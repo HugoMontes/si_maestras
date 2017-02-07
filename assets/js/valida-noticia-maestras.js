@@ -1,0 +1,16 @@
+$(document).ready(function(){
+	$('#urlvideo').change(function(){
+		if($(this).val()!=''){
+			$('#urlaudio').attr('disabled','true');
+		}else{
+			$('#urlaudio').removeAttr('disabled');
+		}
+	});
+	$('#urlaudio').change(function(){
+		if($(this).val()!=''){
+			$('#urlvideo').attr('disabled','true');
+		}else{
+			$('#urlvideo').removeAttr('disabled');
+		}
+	});
+});

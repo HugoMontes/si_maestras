@@ -1,0 +1,1 @@
+<a href="javascript:;" onclick="publicar(<?php echo $id;?>)" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="<?php echo $this->lang->line('score_despublicar_tooltip'); ?>"><i class="fa fa-check-circle"></i></a>

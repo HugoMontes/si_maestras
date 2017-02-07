@@ -1,0 +1,1 @@
+<a href="javascript:;" onclick="habilitar(<?php echo $id;?>)" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="<?php echo $this->lang->line('score_habilitar_tooltip');?>"><i class="fa fa-times-circle"> </i></a>

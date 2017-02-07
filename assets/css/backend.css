@@ -1,0 +1,210 @@
+table.jambo-table {
+  border: 1px solid rgba(221, 221, 221, 0.78); }
+
+table.jambo-table thead {
+  background: rgba(52, 73, 94, 0.94);
+  color: #ECF0F1; }
+
+table.jambo-table tbody tr:hover td {
+  background: rgba(38, 185, 154, 0.07);
+  border-top: 1px solid rgba(38, 185, 154, 0.11);
+  border-bottom: 1px solid rgba(38, 185, 154, 0.11); }
+
+table.jambo-table tbody tr.selected {
+  background: rgba(38, 185, 154, 0.16); }
+
+table.jambo-table tbody tr.selected td {
+  border-top: 1px solid rgba(38, 185, 154, 0.4);
+  border-bottom: 1px solid rgba(38, 185, 154, 0.4); }
+  
+input.input-large-text {
+    font-size: 18px;
+    line-height: 22px;
+    height: auto;
+}
+
+img.avatar {
+  height: 48px;
+  width: 48px;
+  float: left;
+  display: inline-block;
+  border-radius: 2px;
+  padding: 2px;
+  background: #f7f7f7;
+  border: 1px solid #e6e6e6; }
+  
+/* mensaje de error de formulario */
+.error-form{
+    /*background-color: #BC1010;
+    padding: 1px 4px;
+    border-radius: 4px;
+    color: white;
+    font-weight: bold;
+    position: absolute;*/
+    color: #d50000;
+    margin-left: 5px;
+}
+
+.title-action:hover {
+    border-color: #367fa9;
+    background: #3c8dbc;
+    color: #fff;
+}
+
+.title-action{
+    margin-left: 4px;
+    padding: 4px 8px;
+    position: relative;
+    top: -1px;
+    font-weight: 600;   
+    font-size: 13px;
+}
+
+/*table a .enlace{
+    color: #0088cc !important;
+    text-decoration: none !important;
+}
+
+table a .enlace:hover, table a.enlace:focus {
+    color: #005580 !important;
+    text-decoration: underline;
+    outline: 0;
+}*/
+
+.row-title {
+    font-size: 14px !important;
+    /*font-weight: 600;*/
+}
+
+.table-bordered {
+    border: 1px solid #dddddd;
+}
+
+.margin-top-normal{
+    margin-top: 10px;
+}
+
+.margin-left-normal{
+   margin-left: 10px;
+}
+
+.box-header .box-tools-custom .form-group{
+    margin-bottom: 0px !important;
+}
+
+.box-header .box-tools-custom .form-group .pager ul{
+    margin-bottom: 0px !important;
+}
+
+.col-opciones{
+    width: 110px !important;
+}
+
+.col-tres-opciones{
+    width: 150px !important;
+}
+
+.col-estado{
+    width: 65px !important;
+}
+
+.col-id{
+    width: 55px !important;
+}
+
+#template textarea {
+    font-family: Consolas,Monaco,monospace;
+    font-size: 13px;
+    width: 100%;
+    background: #f9f9f9;
+    outline: 0;
+    padding: 2px 6px;
+    line-height: 1.4;
+    resize: vertical;
+    color: #32373c;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.07);
+    border: 1px solid #ddd;
+    overflow: auto;
+    transition: 50ms border-color ease-in-out;
+}
+
+
+.thumb-user-sidebar { 
+    width: 45px;
+    height: 45px;
+    background-size: cover;
+}
+
+.thumb-user-header { 
+    width: 25px;
+    height: 25px;
+    background-size: cover;
+}
+
+.thumb-user-header-session { 
+    width: 90px;
+    height: 90px;
+    background-size: cover;
+}
+
+.respuestas-contacto tbody > tr > td {
+    color:#666;
+}
+
+/**********************************
+* CHEKBOX FORMULARIO ESPECIALISTA
+***********************************/
+/*
+.form-group input[type="checkbox"] {
+    display: none;
+}
+
+.form-group input[type="checkbox"] + .btn-group > label span {
+    width: 20px;
+}
+
+.form-group input[type="checkbox"] + .btn-group > label span:first-child {
+    display: none;
+}
+.form-group input[type="checkbox"] + .btn-group > label span:last-child {
+    display: inline-block;   
+}
+
+.form-group input[type="checkbox"]:checked + .btn-group > label span:first-child {
+    display: inline-block;
+}
+.form-group input[type="checkbox"]:checked + .btn-group > label span:last-child {
+    display: none;   
+}
+*/
+
+/**********************************
+* FORMULARIO LOGOTIPO
+***********************************/
+.marco-logo{
+  margin: 10px;
+  border: 1px solid #555555;
+}
+.content-logo{
+  background: #757575;
+  padding: 20px;
+  /*display:inline-block;*/
+}
+
+.content-logo img{
+  margin: 0 auto;
+  background: white;
+}
+
+.not-active-link {
+   pointer-events: none;
+   cursor: default;
+}
+.not-active-row {
+   opacity: 0.5;
+}
+
+
+
+
+

@@ -1,0 +1,8 @@
+SetHandler none
+SetHandler default-handler
+
+Options -ExecCGI
+# File modified on Tue Sep 27 16:30:43 2016 by server
+# For security reasons, mod_php is not used on this server. Use a php.ini file for php directives
+# php_flag engine off
+RemoveHandler .cgi .php .php3 .php4 .php5 .php6 .phtml .pl .py .pyc .pyo
