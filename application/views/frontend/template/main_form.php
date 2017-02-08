@@ -12,7 +12,7 @@
 <div class="solicitud-maestras-main" style="background: url('<?php echo base_url();?>assets/img/slides/mconstructora2.png'); background-attachment: fixed; background-position: center; background-size: cover; background-repeat: no-repeat;">
   <div class="image-curtain">
 	<div class="container">
-		<h2>Encuentra tu <br/><strong>Maestra Constructora AQUÍ</strong></h2>
+		<h2>Encuentra tu trabajadora calificada aquí</h2>
 	</div>
 
     <!-- Start Formulario Solicitud -->

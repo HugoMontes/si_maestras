@@ -6,6 +6,11 @@
 
 
   <!-- Start Purchase Section -->
+  <div class="content-auspiciantes">
+    <section class="auspiciantes slider">
+      <?php echo $mod_enlaces->contenido; ?>
+    </section>
+  </div>
   <!-- End Purchase Section -->
 
   <!-- Start Portfolio Section -->

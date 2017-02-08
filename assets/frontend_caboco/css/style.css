@@ -1033,13 +1033,15 @@ ul .dropdown-caboco li a{ /*hhh*/
 
 .page-banner {
     padding: 30px 0;
-    background: url(../images/slide-02-bg.jpg) center;
+    /*background: url(../images/slide-02-bg.jpg) center;*/
+    background-color: #054996;
 	border-bottom: 1px solid #eee;
 }
 
 .page-banner h2 {
 	font-weight: 500;
 	text-transform: uppercase;
+	color: white;
 }
 
 .page-banner p {

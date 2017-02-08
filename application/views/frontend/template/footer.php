@@ -4,7 +4,7 @@
 <div class="content-auspiciantes">
   <!-- Start Big Heading -->
   <div class="big-title text-center">
-    <h1>Empresas y organizaciones que<strong> nos colaboran</strong></h1>
+    <h1>Empresas que promueven la <strong>equidad de género en el sector</strong></h1>
   </div>
   <!-- End Big Heading -->
   <section class="auspiciantes slider" style="margin: 60px auto;">

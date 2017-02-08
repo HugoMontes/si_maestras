@@ -199,8 +199,8 @@ class Especialista_solicitud extends CI_Controller{
         $headers .= 'Content-type: text/html; charset="UTF-8"' . "\r\n";
 
         // Additional headers
-        $headers .= 'To: ' .$to. "\r\n";
-        $headers .= 'From: ' .$from. "\r\n";
+        $headers .= 'To: ' .$to. "\n";
+        $headers .= 'From: ' .$from. "\n";
         //  $headers .= 'Bcc: '.$Bcc. "\r\n";
 
         // Send the email

@@ -564,3 +564,10 @@ span.clear { clear: left; display: block; }
 .form-maestras .form-controles{
 	text-align: right;
 }
+
+.contenido p{
+	font-family: Arial;
+	color: #444;
+	font-size: 16px;
+	margin-bottom: 12px;
+}

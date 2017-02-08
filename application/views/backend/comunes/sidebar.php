@@ -76,13 +76,13 @@
         if(strpos($url, 'slide') !== false){
             $class_menu_inicio_1 = 'active';
         }elseif(strpos($url, 'modulo/editar/5') !== false){
-            $class_menu_inicio_2 = 'active';
+            $class_menu_inicio_5 = 'active';
         }elseif(strpos($url, 'modulo/editar/2') !== false){
-            $class_menu_inicio_3 = 'active';
+            $class_menu_inicio_2 = 'active';
         }elseif(strpos($url, 'modulo/editar/4') !== false){
             $class_menu_inicio_4 = 'active';
         }elseif(strpos($url, 'modulo/editar/3') !== false){
-            $class_menu_inicio_5 = 'active';
+            $class_menu_inicio_3 = 'active';
         }           
     }elseif(strpos($url, 'contacto') !== false AND strpos($url, 'search_key=') === false){
         $class_menu_contacto_0 = 'active';     
@@ -247,7 +247,8 @@
             <li class="<?php echo $class_menu_inicio_3;?>"><a href="<?php echo base_url('index.php/administrador/modulo/editar/2'); ?>"><i class="fa fa-circle-o"></i> Convocatoria</a></li>
             -->
             <li class="<?php echo $class_menu_inicio_4;?>"><a href="<?php echo base_url('index.php/administrador/modulo/editar/4'); ?>"><i class="fa fa-circle-o"></i> Anuncio principal</a></li>
-            <li class="<?php echo $class_menu_inicio_5;?>"><a href="<?php echo base_url('index.php/administrador/modulo/editar/3'); ?>"><i class="fa fa-circle-o"></i> Auspiciadores</a></li>         
+            <li class="<?php echo $class_menu_inicio_5;?>"><a href="<?php echo base_url('index.php/administrador/modulo/editar/5'); ?>"><i class="fa fa-circle-o"></i> Escuelas de formación</a></li>
+            <li class="<?php echo $class_menu_inicio_3;?>"><a href="<?php echo base_url('index.php/administrador/modulo/editar/3'); ?>"><i class="fa fa-circle-o"></i> Auspiciadores</a></li>         
           </ul>
         </li>
         <?php } ?>
