@@ -24,7 +24,7 @@ date_default_timezone_set('America/Caracas');
 |
 */
 // SERVIDOR REMOTO
-// $config['base_url'] = 'http://maestrasconstructoras.org/si_maestras/';
+//$config['base_url'] = 'http://maestrasconstructoras.org/si_maestras/';
 // SERVIDOR LOCAL
 $config['base_url'] = 'http://localhost/si_maestras/';
 

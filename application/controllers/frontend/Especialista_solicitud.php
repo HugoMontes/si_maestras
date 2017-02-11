@@ -195,12 +195,13 @@ class Especialista_solicitud extends CI_Controller{
         //$Bcc = "example@example.com";
 
         // To send HTML mail, the Content-type header must be set
-        $headers  = 'MIME-Version: 1.0' . "\r\n";
-        $headers .= 'Content-type: text/html; charset="UTF-8"' . "\r\n";
+        $headers  = 'MIME-Version: 1.0' . "\n";
+        $headers .= 'Content-type: text/html; charset="UTF-8"' . "\n";
 
         // Additional headers
         $headers .= 'To: ' .$to. "\n";
-        $headers .= 'From: ' .$from. "\n";
+        //$headers .= 'From: ' .$from. "<maestrasconstructoras>\n";
+        $headers .= 'From: ' .$from. "<info@maestrasconstructoras.org>\n";
         //  $headers .= 'Bcc: '.$Bcc. "\r\n";
 
         // Send the email

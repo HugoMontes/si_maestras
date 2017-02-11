@@ -687,7 +687,6 @@ ul.social-list li:last-child a i {
     font-family: 'Open Sans', sans-serif;
     padding: 11px 16px;
     text-decoration: none;
-    text-transform: capitalize;
     transition: padding 0.2s ease-in-out;
     -moz-transition: padding 0.2s ease-in-out;
     -webkit-transition: padding 0.2s ease-in-out;
@@ -4109,11 +4108,11 @@ ul.post-meta li, ul.post-meta li a {
 /*------------------------------------------*/
 
 footer {
-	background: url("../../img/footer.png");
+	background: url("../../img/footerv7.png");
 	/* background-attachment: fixed; */
 	background-position: center bottom;
 	background-color: #222;
-    padding-top: 15px;
+    /*padding-top: 15px;*/
 	border-top: 4px solid #555;
 	color: #ccc;
 }
@@ -4325,7 +4324,7 @@ footer a:hover {
 
 .copyright-section p {
 	font-size: 11px;
-	text-transform: uppercase;
+	/*text-transform: uppercase;*/
 }
 
 ul.footer-nav {

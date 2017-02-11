@@ -5,13 +5,13 @@
 <?php $this->load->view('frontend/template/main_form'); ?>
 
 
-  <!-- Start Purchase Section -->
+  <!-- Start Escuelas de Formacion -->
   <div class="content-auspiciantes">
     <section class="auspiciantes slider">
       <?php echo $mod_enlaces->contenido; ?>
     </section>
   </div>
-  <!-- End Purchase Section -->
+  <!-- End Escuelas de Formacion -->
 
   <!-- Start Portfolio Section -->
   <div class="section full-width-portfolio" style="border-top:0; border-bottom:0; background:#fff; padding-top: 40px;">

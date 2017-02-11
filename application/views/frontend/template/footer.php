@@ -17,7 +17,9 @@
 <!-- Start Footer -->
 <?php if(isset($mod_pie) AND !empty($mod_pie)){ ?>
   <footer class="app-footer">
+  <div style="background: rgba(0,53,128,0.7); padding: 5px 15px; padding-top: 15px;">
     <?php echo $mod_pie->contenido; ?>
+  </div>
   </footer>
 <?php } ?>  
 <!-- End Footer -->
