@@ -6,7 +6,6 @@ class Inicio extends CI_Controller{
     $this->load->model('menu_model');
     $this->load->model('modulo_model');
     $this->load->model('noticia_model');
-    $this->load->model('noticia_capacitacion_model');
     $this->load->model('slide_model');
     $this->load->model('especialista_ciudad_model');
     $this->load->model('especialista_especialidad_model');       
@@ -28,11 +27,11 @@ class Inicio extends CI_Controller{
       $data['ciudades'] = $this->especialista_ciudad_model->get_all('',array(),'','','','');
       $data['especialidades'] = $this->especialista_especialidad_model->get_all('',array(),'','','orden asc','');
       $data['slides'] = $this->slide_model->get_all('',array('estado'=>PUBLICADO),'','','id ASC','');
-      $data['noticias_generales'] = $this->noticia_model->get_all('',array('estado'=>PUBLICADO),'',6,'creado desc','');
-      $data['noticias_capacitacion'] = $this->noticia_capacitacion_model->get_all('',array('estado'=>PUBLICADO),'',3,'creado desc','');
-      $data['mod_enlaces'] = $this->modulo_model->get_values('contenido',array('modulo'=>'mod_enlaces','estado'=>PUBLICADO));
-      $data['mod_convocatoria'] = $this->modulo_model->get_values('contenido',array('modulo'=>'mod_convocatoria','estado'=>PUBLICADO));
-      $data['mod_auspiciadores'] = $this->modulo_model->get_values('contenido',array('modulo'=>'mod_auspiciadores','estado'=>PUBLICADO));
+      $data['noticias_generales'] = $this->noticia_model->get_all('',array('id_grupo'=>1,'estado'=>PUBLICADO),'',6,'creado desc','');
+      $data['noticias_capacitacion'] = $this->noticia_model->get_all('',array('id_grupo'=>2,'estado'=>PUBLICADO),'',3,'creado desc','');
+      $data['mod_escuelas'] = $this->modulo_model->get_values('contenido',array('modulo'=>'mod_enlaces','estado'=>PUBLICADO));
+      $data['mod_auspiciantes'] = $this->modulo_model->get_values('contenido',array('modulo'=>'mod_auspiciantes','estado'=>PUBLICADO));
+      $data['mod_empresas'] = $this->modulo_model->get_values('contenido',array('modulo'=>'mod_auspiciadores','estado'=>PUBLICADO));
       $data['mod_score_global'] = $this->modulo_model->get_values('contenido',array('modulo'=>'mod_score_global','estado'=>PUBLICADO));  
       $data['mod_pie'] = $this->modulo_model->get_values('contenido',array('modulo'=>'mod_pie','estado'=>PUBLICADO));
       $data['mod_logo'] = $this->modulo_model->get_values('contenido',array('modulo'=>'mod_logotipo','estado'=>PUBLICADO));  

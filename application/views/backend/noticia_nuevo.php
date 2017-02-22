@@ -1,3 +1,4 @@
+<?php $perfil=$this->session->userdata('usuario')['perfil_id']; ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -25,7 +26,7 @@
             <!-- Content Header (Page header) -->
             <section class="content-header">
               <h1>
-                <?php echo $this->lang->line('score_noticia_nuevo_titulo'); ?> general
+                Añadir nueva: <?php echo $titulo; ?>
                 <small></small>
               </h1>
             </section>
@@ -93,7 +94,7 @@
                               <p class="help-block"><?php echo $this->lang->line('score_imagen_upload').'&nbsp;&nbsp;'.$this->lang->line('score_noticia_img_condiciones');?></p>
                             </div>
 
-                            <p><strong>(Opcional) Ingresar la url o el codigo de inserción de un video o audio como noticia principal</strong></p>  
+                            <p><strong>Ingresar la url o el codigo de inserción de un video o audio como elemento principal (Opcional)</strong></p>  
                             <!-- Start: Nav tabs -->
                             <ul class="nav nav-tabs" role="tablist">
                               <li role="presentation" class="active"><a href="#video" aria-controls="video" role="tab" data-toggle="tab">Video</a></li>
@@ -149,7 +150,8 @@
                                 </div>
                               </div>      
                             </div>                             
-
+                            
+                            <?php if ($perfil==1){ ?>
                             <div class="form-group">
                               <label for="estado">Estado</label>
                               <?php echo form_error('estado', '<span class="error-form">', '</span><br/><br/>'); ?>  
@@ -170,21 +172,24 @@
                               $opciones = array(
                                   PUBLICADO  => 'Publicado',
                                   DESPUBLICADO    => 'Despublicado'
-                               ); 
-                               
+                               );                                
                                echo form_dropdown($data, $opciones, set_value('estado'));                               
                               ?>
                                 </div>
                               </div> 
-                            </div>                          
+                            </div>   
+                            <?php }else{ ?>
+                              <input type="hidden" name="estado" value="<?php echo DESPUBLICADO; ?>">
+                            <?php } ?>                       
 
                           </div>
                           <!-- /.box-body -->
                           <input type="hidden" name="guardar" id="guardar" value="<?php echo NUEVO; ?>" />  
                           <div class="box-footer">
                             <?php
-                            $navegacion = $this->navegacion_model->get_values('navegacion',array('vista'=>NOTICIAS)); 
+                              $navegacion = $this->navegacion_model->get_values('navegacion',array('id'=>$id_navegacion));
                             ?>
+                            <input type="hidden" name="grupo" value="<?php echo $id_grupo; ?>">
                             <a href="<?php echo base_url($navegacion->navegacion); ?>" class="btn btn-default"><?php echo $this->lang->line('score_cerrar'); ?></a>
                             <button type="submit" class="btn btn-primary"><?php echo $this->lang->line('score_guardar');?></button>
                           </div>

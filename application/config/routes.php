@@ -210,24 +210,22 @@ $route['administrador/especialidad/nuevo'] = 'backend/especialidad/nuevo';
 $route['administrador/especialidad/eliminar/(:any)'] = 'backend/especialidad/eliminar/$1';
 $route['administrador/especialidad/guardar'] = 'backend/especialidad/guardar';
 $route['administrador/especialidad/editar/(:num)'] = 'backend/especialidad/existe/$1';
-// noticia general
-$route['administrador/noticia'] = 'backend/noticia';
+// noticia
+$route['administrador/noticia/(:num)'] = 'backend/noticia/listar/$1';
 $route['administrador/noticia/upload'] = 'backend/noticia/upload';
 $route['administrador/noticia/eliminar/(:any)'] = 'backend/noticia/eliminar/$1';
 $route['administrador/noticia/publicar_mensaje'] = 'backend/noticia/publicar_mensaje';
 $route['administrador/noticia/publicar'] = 'backend/noticia/publicar';
-$route['administrador/noticia/editar/(:num)'] = 'backend/noticia/existe/$1';
+$route['administrador/noticia/editar/(:num)/(:num)'] = 'backend/noticia/existe/$1/$2';
 $route['administrador/noticia/guardar'] = 'backend/noticia/guardar';
-$route['administrador/noticia/nuevo'] = 'backend/noticia/nuevo';
-// noticia capacitacion
-$route['administrador/capacitacion'] = 'backend/noticia_capacitacion';
-$route['administrador/capacitacion/upload'] = 'backend/noticia_capacitacion/upload';
-$route['administrador/capacitacion/eliminar/(:any)'] = 'backend/noticia_capacitacion/eliminar/$1';
-$route['administrador/capacitacion/publicar_mensaje'] = 'backend/noticia_capacitacion/publicar_mensaje';
-$route['administrador/capacitacion/publicar'] = 'backend/noticia_capacitacion/publicar';
-$route['administrador/capacitacion/editar/(:num)'] = 'backend/noticia_capacitacion/existe/$1';
-$route['administrador/capacitacion/guardar'] = 'backend/noticia_capacitacion/guardar';
-$route['administrador/capacitacion/nuevo'] = 'backend/noticia_capacitacion/nuevo';
+$route['administrador/noticia/nuevo/(:num)'] = 'backend/noticia/nuevo/$1';
+
+$route['administrador/noticia/configuracion/(:num)']='backend/noticia/configuracion/$1';
+$route['administrador/noticia/configuracion/guardar']='backend/noticia/configuracion_guardar';
+// informacion
+$route['administrador/informacion/(:num)'] = 'backend/noticia/listar/$1';
+$route['administrador/informacion/editar/(:num)/(:num)'] = 'backend/noticia/existe/$1/$2';
+$route['administrador/informacion/nuevo/(:num)'] = 'backend/noticia/nuevo/$1';
 // pagina prediseñada
 $route['administrador/pagina_predisenada'] = 'backend/pagina_predisenada';
 $route['administrador/pagina_predisenada/publicar_mensaje'] = 'backend/pagina_predisenada/publicar_mensaje';
@@ -262,10 +260,13 @@ $route['formador_inscripcion_previo/activar_cuenta/(:any)'] = 'frontend/formador
 $route['inscripciones-empresas-score-bolivia'] = 'frontend/empresa_inscripcion';
 $route['empresa_inscripcion/guardar'] = 'frontend/empresa_inscripcion/guardar';
 // noticias
-$route['noticias-generales/(:num)'] = 'frontend/noticia/generales/$1';
-$route['noticias-capacitacion/(:num)'] = 'frontend/noticia/capacitacion/$1';
-$route['noticias-generales'] = 'frontend/noticia/generales';
-$route['noticias-capacitacion'] = 'frontend/noticia/capacitacion';
+$route['noticias/(:num)'] = 'frontend/noticia/all_noticias_by_id_grupo/$1'; //cuando sea la primera página
+$route['noticias/(:num)/(:num)'] = 'frontend/noticia/all_noticias_by_id_grupo/$1'; //cuando no sea la primera página
+$route['noticias_detalle/(:num)'] = 'frontend/noticia/find_noticia_by_id/$1';
+// informacion
+$route['informacion/(:num)'] = 'frontend/informacion/all_noticias_by_id_grupo/$1'; //cuando sea la primera página
+$route['informacion/(:num)/(:num)'] = 'frontend/informacion/all_noticias_by_id_grupo/$1'; //cuando no sea la primera página
+$route['informacion_detalle/(:num)'] = 'frontend/informacion/find_noticia_by_id/$1';
 // rutas simples
 $route{'biblioteca/(:any)'} = 'frontend/biblioteca/mostrar/$1';
 $route['contacto/guardar'] = 'frontend/contacto/guardar';

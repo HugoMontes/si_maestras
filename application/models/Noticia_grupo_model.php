@@ -1,8 +1,8 @@
 <?php (defined('BASEPATH')) OR exit('No direct script access allowed');
 
-class Noticia_capacitacion_model extends CI_Model{
+class Noticia_grupo_model extends CI_Model{
 
-    protected $table_name = 'noticia_capacitacion';
+    protected $table_name = 'noticia_grupo';
     protected $primary_key = 'id';
 
     public function __construct() {

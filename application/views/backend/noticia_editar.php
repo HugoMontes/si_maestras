@@ -1,3 +1,4 @@
+<?php $perfil=$this->session->userdata('usuario')['perfil_id']; ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -24,7 +25,7 @@
             <!-- Content Header (Page header) -->
             <section class="content-header">
               <h1>
-                <?php echo $this->lang->line('score_noticia_editar_titulo'); ?>
+                Editar
                 <a href="<?php echo base_url('index.php/administrador/noticia/nuevo');?>" class="btn btn-default btn-sm title-action"><?php echo $this->lang->line('score_nueva'); ?></a>
                 <small></small>
               </h1>
@@ -161,8 +162,9 @@
                                     <input type="text" class="form-control" id="fuente" name="fuente" value="<?php echo set_value('fuente', $noticia->fuente);?>" placeholder="Ingrese la fuente de la noticia"/>
                                 </div>
                               </div>      
-                            </div>                            
+                            </div>      
 
+                            <?php if ($perfil==1){ ?>
                             <div class="form-group">
                               <label for="estado">Estado</label>
                               <?php echo form_error('estado', '<span class="error-form">', '</span><br/><br/>'); ?>
@@ -189,7 +191,10 @@
                               ?>
                                 </div>
                               </div> 
-                            </div>                          
+                            </div>   
+                            <?php }else{ ?>
+                              <input type="hidden" name="estado" value="<?php echo $noticia->estado; ?>">
+                            <?php } ?>                       
 
                           </div>
                           <!-- /.box-body -->
@@ -199,8 +204,9 @@
                           <input type="hidden" name="guardar" id="guardar" value="<?php echo EDICION; ?>" />  
                           <div class="box-footer">
                             <?php
-                            $navegacion = $this->navegacion_model->get_values('navegacion',array('vista'=>NOTICIAS)); 
+                              $navegacion = $this->navegacion_model->get_values('navegacion',array('id'=>$id_navegacion));
                             ?>
+                            <input type="hidden" name="grupo" value="<?php echo $id_grupo; ?>">
                             <a href="<?php echo base_url($navegacion->navegacion); ?>" class="btn btn-default"><?php echo $this->lang->line('score_cerrar'); ?></a>
                             <button type="submit" class="btn btn-primary"><?php echo $this->lang->line('score_guardar');?></button>
                           </div>

@@ -19,7 +19,7 @@
           foreach ($noticias as $noticia):
           $noticia = (object) $noticia;   
         ?>
-        <div class="col-xs-12 col-sm-6 col-md-4 noticia-container">
+        <div class="col-xs-12 col-sm-<?php echo 12/$columnas?> noticia-container">
           <div class="noticia-border">
             <div class="nombre-seccion">
               <h6>
@@ -46,7 +46,7 @@
               }
             ?>
             <div class="noticia-imagen">
-              <img src="<?php echo $img; ?>" class="img-responsive" alt="">
+              <img src="<?php echo $img; ?>" class="img-responsive" alt="" style="margin: 0 auto; max-height: 200px;">
             </div>
             <div class="noticia-content-title noticia-border">
               <div class="meta-left">

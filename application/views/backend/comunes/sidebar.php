@@ -23,14 +23,15 @@
     $class_menu_menu_0 = '';
     $class_menu_menu_1 = '';
     $class_menu_menu_2 = '';
-    // menu noticia general
+    // menu noticia
     $class_menu_noticia_0 = '';
     $class_menu_noticia_1 = '';
     $class_menu_noticia_2 = '';
-    // menu noticia capacitacion
-    $class_menu_noticia_capacitacion_0 = '';
-    $class_menu_noticia_capacitacion_1 = '';
-    $class_menu_noticia_capacitacion_2 = '';
+    // menu informacion
+    $class_menu_informacion_0 = '';
+    $class_menu_informacion_1 = '';
+    $class_menu_informacion_2 = '';
+    $class_menu_informacion_3 = '';
     // menu formador
     $class_menu_formador_0 = '';
     $class_menu_formador_1 = '';
@@ -106,20 +107,23 @@
         }        
     }elseif(strpos($url, 'noticia') !== false AND strpos($url, 'search_key=') === false){
         $class_menu_noticia_0 = 'active';
-        if(strpos($url, 'nuevo') !== false){
-            $class_menu_noticia_2 = 'active';
-        }
-        else{
+        if(strpos($url, 'noticia/1') !== false OR strpos($url, 'noticia/nuevo/1') !== false){
             $class_menu_noticia_1 = 'active';
-        }        
-    }elseif(strpos($url, 'capacitacion') !== false AND strpos($url, 'search_key=') === false){
-        $class_menu_noticia_capacitacion_0 = 'active';
-        if(strpos($url, 'nuevo') !== false){
-            $class_menu_noticia_capacitacion_2 = 'active';
         }
-        else{
-            $class_menu_noticia_capacitacion_1 = 'active';
+        elseif(strpos($url, 'noticia/2') !== false OR strpos($url, 'noticia/nuevo/2') !== false){
+            $class_menu_noticia_2 = 'active';
         }        
+    }elseif(strpos($url, 'informacion') !== false AND strpos($url, 'search_key=') === false){
+        $class_menu_informacion_0 = 'active';
+        if(strpos($url, 'informacion/3') !== false OR strpos($url, 'informacion/nuevo/3') !== false){
+            $class_menu_informacion_1 = 'active';
+        }
+        elseif(strpos($url, 'informacion/4') !== false OR strpos($url, 'informacion/nuevo/4') !== false){
+            $class_menu_informacion_2 = 'active';
+        }
+        elseif(strpos($url, 'informacion/5') !== false OR strpos($url, 'informacion/nuevo/5') !== false){
+            $class_menu_informacion_3 = 'active';
+        }         
     }elseif(strpos($url, 'formador') !== false AND strpos($url, 'search_key=') === false){
         $class_menu_formador_0 = 'active';
         if(strpos($url, 'nuevo') !== false){
@@ -243,12 +247,12 @@
           <ul class="treeview-menu">
             <li class="<?php echo $class_menu_inicio_1;?>"><a href="<?php echo base_url('index.php/administrador/slide'); ?>"><i class="fa fa-circle-o"></i> Slides</a></li>
             <!--
-            <li class="<?php echo $class_menu_inicio_2;?>"><a href="<?php echo base_url('index.php/administrador/modulo/editar/5'); ?>"><i class="fa fa-circle-o"></i> Enlaces</a></li>           
             <li class="<?php echo $class_menu_inicio_3;?>"><a href="<?php echo base_url('index.php/administrador/modulo/editar/2'); ?>"><i class="fa fa-circle-o"></i> Convocatoria</a></li>
             -->
             <li class="<?php echo $class_menu_inicio_4;?>"><a href="<?php echo base_url('index.php/administrador/modulo/editar/4'); ?>"><i class="fa fa-circle-o"></i> Anuncio principal</a></li>
             <li class="<?php echo $class_menu_inicio_5;?>"><a href="<?php echo base_url('index.php/administrador/modulo/editar/5'); ?>"><i class="fa fa-circle-o"></i> Escuelas de formación</a></li>
-            <li class="<?php echo $class_menu_inicio_3;?>"><a href="<?php echo base_url('index.php/administrador/modulo/editar/3'); ?>"><i class="fa fa-circle-o"></i> Auspiciadores</a></li>         
+            <li class="<?php echo $class_menu_inicio_2;?>"><a href="<?php echo base_url('index.php/administrador/modulo/editar/2'); ?>"><i class="fa fa-circle-o"></i> Auspiciadores</a></li>
+            <li class="<?php echo $class_menu_inicio_3;?>"><a href="<?php echo base_url('index.php/administrador/modulo/editar/3'); ?>"><i class="fa fa-circle-o"></i> Empresas</a></li>         
           </ul>
         </li>
         <?php } ?>
@@ -311,35 +315,39 @@
         </li>
         <?php } ?>
 
-        <?php if($usuario_sesion->perfil_id == SUPER){ ?>
+        
         <li class="treeview <?php echo $class_menu_noticia_0;?>">
           <a href="#">
             <i class="fa fa-newspaper-o"></i>
-            <span>Noticias generales</span>
+            <span>Noticias</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="<?php echo $class_menu_noticia_1;?>"><a href="<?php echo base_url('index.php/administrador/noticia') ?>"><i class="fa fa-circle-o"></i> Todas las noticias</a></li>
-            <li class="<?php echo $class_menu_noticia_2;?>"><a href="<?php echo base_url('index.php/administrador/noticia/nuevo') ?>"><i class="fa fa-circle-o"></i> Añadir nueva</a></li>
+            <?php if($usuario_sesion->perfil_id == SUPER){ ?>
+                <li class="<?php echo $class_menu_noticia_1;?>"><a href="<?php echo base_url('index.php/administrador/noticia/1') ?>"><i class="fa fa-circle-o"></i> Generales</a></li>
+            <?php } ?>
+            <?php if($usuario_sesion->perfil_id == SUPER OR 
+                 $usuario_sesion->perfil_id == CENTRO_FORMACION){ ?>
+            <li class="<?php echo $class_menu_noticia_2;?>"><a href="<?php echo base_url('index.php/administrador/noticia/2') ?>"><i class="fa fa-circle-o"></i> Capacitacion</a></li>
+            <?php } ?>
           </ul>
         </li>
-        <?php } ?>
 
-        <?php if($usuario_sesion->perfil_id == SUPER OR 
-                 $usuario_sesion->perfil_id == CENTRO_FORMACION){ ?>
-        <li class="treeview <?php echo $class_menu_noticia_capacitacion_0;?>">
+        <?php if($usuario_sesion->perfil_id == SUPER){ ?>
+        <li class="treeview <?php echo $class_menu_informacion_0;?>">
           <a href="#">
-            <i class="fa fa-newspaper-o"></i>
-            <span>Noticias capacitación</span>
+            <i class="fa fa-info-circle"></i>
+            <span>Información de interes</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="<?php echo $class_menu_noticia_capacitacion_1;?>"><a href="<?php echo base_url('index.php/administrador/capacitacion') ?>"><i class="fa fa-circle-o"></i> Todas las noticias</a></li>
-            <li class="<?php echo $class_menu_noticia_capacitacion_2;?>"><a href="<?php echo base_url('index.php/administrador/capacitacion/nuevo') ?>"><i class="fa fa-circle-o"></i> Añadir nueva</a></li>
+            <li class="<?php echo $class_menu_informacion_1;?>"><a href="<?php echo base_url('index.php/administrador/informacion/3') ?>"><i class="fa fa-circle-o"></i> Equidad de genero</a></li>
+            <li class="<?php echo $class_menu_informacion_2;?>"><a href="<?php echo base_url('index.php/administrador/informacion/4') ?>"><i class="fa fa-circle-o"></i> Derechos laborales</a></li>
+            <li class="<?php echo $class_menu_informacion_3;?>"><a href="<?php echo base_url('index.php/administrador/informacion/5') ?>"><i class="fa fa-circle-o"></i> Salud y seguridad</a></li>
           </ul>
         </li>
         <?php } ?>

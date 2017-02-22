@@ -1,5 +1,5 @@
 <?php
-class Noticia extends CI_Controller{
+class Informacion extends CI_Controller{
     public function __construct()
     {
         parent::__construct();            
@@ -31,7 +31,7 @@ class Noticia extends CI_Controller{
 	    	   //$data['noticias'] = $this->noticia_model->get_all('',array('id_grupo'=>$idgrupo,'estado'=>PUBLICADO),'','','creado desc','');
 	           $data['mod_pie'] = $this->modulo_model->get_values('contenido',array('modulo'=>'mod_pie','estado'=>PUBLICADO));
 	           $data['mod_logo'] = $this->modulo_model->get_values('contenido',array('modulo'=>'mod_logotipo','estado'=>PUBLICADO));  
-	   
+	   		   $data['columnas']=$grupo->columnas;
 	           //**** Inicio Parametros Paginacion ****
 	            $pages=6; //Número de registros mostrados por páginas
 				$this->load->library('pagination'); //Cargamos la librería de paginación
@@ -50,7 +50,7 @@ class Noticia extends CI_Controller{
 				$data["pagina_total"] = ceil($config['total_rows']/$pages);
 			   //**** Fin Parametros Paginacion
 
-	           $this->load->view('frontend/noticia_list',$data);        
+	           $this->load->view('frontend/informacion_list',$data);        
 	     	
 	       	}elseif($pagina->estado == DESPUBLICADO){
 	       	   redirect('404_override');

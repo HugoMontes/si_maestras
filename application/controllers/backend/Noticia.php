@@ -8,6 +8,7 @@
                         
             // modelos
             $this->load->model('noticia_model');
+            $this->load->model('noticia_grupo_model');
             $this->load->model('navegacion_model');
             
             // helpers
@@ -17,8 +18,9 @@
             //$this->load->library('session');
         }
 
-        public function index()
-    	{
+        //public function index()
+    	public function listar($idgrupo)
+        {
            if($this->session->flashdata('mensaje'))
            {
                $data['mensaje'] = $this->session->flashdata('mensaje');
@@ -27,12 +29,28 @@
            { 
                $data['error'] = $this->session->flashdata('error');
            }
-            
+            $this->session->set_userdata(array('grupo_noticia'=>$idgrupo));
             ###################################################
             # url
             ###################################################
             $url = str_replace(base_url(),"",current_url());
-            $navegacion = $this->navegacion_model->get_values('id',array('vista'=>NOTICIAS)); 
+            $categoria='';
+            if($idgrupo==1){
+                $navegacion = $this->navegacion_model->get_values('id',array('vista'=>'noticias_generales')); 
+                $categoria='noticia';
+            }elseif($idgrupo==2){
+                $navegacion = $this->navegacion_model->get_values('id',array('vista'=>'noticias_capacitacion'));                 
+                $categoria='noticia';
+            }elseif($idgrupo==3){
+                $navegacion = $this->navegacion_model->get_values('id',array('vista'=>'informacion_equidad'));                 
+                $categoria='informacion';
+            }elseif($idgrupo==4){
+                $navegacion = $this->navegacion_model->get_values('id',array('vista'=>'informacion_derecho'));                 
+                $categoria='informacion';
+            }elseif($idgrupo==5){
+                $navegacion = $this->navegacion_model->get_values('id',array('vista'=>'informacion_salud'));                 
+                $categoria='informacion';
+            }
             $this->navegacion_model->update(array('navegacion'=>$url),$navegacion->id); 
             ###################################################
             #	Busqueda
@@ -41,7 +59,7 @@
             $search_in = (isset($_GET['search_in']) ? $_GET['search_in'] : null);
             $safe_columns = array('titulo','estado');
             if (!is_null($search_key) && !is_null($search_in) && in_array($search_in, $safe_columns)) {
-                $where = " `" . $search_in . "` LIKE '%" . $this->db->escape_like_str($search_key) . "%' ";
+                $where = " `" . $search_in . "` LIKE '%" . $this->db->escape_like_str($search_key) . "%' AND id_grupo=".$idgrupo;
             
                 $config['add_pars']['search_key'] = $search_key;
                 $config['add_pars']['search_in'] = $search_in;
@@ -70,7 +88,7 @@
             #	Consulta principal
             ###################################################
             if (!isset($where)) {
-                $where = '';
+                $where = 'id_grupo='.$idgrupo;
             }
             $count = $this->noticia_model->get_count($where, $order);
             
@@ -95,14 +113,14 @@
             $this->page->initialize($config);
             
             $data['noticias'] = $this->noticia_model->get_pagination($cur_page, $config['rows_per_page'], $where, $order);
-           ########################################################################################  
-
-           $data['titulo'] = $this->lang->line('score_noticias');
-    	   //$data['noticias'] = $this->noticia_model->get_all('',array(),'','','creado desc','');
-           $this->load->view('backend/noticias',$data);
+            ########################################################################################  
+            $data['grupo']=$this->noticia_grupo_model->get($idgrupo);
+            $data['categoria']=$categoria;
+            //$data['noticias'] = $this->noticia_model->get_all('',array(),'','','creado desc','');
+            $this->load->view('backend/noticias',$data);
     	}
 
-        public function nuevo()
+        public function nuevo($idgrupo)
         {
              if($this->session->flashdata('mensaje'))
              {
@@ -113,15 +131,18 @@
                 
                 $data['error'] = $this->session->flashdata('error');
              }
-            
-            $data['titulo'] = $this->lang->line('score_noticia_nuevo_titulo');
+            $grupo_noticia=$this->noticia_grupo_model->get($idgrupo);
+            $data['id_grupo']=$grupo_noticia->id;
+            $data['id_navegacion']=$grupo_noticia->id_navegacion;
+            $data['titulo'] = $grupo_noticia->descripcion;
             $this->load->view('backend/noticia_nuevo',$data);
         }
         
-        public function existe($noticia_id = FALSE)
+        public function existe($noticia_id = FALSE, $grupo_id)
         {
-            $navegacion = $this->navegacion_model->get_values('navegacion',array('vista'=>NOTICIAS));
-            
+            $grupo_noticia=$this->noticia_grupo_model->get($grupo_id);
+            $navegacion = $this->navegacion_model->get_values('navegacion',array('id'=>$grupo_noticia->id_navegacion));
+
             if($noticia_id == FALSE)
             {
                 $this->session->set_flashdata('error', $this->lang->line('score_noticia_error_enlace'));
@@ -129,7 +150,7 @@
             } 
             if($this->noticia_model->exists('id', $noticia_id))
             {
-                $this->editar($noticia_id);
+                $this->editar($noticia_id, $grupo_id);
             }
             else
             {
@@ -138,7 +159,7 @@
             }
         }
         
-        public function editar($noticia_id = FALSE)
+        public function editar($noticia_id = FALSE, $grupo_id)
         {
             if($noticia_id == FALSE)
             {
@@ -155,15 +176,19 @@
             }
 
             $data['titulo'] = $this->lang->line('score_noticia_editar_titulo');
-            
             $data['noticia']=$this->noticia_model->get($noticia_id);
-                   
+            $data['id_grupo']=$grupo_id;
+            $grupo_noticia=$this->noticia_grupo_model->get($grupo_id);
+            $data['id_navegacion']=$grupo_noticia->id_navegacion;
             $this->load->view('backend/noticia_editar',$data);
         }
 
         public function eliminar($noticia_id = FALSE)
         {
-            $navegacion = $this->navegacion_model->get_values('navegacion',array('vista'=>NOTICIAS));
+            $grupo_id=$this->noticia_model->get($noticia_id)->id_grupo;
+            $grupo_noticia=$this->noticia_grupo_model->get($grupo_id);
+            $navegacion = $this->navegacion_model->get_values('navegacion',array('id'=>$grupo_noticia->id_navegacion));
+            //$navegacion = $this->navegacion_model->get_values('navegacion',array('vista'=>NOTICIAS));
             if($noticia_id == FALSE)
             {
                 $this->session->set_flashdata('error', $this->lang->line('score_noticia_error_enlace'));
@@ -185,8 +210,11 @@
  
         public function guardar()
     	{
-    	    $navegacion = $this->navegacion_model->get_values('navegacion',array('vista'=>NOTICIAS));
-    		if(isset($_POST['guardar']))
+            $grupo = $this->input->post('grupo');
+            $grupo_noticia=$this->noticia_grupo_model->get($grupo);
+    	    $navegacion = $this->navegacion_model->get_values('navegacion',array('id'=>$grupo_noticia->id_navegacion));
+    		
+            if(isset($_POST['guardar']))
     		{              
     		    $guardar = $this->input->post("guardar");
                 if($guardar == EDICION)
@@ -195,14 +223,6 @@
                     $imagen = $this->input->post('imagen');   
                     $imagen_thumb = $this->input->post('imagen_thumb');
                 }
-                /*
-                if($guardar == NUEVO)
-                {
-                    if (empty($_FILES['imagen']['name'])){
-                        $this->form_validation->set_rules('imagen', 'Imagen destacada', 'required');
-                    }
-                }
-                */
                 //required=campo obligatorio||xss_clean=evitamos inyecciones de codigo
     			$this->form_validation->set_rules('titulo', 'Título', 'trim|required');
                 $this->form_validation->set_rules('resumen', 'Resumen', 'trim|required');
@@ -338,6 +358,7 @@
                                             'fuente'=> $fuente, 
                                             'imagen' => $imagen,
                                             'thumb' => $imagen_thumb,
+                                            'id_grupo'=>$grupo,
                                             'estado' =>$estado,
                                             'creado_por'=>$usuario_sesion->id);
                                             
@@ -351,7 +372,7 @@
                             
                             $this->session->set_flashdata('mensaje', $this->lang->line('score_noticia_guardada'));
                             
-                            redirect('administrador/noticia/editar/'.$noticia_id);
+                            redirect('administrador/noticia/editar/'.$noticia_id.'/'.$grupo);
                             
                         }
     
@@ -368,6 +389,7 @@
                                             'fuente'=> $fuente,
                                             'imagen' => $imagen,
                                             'thumb' => $imagen_thumb,
+                                            'id_grupo'=>$grupo,
                                             'estado' =>$estado,
                                             'modificado_por'=>$usuario_sesion->id);
                                             
@@ -381,11 +403,11 @@
                             {
                                 $this->noticia_model->update($data, $noticia_id);
                                 $this->session->set_flashdata('mensaje', $this->lang->line('score_noticia_guardada'));
-                                redirect('administrador/noticia/editar/'.$noticia_id);
+                                redirect('administrador/noticia/editar/'.$noticia_id."/".$grupo);
                             }
                             else
                             {
-                                redirect('administrador/noticia/nuevo');
+                                redirect('administrador/noticia/nuevo/'.$grupo);
                             }    
                         }                        
                     }                                      
@@ -460,5 +482,22 @@
                 echo $this->load->view('backend/ajax/mensaje',$data,TRUE);
             } 
         }
+
+        public function configuracion($idgrupo){
+            $grupo=$this->noticia_grupo_model->get($idgrupo);
+            $data=array(
+                'columnas'=>$grupo->columnas,
+            );
+            echo json_encode($data);
+        }
         
+        public function configuracion_guardar(){
+            $idgrupo=$this->input->post('idgrupo');
+            $columnas=$this->input->post('columnas');
+            $this->noticia_grupo_model->update(array('columnas'=>$columnas),$idgrupo);
+            $grupo_noticia=$this->noticia_grupo_model->get($idgrupo);
+            $navegacion = $this->navegacion_model->get_values('navegacion',array('id'=>$grupo_noticia->id_navegacion));
+            $this->session->set_flashdata('mensaje', 'Se ha guardado correctamente la configuración.');
+            redirect(base_url($navegacion->navegacion));
+        }
     }

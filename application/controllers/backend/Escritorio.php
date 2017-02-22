@@ -9,7 +9,6 @@ class Escritorio extends CI_Controller{
         $this->load->model('pagina_model');
         $this->load->model('pagina_predisenada_model');        
         $this->load->model('noticia_model');
-        $this->load->model('noticia_capacitacion_model');
         $this->load->model('testimonio_model');
         // $this->load->model('formador_model');
         $this->load->model('especialista_trabajador_model');
@@ -17,8 +16,8 @@ class Escritorio extends CI_Controller{
     }
     
     public function index(){	   
-	     $data['noticias_publicadas'] = $this->noticia_model->get_count(array('estado'=>PUBLICADO),'');
-       $data['noticias_publicadas_capacitacion'] = $this->noticia_capacitacion_model->get_count(array('estado'=>PUBLICADO),'');
+	     $data['noticias_publicadas'] = $this->noticia_model->get_count(array('estado'=>PUBLICADO,'id_grupo'=>1),'');
+       $data['noticias_publicadas_capacitacion'] = $this->noticia_model->get_count(array('estado'=>PUBLICADO,'id_grupo'=>2),'');
        $data['testimonios_publicados'] = $this->testimonio_model->get_count(array('estado'=>PUBLICADO),'');
        $data['especialistas_publicados'] = $this->especialista_trabajador_model->get_count(array('estado'=>PUBLICADO),'');
        $data['especialidades_publicados'] = $this->especialista_especialidad_model->get_count(array('estado'=>PUBLICADO),'');

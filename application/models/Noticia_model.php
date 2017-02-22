@@ -191,5 +191,30 @@ class Noticia_model extends CI_Model{
         $Q->free_result();
 
         return $data;       
-    }       
+    } 
+
+
+    /*MI PAGINACION HHH*/
+    //obtenemos el total de filas para hacer la paginación
+    function filas($idgrupo){
+        $this->db->where(array('id_grupo'=>$idgrupo,'estado'=>PUBLICADO));
+        $consulta = $this->db->get($this->table_name);
+        return  $consulta->num_rows() ;
+    }
+        
+    //obtenemos todas las provincias a paginar con la función
+    //total_posts_paginados pasando la cantidad por página y el segmento
+    //como parámetros de la misma
+    function total_paginados($por_pagina,$segmento,$idgrupo){
+        $this->db->where(array('id_grupo'=>$idgrupo,'estado'=>PUBLICADO));
+        $this->db->order_by("creado", "desc");
+        $consulta = $this->db->get($this->table_name,$por_pagina,$segmento);
+        if($consulta->num_rows()>0){
+            foreach($consulta->result() as $fila){
+                $data[] = $fila;
+            }
+            return $data;
+        }
+    }
+
 }

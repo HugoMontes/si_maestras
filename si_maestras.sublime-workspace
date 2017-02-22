@@ -4,16 +4,96 @@
 		"selected_items":
 		[
 			[
+				"he",
+				"height"
+			],
+			[
+				"mar",
+				"margin"
+			],
+			[
+				"id",
+				"idgrupo"
+			],
+			[
+				"form",
+				"form-configuracion"
+			],
+			[
+				"noticia",
+				"noticia_grupo_model"
+			],
+			[
+				"base",
+				"base_url"
+			],
+			[
+				"modal",
+				"modal-configuracion"
+			],
+			[
+				"cl",
+				"clear"
+			],
+			[
+				"noti",
+				"noticias"
+			],
+			[
+				"pagina",
+				"pagination_item"
+			],
+			[
+				"fon",
+				"font-weight"
+			],
+			[
 				"font",
-				"font-family"
+				"font-size"
+			],
+			[
+				"margin",
+				"margin"
+			],
+			[
+				"list",
+				"list-style"
+			],
+			[
+				"wi",
+				"width"
+			],
+			[
+				"ma",
+				"margin"
+			],
+			[
+				"border-",
+				"border-top"
+			],
+			[
+				"bac",
+				"background-color"
+			],
+			[
+				"TA",
+				"table_name"
+			],
+			[
+				"id_",
+				"id_navegacion"
+			],
+			[
+				"grupo",
+				"grupo_noticia"
+			],
+			[
+				"no",
+				"noticia_id"
 			],
 			[
 				"co",
 				"color"
-			],
-			[
-				"mar",
-				"margin-bottom"
 			],
 			[
 				"pa",
@@ -48,20 +128,12 @@
 				"container"
 			],
 			[
-				"wi",
-				"widget1"
-			],
-			[
 				"url",
 				"url_audio"
 			],
 			[
 				"frame",
 				"frame-audio"
-			],
-			[
-				"id",
-				"id_video"
 			],
 			[
 				"btn",
@@ -92,20 +164,12 @@
 				"overflow"
 			],
 			[
-				"form",
-				"form-solicitud"
-			],
-			[
 				"campo",
 				"campo_ciudad"
 			],
 			[
 				"ca",
 				"campo_ciudad"
-			],
-			[
-				"margin",
-				"margin-bottom"
 			],
 			[
 				"ba",
@@ -154,10 +218,6 @@
 			[
 				"di",
 				"display"
-			],
-			[
-				"fon",
-				"font-size"
 			],
 			[
 				"margion",
@@ -220,10 +280,6 @@
 				"padding"
 			],
 			[
-				"no",
-				"nombre"
-			],
-			[
 				"cam",
 				"campo_fecha_ini"
 			],
@@ -260,10 +316,6 @@
 				"required\tAttr"
 			],
 			[
-				"ma",
-				"margin-top"
-			],
-			[
 				"ps",
 				"position"
 			],
@@ -274,10 +326,6 @@
 			[
 				"file",
 				"file-input"
-			],
-			[
-				"bac",
-				"background"
 			],
 			[
 				"aling",
@@ -302,14 +350,6 @@
 			[
 				"con",
 				"cont"
-			],
-			[
-				"noticia",
-				"noticia-border"
-			],
-			[
-				"noti",
-				"noticia-border"
 			],
 			[
 				"iz",
@@ -474,76 +514,36 @@
 			[
 				"es",
 				"especialista_especialidad_model"
-			],
-			[
-				"prin",
-				"print_r"
-			],
-			[
-				"table",
-				"table_name"
-			],
-			[
-				"esp",
-				"especialista_id"
-			],
-			[
-				"public",
-				"publicaciones-caboco"
-			],
-			[
-				"pu",
-				"publicaciones"
-			],
-			[
-				"val",
-				"valEspecialidad"
-			],
-			[
-				"id_",
-				"id_esp"
-			],
-			[
-				"fe",
-				"fechaFin"
-			],
-			[
-				"fech",
-				"fechaIni"
-			],
-			[
-				"ve",
-				"vectorFechaFin"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "application/config/config.php",
+			"file": "application/config/routes.php",
 			"settings":
 			{
-				"buffer_size": 18324,
+				"buffer_size": 16919,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "application/config/database.php",
+			"file": "application/views/frontend/informacion_list.php",
 			"settings":
 			{
-				"buffer_size": 4696,
+				"buffer_size": 7569,
 				"encoding": "UTF-8",
-				"line_ending": "Unix"
+				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "index.php",
+			"file": "application/views/frontend/noticia_list.php",
 			"settings":
 			{
-				"buffer_size": 10452,
+				"buffer_size": 7511,
 				"encoding": "UTF-8",
-				"line_ending": "Unix"
+				"line_ending": "Windows"
 			}
 		}
 	],
@@ -600,17 +600,52 @@
 	},
 	"expanded_folders":
 	[
-		"/C/xampp/htdocs/si_cepb/administrador",
-		"/C/xampp/htdocs/si_cepb/administrador/application",
-		"/C/xampp/htdocs/si_cepb/administrador/application/controllers/backend",
-		"/C/xampp/htdocs/si_cepb/administrador/application/models",
-		"/C/xampp/htdocs/si_cepb/administrador/application/views",
 		"/C/xampp/htdocs/si_maestras",
 		"/C/xampp/htdocs/si_maestras/application",
-		"/C/xampp/htdocs/si_maestras/application/config"
+		"/C/xampp/htdocs/si_maestras/application/config",
+		"/C/xampp/htdocs/si_maestras/application/views",
+		"/C/xampp/htdocs/si_maestras/application/views/backend/comunes",
+		"/C/xampp/htdocs/si_maestras/application/views/frontend",
+		"/C/xampp/htdocs/si_maestras/assets"
 	],
 	"file_history":
 	[
+		"/C/xampp/htdocs/si_maestras/application/views/backend/comunes/sidebar.php",
+		"/C/xampp/htdocs/si_maestras/.gitignore",
+		"/C/Users/hugo9/Desktop/centrar.html",
+		"/C/xampp/htdocs/si_maestras/application/views/frontend/template/footer.php",
+		"/C/xampp/htdocs/si_maestras/application/models/Noticia_grupo_model.php",
+		"/C/xampp/htdocs/si_maestras/application/views/backend/noticias.php",
+		"/C/xampp/htdocs/si_maestras/application/controllers/backend/Noticia.php",
+		"/C/xampp/htdocs/si_maestras/application/controllers/frontend/Informacion.php",
+		"/C/xampp/htdocs/si_maestras/application/views/frontend/informacion_list.php",
+		"/C/xampp/htdocs/si_maestras/application/views/frontend/noticia_list.php",
+		"/C/xampp/htdocs/si_maestras/application/views/backend/noticia_nuevo.php",
+		"/C/xampp/htdocs/si_maestras/application/views/backend/noticia_editar.php",
+		"/C/xampp/htdocs/si_maestras/application/config/pagination.php",
+		"/C/xampp/htdocs/si_maestras/assets/frontend_caboco/css/style.caboco.css",
+		"/C/xampp/htdocs/si_maestras/application/controllers/frontend/Noticia.php",
+		"/C/xampp/htdocs/si_maestras/application/models/Noticia_model.php",
+		"/C/xampp/htdocs/si_maestras/application/controllers/backend/Modulo.php",
+		"/C/xampp/htdocs/si_maestras/application/controllers/Inicio.php",
+		"/C/xampp/htdocs/si_maestras/application/views/frontend/inicio.php",
+		"/C/xampp/htdocs/si_maestras/application/views/backend/modulo_editar.php",
+		"/C/Users/hugo9/Desktop/carouFredSel-jQuery-master/index.html",
+		"/C/xampp/htdocs/si_maestras/application/models/provincia_model.php",
+		"/C/xampp/htdocs/si_maestras/application/controllers/provincia.php",
+		"/C/xampp/htdocs/si_maestras/application/views/provincia_view.php",
+		"/C/xampp/htdocs/si_maestras/application/language/spanish/score_lang.php",
+		"/C/xampp/htdocs/si_maestras/system/libraries/Page.php",
+		"/C/xampp/htdocs/si_maestras/application/views/backend/noticias_capacitacion.php",
+		"/C/xampp/htdocs/si_maestras/assets/js/backend.js",
+		"/C/xampp/htdocs/si_maestras/application/views/backend/comunes/cabecera.php",
+		"/C/xampp/htdocs/si_maestras/application/config/constants.php",
+		"/C/xampp/htdocs/si_maestras/application/controllers/backend/Noticia_capacitacion.php",
+		"/C/xampp/htdocs/si_score/application/models/Navegacion_model.php",
+		"/C/xampp/htdocs/si_maestras/application/controllers/backend/Escritorio.php",
+		"/C/xampp/htdocs/si_maestras/application/config/config.php",
+		"/C/xampp/htdocs/si_maestras/application/config/database.php",
+		"/C/xampp/htdocs/si_maestras/index.php",
 		"/C/xampp/htdocs/si_cepb/administrador/application/config/routes.php",
 		"/C/xampp/htdocs/si_cepb/administrador/application/controllers/Sesion.php",
 		"/C/xampp/htdocs/si_cepb/administrador/application/views/login.php",
@@ -620,44 +655,32 @@
 		"/C/xampp/htdocs/si_cepb/administrador/application/models/Usuario_model.php",
 		"/C/xampp/htdocs/si_cepb/administrador/application/config/database.php",
 		"/C/xampp/htdocs/si_cepb/administrador/application/models/Perfil_model.php",
-		"/C/xampp/htdocs/si_maestras/assets/frontend_caboco/css/style.caboco.css",
 		"/C/Users/hugo9/Desktop/estadisticas/Template Administrador/NiceAdmin/.htaccess",
 		"/C/xampp/htdocs/si_cepb/administrador/application/views/backend/escritorio.php",
 		"/C/xampp/htdocs/si_cepb/administrador/application/config/config.php",
 		"/C/xampp/htdocs/si_cepb/administrador/resources/css/style.css",
 		"/C/xampp/htdocs/si_maestras/application/config/routes.php",
 		"/C/xampp/htdocs/si_maestras/application/views/frontend/template/main_form.php",
-		"/C/xampp/htdocs/si_maestras/application/views/frontend/inicio.php",
-		"/C/xampp/htdocs/si_maestras/application/controllers/backend/Modulo.php",
-		"/C/xampp/htdocs/si_maestras/application/views/backend/comunes/sidebar.php",
 		"/C/xampp/htdocs/si_maestras/application/views/backend/especialista.php",
 		"/C/xampp/htdocs/si_maestras/application/controllers/backend/Especialista.php",
 		"/C/xampp/htdocs/si_maestras/assets/frontend_caboco/css/style.css",
 		"/C/xampp/htdocs/si_maestras/assets/frontend_caboco/js/script.caboco.js",
 		"/C/xampp/htdocs/si_maestras/assets/css/backend.css",
 		"/C/xampp/htdocs/si_maestras/application/views/backend/especialista_csv.php",
-		"/C/xampp/htdocs/si_maestras/application/views/frontend/template/footer.php",
 		"/C/xampp/htdocs/si_maestras/application/controllers/frontend/Especialista_solicitud.php",
 		"/C/xampp/htdocs/si_cepb/config/config.php",
 		"/C/xampp/htdocs/si_maestras/application/views/frontend/comunes/menu.php",
 		"/C/xampp/htdocs/si_maestras/application/views/frontend/especialista_solicitud_enviada.php",
 		"/C/xampp/htdocs/si_maestras/application/libraries/CSVReader.php",
-		"/C/xampp/htdocs/si_maestras/application/views/backend/noticias_capacitacion.php",
-		"/C/xampp/htdocs/si_maestras/application/config/constants.php",
 		"/C/xampp/htdocs/si_maestras/application/views/backend/escritorio_formacion.php",
 		"/C/xampp/htdocs/si_maestras/application/controllers/backend/Especialidad.php",
 		"/C/xampp/htdocs/si_maestras/application/views/backend/especialidad.php",
-		"/C/xampp/htdocs/si_maestras/application/views/frontend/noticia_list.php",
 		"/C/xampp/htdocs/si_maestras/application/helpers/score_helper.php",
 		"/C/Users/hugo9/Desktop/Excel15.xlb",
 		"/C/Users/hugo9/Desktop/maestras_constructoras.csv",
 		"/C/xampp/htdocs/si_maestras/application/views/backend/escritorio.php",
-		"/C/xampp/htdocs/si_maestras/application/controllers/backend/Escritorio.php",
-		"/C/xampp/htdocs/si_maestras/application/controllers/backend/Noticia_capacitacion.php",
-		"/C/xampp/htdocs/si_maestras/application/config/config.php",
 		"/C/xampp/htdocs/si_maestras/application/controllers/backend/Sesion.php",
 		"/C/xampp/htdocs/si_maestras/assets/css/style.css",
-		"/C/xampp/htdocs/si_maestras/application/views/backend/noticias.php",
 		"/C/xampp/htdocs/si_maestras/application/views/backend/comunes/sidebar_formacion.php",
 		"/C/xampp/htdocs/si_maestras/application/views/backend/css.php",
 		"/C/xampp/htdocs/roles_usuarios/application/controllers/login.php",
@@ -689,15 +712,11 @@
 		"/C/xampp/htdocs/si_maestras/application/controllers/backend/Menu.php",
 		"/C/xampp/htdocs/si_maestras/application/controllers/backend/Menu_pagina.php",
 		"/C/xampp/htdocs/si_maestras/application/controllers/backend/Menu_url.php",
-		"/C/xampp/htdocs/si_maestras/application/controllers/backend/Noticia.php",
 		"/C/xampp/htdocs/si_maestras/application/controllers/backend/Pagina.php",
 		"/C/xampp/htdocs/si_maestras/application/controllers/backend/Contacto.php",
 		"/C/xampp/htdocs/si_maestras/application/models/Usuario_model.php",
 		"/C/xampp/htdocs/si_maestras/application/views/backend/usuario_iniciar_sesion.php",
 		"/C/xampp/htdocs/si_maestras/application/views/frontend/noticia_view.php",
-		"/C/xampp/htdocs/si_maestras/index.php",
-		"/C/xampp/htdocs/si_maestras/application/views/backend/noticia_editar.php",
-		"/C/xampp/htdocs/si_maestras/application/views/backend/noticia_nuevo.php",
 		"/C/xampp/htdocs/si_maestras/application/views/backend/noticia_capacitacion_nuevo.php",
 		"/C/xampp/htdocs/si_maestras/application/views/backend/noticia_capacitacion_editar.php",
 		"/C/xampp/htdocs/si_maestras/assets/js/valida-noticia-maestras.js",
@@ -707,7 +726,6 @@
 		"/C/xampp/htdocs/si_maestras/assets/frontend_caboco/js/script.js",
 		"/C/Users/hugo9/Desktop/slick-1.6.0/index.html",
 		"/C/xampp/htdocs/si_maestras/application/views/frontend/comunes/menu_.php",
-		"/C/xampp/htdocs/si_maestras/application/language/spanish/score_lang.php",
 		"/C/xampp/htdocs/si_maestras/application/models/Noticia_capacitacion_model.php",
 		"/C/xampp/htdocs/si_maestras/application/views/frontend/especialista_respuesta_consulta.php",
 		"/C/xampp/htdocs/si_maestras/application/models/Especialista_solicitud_model.php",
@@ -719,26 +737,7 @@
 		"/C/xampp/htdocs/si_maestras/application/views/backend/especialidad_nuevo.php",
 		"/C/xampp/htdocs/si_maestras/application/models/Especialista_especialidad_model.php",
 		"/C/xampp/htdocs/si_maestras/application/models/Especialista_ciudad_model.php",
-		"/C/xampp/htdocs/si_maestras/application/controllers/Inicio.php",
-		"/C/xampp/htdocs/si_maestras/application/views/frontend/especialista_formulario_solicitud.php",
-		"/C/xampp/htdocs/ossn/locale/ossn.es.php",
-		"/C/Users/hugo9/Desktop/spanish/locale/ossn.es.php",
-		"/C/Users/hugo9/Desktop/spanish2/locale/ossn.es.php",
-		"/C/Users/hugo9/Desktop/spanish2/components/OssnWall/locale/ossn.es.php",
-		"/C/Users/hugo9/Desktop/spanish2/components/PrivateNetwork/locale/ossn.es.php",
-		"/C/Users/hugo9/Desktop/spanish2/components/OssnSitePages/locale/ossn.es.php",
-		"/C/Users/hugo9/Desktop/spanish2/components/OssnPoke/locale/ossn.es.php",
-		"/C/Users/hugo9/Desktop/spanish2/components/OssnSearch/locale/ossn.es.php",
-		"/C/Users/hugo9/Desktop/spanish2/components/OssnProfile/locale/ossn.es.php",
-		"/C/Users/hugo9/Desktop/spanish2/components/OssnPhotos/locale/ossn.es.php",
-		"/C/Users/hugo9/Desktop/spanish2/components/OssnNotifications/locale/ossn.es.php",
-		"/C/Users/hugo9/Desktop/spanish2/components/OssnMembers/locale/ossn.es.php",
-		"/C/Users/hugo9/Desktop/spanish2/components/OssnMessages/locale/ossn.es.php",
-		"/C/Users/hugo9/Desktop/spanish2/components/OssnInvite/locale/ossn.es.php",
-		"/C/Users/hugo9/Desktop/spanish2/components/OssnLikes/locale/ossn.es.php",
-		"/C/Users/hugo9/Desktop/spanish2/components/OssnGroups/locale/ossn.es.php",
-		"/C/Users/hugo9/Desktop/spanish2/components/OssnComments/locale/ossn.es.php",
-		"/C/Users/hugo9/Desktop/spanish2/components/OssnChat/locale/ossn.es.php"
+		"/C/xampp/htdocs/si_maestras/application/views/frontend/especialista_formulario_solicitud.php"
 	],
 	"find":
 	{
@@ -749,6 +748,7 @@
 		"height": 90.0,
 		"where_history":
 		[
+			"C:\\xampp\\htdocs\\si_maestras\\assets\\frontend_caboco",
 			"C:\\xampp\\htdocs\\si_maestras\\application",
 			"C:\\xampp\\htdocs\\si_maestras\\assets\\frontend_caboco",
 			"C:\\xampp\\htdocs\\si_maestras\\assets\\frontend_caboco\\js",
@@ -780,6 +780,120 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"dot1",
+			"spinner",
+			"50vw",
+			";\">",
+			"300px",
+			"End",
+			"ajaxloader.gif",
+			"loader",
+			"dot2",
+			"eliminar",
+			"btn-ventana-configuracion",
+			"GET",
+			"btn-ventana-configuracion",
+			"$grupo",
+			"$titulo",
+			"titulo",
+			"$grupo->id",
+			"id_grupo",
+			"optionsRadios",
+			"myModal",
+			"$grupo",
+			"noticia/",
+			"noticia",
+			"noticias/",
+			"noticias",
+			"informacion",
+			"categoria",
+			"$grupo",
+			"informacion/",
+			"informacion",
+			"noticia",
+			"informacion",
+			"administrador/noticia/",
+			"noticia",
+			"$class_menu_informacion_1",
+			"informacion/",
+			"informacion",
+			"noticia",
+			"$class_menu_informacion_2",
+			"informacion",
+			"$class_menu_noticia_2",
+			"class_menu_noticia_2",
+			" $class_menu_informacion",
+			"$class_menu_informacion",
+			"$class_menu_noticia_capacitacion",
+			"$class_menu_noticia_capacitacion_0",
+			"class_menu_noticia_capacitacion_1",
+			"Noticia",
+			"<li>",
+			"padding: 2px 4px;",
+			"6px 8px",
+			"8px 14px",
+			"16px",
+			";",
+			"get_all",
+			".clearfix",
+			"list_carousel",
+			"mod_auspiciadores",
+			"mod_convocatoria",
+			"modulo",
+			"$class_menu_inicio_2",
+			"$class_menu_inicio_0",
+			"29/11/2016",
+			"\"index.php/noticias/\".$noticia->id_grupo.\"/\".$noticia->id;?>",
+			"$noticia->creado",
+			"29/11/2016",
+			"\"index.php/noticias_detalle/\".$noticia->id",
+			"\"index.php/noticias_detalle/\".$noticia->id_grupo.",
+			"index.php/noticias",
+			"2",
+			"3",
+			"$table_name",
+			"for",
+			"table",
+			"'noticia'",
+			"library('pagination')",
+			"$this->load->library('pagination')",
+			"$this->load->library('pagination');",
+			"DESPUBLICADO",
+			"$sw_user",
+			"80%",
+			"#enlace_eliminar",
+			"enlace_eliminar",
+			"modal-eliminar",
+			"#modal-eliminar",
+			"eliminar",
+			"/editar/",
+			"$id_grupo",
+			"form",
+			"grupo",
+			"noticia",
+			"$id_grupo",
+			"navegacion",
+			"idgrupo",
+			"navegacion",
+			"score_noticia_nuevo_titulo",
+			"$route[",
+			"noticia",
+			"NOTICIAS",
+			"noticias",
+			"noticia_capacitacion_model",
+			"index()",
+			"administrador/noticia",
+			"get_count",
+			"noticia_model",
+			"noticias-capacitacion",
+			"noticias-generales",
+			"noticia",
+			"noticia_capacitacion_model",
+			"/(:",
+			"frontend/noticia/",
+			"generales",
+			"$id",
+			"get_all",
 			"clave",
 			"img/",
 			"img",
@@ -793,121 +907,7 @@
 			"sesion",
 			"login",
 			"default_controller",
-			"assets/",
-			"helper",
-			"welcome",
-			"$class_menu_inicio_3",
-			"administrador/modulo/editar",
-			"$class_menu_inicio_5",
-			"class_menu_inicio_5",
-			"</td>",
-			"<td><?php echo ",
-			"\">\n",
-			"fotografia",
-			"Descar",
-			"</h3>",
-			"2",
-			"administrador/especialista",
-			"capacitacion",
-			"info",
-			"<h6>",
-			"es_item_super_usuario",
-			"guardar",
-			"for",
-			"Especialidades",
-			"es_noticia_usuario",
-			"noticia",
-			"usuario_sesion",
-			"auspiciantes",
-			"administrador/noticia",
-			"is_user_item",
-			"existe_sesion_perfil",
-			"FORMADOR_EXPERTO",
-			"Formadores",
-			"Convocatorias formadores",
-			"Mensajes de contacto",
-			"get_user_session",
-			"existe_sesion_urse",
-			"{",
-			"cookie",
-			"sess_encrypt_cookie",
-			"existe_sesion_urse",
-			"password_user_no_exists",
-			"administrador/escritorio",
-			"administrador/",
-			"noticias-generales",
-			"audio_",
-			"iframe",
-			".btn-close-modal-audio",
-			"iframe",
-			"frame-audio",
-			"https",
-			"btn-audio",
-			"urlaudio",
-			"noticia-resumen",
-			"video",
-			"noticia_default",
-			"vimeo",
-			"\".playerid\"",
-			"#playerid",
-			"bs-example-modal-lg",
-			"A",
-			"$noticia->tipo",
-			"fa fa-newspaper-o",
-			"span",
-			"small",
-			"tipo",
-			"video_id",
-			"helper",
-			"get_columnas_contenido",
-			"urlvideo",
-			"tinymce",
-			"audio",
-			"#urlvideo",
-			"video",
-			"url_audio",
-			"video",
-			"url_video",
-			"url",
-			"video",
-			"$_FILES",
-			"<span class=\"required\">*</span>",
-			"imagen",
-			"url",
-			"Url",
-			"url",
-			"Video",
-			"administrador/noticia",
-			"administrador/capacitacion",
-			"administrador/noticia",
-			"backend/noticia_capacitacion_editar",
-			"backend/noticia_capacitacion_nuevo",
-			"backend/noticia_nuevo",
-			"backend/noticia_editar",
-			"noticia_editar",
-			"form",
-			"administrador/capacitacion",
-			"administrador/noticia",
-			"\"/>\n",
-			"administrador/noticia",
-			"administrador/capacitacion",
-			"messages",
-			"profile",
-			"home",
-			"administrador",
-			"get_columnas_contenido",
-			".content-noticia",
-			".modal-body-noticia .linea-derecha",
-			"animationHover",
-			"[]",
-			"ciudad",
-			"finalizar_solicitud_especialistas",
-			"txtEspecialidad",
-			"txtCiudad",
-			"position: absolute;",
-			"right: 0px; top: 0px;",
-			"relative",
-			"z-index:"
+			"assets/"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -930,124 +930,19 @@
 			[
 				{
 					"buffer": 0,
-					"file": "application/config/config.php",
+					"file": "application/config/routes.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 18324,
+						"buffer_size": 16919,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1026,
-								1026
-							]
-						],
-						"settings":
-						{
-							"bracket_highlighter.busy": false,
-							"bracket_highlighter.locations":
-							{
-								"close":
-								{
-								},
-								"icon":
-								{
-								},
-								"open":
-								{
-								},
-								"unmatched":
-								{
-								}
-							},
-							"bracket_highlighter.regions":
-							[
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content"
-							],
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/PHP/PHP.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 2460.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "application/config/database.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4696,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4273,
-								4273
+								12959,
+								12980
 							]
 						],
 						"settings":
@@ -1059,15 +954,15 @@
 								{
 									"1":
 									[
-										4693,
-										4694
+										12980,
+										12981
 									]
 								},
 								"icon":
 								{
 									"1":
 									[
-										"Packages/BracketHighlighter/icons/round_bracket.png",
+										"Packages/BracketHighlighter/icons/single_quote.png",
 										"brackethighlighter.default"
 									]
 								},
@@ -1075,8 +970,8 @@
 								{
 									"1":
 									[
-										4067,
-										4068
+										12942,
+										12943
 									]
 								},
 								"unmatched":
@@ -1085,16 +980,26 @@
 							},
 							"bracket_highlighter.regions":
 							[
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
@@ -1105,70 +1010,60 @@
 								"bh_double_quote_open",
 								"bh_double_quote_close",
 								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
 								"bh_round",
 								"bh_round_center",
 								"bh_round_open",
 								"bh_round_close",
 								"bh_round_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content"
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
 							],
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
 							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"translate_tabs_to_spaces": false
+							"word_wrap": false
 						},
-						"translation.x": 0.0,
-						"translation.y": 1500.0,
+						"translation.x": 4.0,
+						"translation.y": 4111.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "index.php",
+					"buffer": 1,
+					"file": "application/views/frontend/informacion_list.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 10452,
+						"buffer_size": 7569,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2286,
-								2286
+								6504,
+								6516
 							]
 						],
 						"settings":
@@ -1178,12 +1073,27 @@
 							{
 								"close":
 								{
+									"1":
+									[
+										6689,
+										6692
+									]
 								},
 								"icon":
 								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/tag.png",
+										"brackethighlighter.default"
+									]
 								},
 								"open":
 								{
+									"1":
+									[
+										6444,
+										6447
+									]
 								},
 								"unmatched":
 								{
@@ -1191,16 +1101,26 @@
 							},
 							"bracket_highlighter.regions":
 							[
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
@@ -1211,50 +1131,163 @@
 								"bh_double_quote_open",
 								"bh_double_quote_close",
 								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
 								"bh_round",
 								"bh_round_center",
 								"bh_round_open",
 								"bh_round_close",
 								"bh_round_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content"
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
 							],
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
 							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"translate_tabs_to_spaces": false
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 780.0,
+						"translation.y": 2640.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "application/views/frontend/noticia_list.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7511,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6458,
+								6458
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										6631,
+										6634
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/tag.png",
+										"brackethighlighter.default"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										6386,
+										6389
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2639.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -1344,7 +1377,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 334.0,
+	"side_bar_width": 266.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

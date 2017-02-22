@@ -8,13 +8,19 @@
   <!-- Start Escuelas de Formacion -->
   <div class="content-auspiciantes">
     <section class="auspiciantes slider">
-      <?php echo $mod_enlaces->contenido; ?>
+      <?php echo $mod_escuelas->contenido; ?>
     </section>
   </div>
   <!-- End Escuelas de Formacion -->
 
+  <!-- Start Auspiciadores -->
+  <div class="list_carousel responsive">
+      <?php echo $mod_auspiciantes->contenido; ?>
+  </div>
+  <!-- End Auspiciadores -->
+
   <!-- Start Portfolio Section -->
-  <div class="section full-width-portfolio" style="border-top:0; border-bottom:0; background:#fff; padding-top: 40px;">
+  <div class="section full-width-portfolio" style="border-top:0; border-bottom:0; background:#fff; padding-top: 0px;">
 
     <!-- Start Big Heading -->
     <div class="big-title text-center" data-animation="fadeInDown" data-animation-delay="01">
@@ -61,9 +67,9 @@
             <div class="noticia-content-title noticia-border">
               <div class="meta-left">
                 <h6 class="noticia-titulo">
-                  <a href="<?php echo base_url()."index.php/noticias-generales/".$noticia->id;?>"><?php echo $noticia->titulo; ?></a>
+                  <a href="<?php echo base_url()."index.php/noticias_detalle/".$noticia->id;?>"><?php echo $noticia->titulo; ?></a>
                   <br/>
-                  <span class="fecha"><i class="fa fa-calendar" aria-hidden="true"></i> 29/11/2016</span>
+                  <span class="fecha"><i class="fa fa-calendar" aria-hidden="true"></i> <?php echo date("d-m-Y", strtotime($noticia->creado)); ?></span>
                 </h6>
               </div>
               <?php if($noticia->tipo_contenido=='texto'){
@@ -83,7 +89,7 @@
               </div>
               <br/><br/>
               <p>
-                <a class="btn btn-warning" href="<?php echo base_url()."index.php/noticias-generales/".$noticia->id;?>">Ver más</a>
+                <a class="btn btn-warning" href="<?php echo base_url()."index.php/noticias_detalle/".$noticia->id;?>">Ver más</a>
                 <?php if($noticia->tipo_contenido=='video'){ ?>
                 <?php $id_video = substr($noticia->url_video,strpos($noticia->url_video,'?v=')+3); ?>
                   <button type="button" id="<?php echo $id_video; ?>" class="btn btn-primary btn-video" data-toggle="modal" data-target=".modal-video-<?php echo $id_video; ?>">Ver video</button>
@@ -182,9 +188,9 @@
             <div class="noticia-content-title noticia-border">
               <div class="meta-left">
                 <h6 class="noticia-titulo">
-                  <a href="<?php echo base_url()."index.php/noticias-capacitacion/".$noticia->id;?>"><?php echo $noticia->titulo; ?></a>
+                  <a href="<?php echo base_url()."index.php/noticias_detalle/".$noticia->id;?>"><?php echo $noticia->titulo; ?></a>
                   <br/>
-                  <span class="fecha"><i class="fa fa-calendar" aria-hidden="true"></i> 29/11/2016</span>
+                  <span class="fecha"><i class="fa fa-calendar" aria-hidden="true"></i> <?php echo date("d-m-Y", strtotime($noticia->creado)); ?></span>
                 </h6>
               </div>
               <?php if($noticia->tipo_contenido=='texto'){
@@ -204,7 +210,7 @@
               </div>
               <br/><br/>
               <p>
-                <a class="btn btn-warning" href="<?php echo base_url()."index.php/noticias-capacitacion/".$noticia->id;?>">Ver más</a>
+                <a class="btn btn-warning" href="<?php echo base_url()."index.php/noticias_detalle/".$noticia->id;?>">Ver más</a>
                 <?php if($noticia->tipo_contenido=='video'){ ?>
                 <?php $id_video = substr($noticia->url_video,strpos($noticia->url_video,'?v=')+3); ?>
                   <button type="button" id="<?php echo $id_video; ?>" class="btn btn-primary btn-video" data-toggle="modal" data-target=".modal-video-<?php echo $id_video; ?>">Ver video</button>
@@ -271,7 +277,32 @@
   <!-- Start Client/Partner Section -->
   <!-- End Client/Partner Section -->
 <?php $this->load->view('frontend/template/footer'); ?>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.carouFredSel-6.2.1-packed.js"></script>
+
 <script>
+$(function(){
+  //  Basic carousel + timer, using CSS-transitions
+  $('#foo0').carouFredSel({
+    responsive: true,
+    width: '100%',
+    auto: {
+      duration: 30000,
+      easing: "linear",
+      timeoutDuration: 0,
+      pauseOnHover: "immediate"
+    },
+    items: {
+      /*width: 400,*/
+      // height: '30%',  //  optionally resize item-height
+      height: 85,
+      visible: {
+        min: 2,
+        max: 7
+      }
+    }
+  });
+});
+
 $(document).ready(function(){
   var video,id_video;
   $('.btn-video').click(function(){
