@@ -163,7 +163,7 @@
         {
             if($noticia_id == FALSE)
             {
-                $this->nuevo();
+                $this->nuevo($grupo_id);
             }
             
             if($this->session->flashdata('mensaje'))
@@ -239,7 +239,7 @@
                   $this->session->set_flashdata('error', validation_errors());
                   
     			  if($guardar == NUEVO)
-                    $this->nuevo();
+                    $this->nuevo($grupo);
                   if($guardar == EDICION)
                     $this->editar($noticia_id);
     			}
@@ -287,7 +287,7 @@
                             $this->session->set_flashdata('error',$this->upload->display_errors());     
                             
                             if($guardar == NUEVO)
-                            $this->nuevo();
+                            $this->nuevo($grupo);
                             if($guardar == EDICION)
                             $this->editar($noticia_id);
     
@@ -315,7 +315,7 @@
                             {
                                 $this->session->set_flashdata('error',$this->image_lib->display_errors()); 
                                 if($guardar == NUEVO)
-                                    $this->nuevo();
+                                    $this->nuevo($grupo);
                                 if($guardar == EDICION)
                                     $this->editar($noticia_id);
                             }
