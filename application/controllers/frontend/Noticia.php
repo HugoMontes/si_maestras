@@ -31,7 +31,7 @@ class Noticia extends CI_Controller{
 	    	   //$data['noticias'] = $this->noticia_model->get_all('',array('id_grupo'=>$idgrupo,'estado'=>PUBLICADO),'','','creado desc','');
 	           $data['mod_pie'] = $this->modulo_model->get_values('contenido',array('modulo'=>'mod_pie','estado'=>PUBLICADO));
 	           $data['mod_logo'] = $this->modulo_model->get_values('contenido',array('modulo'=>'mod_logotipo','estado'=>PUBLICADO));  
-	   
+	   		   $data['columnas']=$grupo->columnas;
 	           //**** Inicio Parametros Paginacion ****
 	            $pages=6; //Número de registros mostrados por páginas
 				$this->load->library('pagination'); //Cargamos la librería de paginación

@@ -97,8 +97,7 @@
                         <span class="glyphicon glyphicon-cog"></span>
                     </button>
                 </div>
-              </h1>
-              
+              </h1>              
             </section>
     
             <!-- Main content -->

@@ -94,17 +94,40 @@
                               <p class="help-block"><?php echo $this->lang->line('score_imagen_upload').'&nbsp;&nbsp;'.$this->lang->line('score_noticia_img_condiciones');?></p>
                             </div>
 
-                            <p><strong>Ingresar la url o el codigo de inserción de un video o audio como elemento principal (Opcional)</strong></p>  
+                            <div class="form-group">
+                              <label for="rotulo">Rotulo <span class="required">*</span></label>
+                              <?php echo form_error('rotulo', '<span class="error-form">', '</span><br/><br/>'); ?>
+                              <div class="row">
+                                <div class="col-lg-6"> 
+                                    <input type="text" class="form-control input-large-text" id="rotulo" name="rotulo" value="<?php echo set_value('rotulo')==''?$rotulo:set_value('rotulo');?>" placeholder="Ingrese el rotulo"/>
+                                </div>
+                              </div>      
+                            </div>
+
+                            <label for="imagen">Tipo de contenido </label>
+                            <input type="hidden" id="tipo" name="tipo" name="texto">
                             <!-- Start: Nav tabs -->
                             <ul class="nav nav-tabs" role="tablist">
-                              <li role="presentation" class="active"><a href="#video" aria-controls="video" role="tab" data-toggle="tab">Video</a></li>
+                              <li role="presentation" class="active"><a href="#pdf" aria-controls="pdf" role="tab" data-toggle="tab">PDF</a></li>
+                              <li role="presentation"><a href="#video" aria-controls="video" role="tab" data-toggle="tab">Video</a></li>
                               <li role="presentation"><a href="#audio" aria-controls="audio" role="tab" data-toggle="tab">Audio</a></li>
                             </ul>
                             <!-- End: Nav tabs -->
 
                             <!-- Start: Tab panes -->
                             <div class="tab-content">
-                              <div role="tabpanel" class="tab-pane active" id="video">
+                              <div role="tabpanel" class="tab-pane active" id="pdf">
+                                <div class="panel panel-default">
+                                  <div class="panel-body">
+                                    <div class="form-group">
+                                      <label for="docPdf">Seleccionar documento PDF</label>
+                                      <?php echo form_error('docPdf', '<span class="error-form">', '</span><br/><br/>'); ?>
+                                      <input type="file" id="docPdf" name="docPdf" accept=".pdf"/> 
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div role="tabpanel" class="tab-pane" id="video">
                                 <div class="panel panel-default">
                                   <div class="panel-body">
                                     <div class="form-group">
@@ -130,6 +153,7 @@
                               </div>
                             </div>
                             <!-- End: Tab panes -->
+
 
                             <div class="form-group">
                               <label for="url">Url externa </label>

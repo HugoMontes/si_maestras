@@ -414,6 +414,9 @@ div.crop-img img {
 	color: white;
 	background-color: #EA9F27;
 }
+.btn-mas, .btn-video, .btn-pdf, .btn-audio{
+	width: 85px;
+}
 .content-noticia p{
 	color: #444;
 	font-size: 14px;

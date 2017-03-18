@@ -55,6 +55,10 @@
         <div style="margin: 0 auto;">
           <iframe width="560" height="315" src="https://www.youtube.com/embed/<?php echo substr($noticia->url_video,strpos($noticia->url_video,'?v=')+3); ?>?rel=0" frameborder="0" allowfullscreen></iframe>
         </div>
+      <?php }elseif($noticia->tipo_contenido=='pdf'){ ?>
+        <div style="text-align: center;">                            
+          <iframe src="<?php echo base_url('assets/pdf/'.$noticia->doc_pdf); ?>" style="width:100%; height:500px;" frameborder="0"></iframe>
+        </div>
       <?php } ?>
 
       <div class="content-noticia" style="text-align: justify; margin-top: 10px; font-size: 16px;" >

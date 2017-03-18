@@ -135,6 +135,7 @@
             $data['id_grupo']=$grupo_noticia->id;
             $data['id_navegacion']=$grupo_noticia->id_navegacion;
             $data['titulo'] = $grupo_noticia->descripcion;
+            $data['rotulo'] = 'NOTICIA';
             $this->load->view('backend/noticia_nuevo',$data);
         }
         
@@ -215,60 +216,56 @@
     	    $navegacion = $this->navegacion_model->get_values('navegacion',array('id'=>$grupo_noticia->id_navegacion));
     		
             if(isset($_POST['guardar']))
-    		{              
+    		{   
     		    $guardar = $this->input->post("guardar");
-                if($guardar == EDICION)
-                {
+                if($guardar == EDICION){
                     $noticia_id = $this->input->post('noticia_id');
                     $imagen = $this->input->post('imagen');   
                     $imagen_thumb = $this->input->post('imagen_thumb');
+                    $pdf = $this->input->post('docPdf');
                 }
+
+                //if($guardar == NUEVO){
+                //   if (empty($_FILES['imagen']['name']))
+                //    $this->form_validation->set_rules('imagen', 'Imagen destacada', 'required');
+                //}
+
                 //required=campo obligatorio||xss_clean=evitamos inyecciones de codigo
     			$this->form_validation->set_rules('titulo', 'Título', 'trim|required');
                 $this->form_validation->set_rules('resumen', 'Resumen', 'trim|required');
                 $this->form_validation->set_rules('contenido', 'Contenido', 'trim|required');
+                $this->form_validation->set_rules('rotulo', 'Rotulo', 'trim|required');
                 $this->form_validation->set_rules('urlvideo', 'Url de video', 'trim|valid_url_format|url_exists');
                 $this->form_validation->set_rules('url', 'Url externa', 'trim|valid_url_format|url_exists');                
                 $this->form_validation->set_rules('estado', 'Estado', 'integer|required');  
 
     			$this->form_validation->set_message('required', 'Falta el campo %s');
                                 
-    			if($this->form_validation->run() == FALSE)
-    			{
-    			 
+    			if($this->form_validation->run() == FALSE){
                   $this->session->set_flashdata('error', validation_errors());
-                  
-    			  if($guardar == NUEVO)
+                  if($guardar == NUEVO)
                     $this->nuevo($grupo);
                   if($guardar == EDICION)
                     $this->editar($noticia_id);
-    			}
-                else
-                {                    
+    			}else{                    
                     // obtenemos los datos del usuario administrador
                     $usuario_sesion = get_user_session();
                                         
                     $titulo = $this->input->post('titulo');
                     $resumen = $this->input->post('resumen');
                     $contenido = $this->input->post('contenido');
+                    $rotulo = $this->input->post('rotulo');
                     $url_video = $this->input->post('urlvideo');
                     $url_audio = $this->input->post('urlaudio');
                     $url = $this->input->post('url');
+                    $tipo_contenido = $this->input->post('tipo');
                     $fuente = trim($this->input->post('fuente'));
                     $estado = $this->input->post('estado');
                     $guardar = $this->input->post("guardar");
-
-                    if(isset($url_video) && $url_video!=''){
-                        $tipo_contenido='video';
-                    }else if(isset($url_audio) && $url_audio!=''){
-                        $tipo_contenido="audio";
-                    }else{
-                        $tipo_contenido="texto";
-                    }
                     
-                    /*********************************************************************/
-                    // upload imagen
-                    /*********************************************************************/
+                    // -------------------------------------------------------------------
+                    // begin : upload imagen
+                    // -------------------------------------------------------------------
                     $sw = 1;
                     if (!empty($_FILES['imagen']['name']))
                     {
@@ -289,15 +286,14 @@
                             if($guardar == NUEVO)
                             $this->nuevo($grupo);
                             if($guardar == EDICION)
-                            $this->editar($noticia_id);
-    
+                            $this->editar($noticia_id);    
                         }
                         else
                         {
                             $data = $this->upload->data();
                             $imagen = $data['file_name'];
                             
-                            // thumb
+                            // begin : thumb
                             $source_path = './assets/img/noticias/' . $imagen;
                             $target_path = './assets/img/noticias/' . 'thumb/';
                             $config_thumb = array(
@@ -324,9 +320,8 @@
                                 $imagen_thumb = $data['raw_name'].'_thumb'.$data['file_ext'];
                             }
                             $this->image_lib->clear();
-                            // fin thumb                            
-                        }
-                       
+                            // end : thumb                            
+                        }                       
                     }else{
                         switch($tipo_contenido){
                             case('video'):
@@ -343,16 +338,47 @@
                                 $imagen_thumb="noticia_default_thumb.jpg";
                         }
                     }
-                    if($sw == 1)
-                    {
-                        if($guardar == NUEVO)
-                        {                                            
+                    // -------------------------------------------------------------------
+                    // end : upload imagen
+                    // -------------------------------------------------------------------
+
+
+                    // -------------------------------------------------------------------
+                    // begin : upload pdf
+                    // -------------------------------------------------------------------
+                    if (!empty($_FILES['docPdf']['name'])){
+                        $config['upload_path'] = './assets/pdf';
+                        $config['allowed_types'] = 'pdf';     
+                        $config['encrypt_name'] = FALSE;
+                        $this->load->library('upload', $config);
+                        if (!$this->upload->do_upload('docPdf')){
+                            $sw = 0;                            
+                            $this->session->set_flashdata('error',$this->upload->display_errors());
+                            if($guardar == NUEVO){
+                                $this->nuevo($grupo);
+                            }
+                            if($guardar == EDICION){
+                                $this->editar($noticia_id); 
+                            }
+                        }else{
+                            $data = $this->upload->data();
+                            $pdf = $data['file_name'];
+                        }
+                    }                    
+                    // -------------------------------------------------------------------
+                    // end : upload pdf
+                    // -------------------------------------------------------------------
+
+                    if($sw == 1){
+                        if($guardar == NUEVO){                                            
                             $data = array();
                             $data = array ('titulo' =>$titulo,
                                             'resumen' => $resumen,
                                             'contenido' =>$contenido,
+                                            'rotulo'=>$rotulo,
                                             'url_video' => $url_video,
                                             'url_audio' => $url_audio,
+                                            'doc_pdf'=> $pdf,
                                             'tipo_contenido' => $tipo_contenido,
                                             'url' => $url,
                                             'fuente'=> $fuente, 
@@ -360,8 +386,7 @@
                                             'thumb' => $imagen_thumb,
                                             'id_grupo'=>$grupo,
                                             'estado' =>$estado,
-                                            'creado_por'=>$usuario_sesion->id);
-                                            
+                                            'creado_por'=>$usuario_sesion->id);                                            
                                             
                             if($estado == PUBLICADO)                
                                 $data['publicado'] = date('Y-m-d H:i:s');
@@ -375,15 +400,15 @@
                             redirect('administrador/noticia/editar/'.$noticia_id.'/'.$grupo);
                             
                         }
-    
-                        if($guardar == EDICION)
-                        {
+                        if($guardar == EDICION){
                             $data = array();
                             $data = array ('titulo' =>$titulo,
                                             'resumen' => $resumen,
                                             'contenido' =>$contenido,
+                                            'rotulo'=>$rotulo,
                                             'url_video' => $url_video,
                                             'url_audio' => $url_audio,
+                                            'doc_pdf'=> $pdf,
                                             'tipo_contenido' => $tipo_contenido,
                                             'url' => $url,
                                             'fuente'=> $fuente,
@@ -391,32 +416,27 @@
                                             'thumb' => $imagen_thumb,
                                             'id_grupo'=>$grupo,
                                             'estado' =>$estado,
-                                            'modificado_por'=>$usuario_sesion->id);
-                                            
+                                            'modificado_por'=>$usuario_sesion->id);                                          
                                             
                             if($estado == PUBLICADO)                
                                 $data['publicado'] = date('Y-m-d H:i:s');
                             if($estado == DESPUBLICADO)    
                                 $data['despublicado'] = date('Y-m-d H:i:s');
                             
-                            if($this->noticia_model->exists('id',$noticia_id))
-                            {
+                            if($this->noticia_model->exists('id',$noticia_id)){
                                 $this->noticia_model->update($data, $noticia_id);
                                 $this->session->set_flashdata('mensaje', $this->lang->line('score_noticia_guardada'));
                                 redirect('administrador/noticia/editar/'.$noticia_id."/".$grupo);
-                            }
-                            else
-                            {
+                            }else{
                                 redirect('administrador/noticia/nuevo/'.$grupo);
                             }    
                         }                        
                     }                                      
     			}
-    		}
-            else
-            {
+    		}else{
                 redirect(base_url($navegacion->navegacion));
             }
+        
     	}
         
         

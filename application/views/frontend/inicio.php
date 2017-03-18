@@ -38,16 +38,7 @@
         <div class="col-xs-12 col-sm-6 col-md-4 noticia-container">
           <div class="noticia-border">
             <div class="nombre-seccion">
-              <h6>
-              <?php if($noticia->tipo_contenido=='texto'){
-                  echo 'NOTICIA';
-                }else if($noticia->tipo_contenido=='video'){
-                  echo 'VIDEO';
-                }else if($noticia->tipo_contenido=='audio'){
-                  echo 'AUDIO';                  
-                }
-              ?>
-              </h6>
+              <h6><?php echo $noticia->rotulo; ?></h6>
             </div>
             <?php
               if(!empty($noticia->imagen)){
@@ -56,8 +47,7 @@
                 }else{
                   $img = $noticia->imagen;
                 }
-              }
-              else{
+              }else{
                 $img = base_url('assets/img/noticias/default.png');
               }
             ?>
@@ -72,12 +62,15 @@
                   <span class="fecha"><i class="fa fa-calendar" aria-hidden="true"></i> <?php echo date("d-m-Y", strtotime($noticia->creado)); ?></span>
                 </h6>
               </div>
-              <?php if($noticia->tipo_contenido=='texto'){
-                  $icon="fa fa-newspaper-o fa-2x";
-                }else if($noticia->tipo_contenido=='video'){
+              <?php 
+                if($noticia->tipo_contenido=='video'){
                   $icon="fa fa-play-circle fa-2x";
                 }else if($noticia->tipo_contenido=='audio'){
                   $icon="fa fa-volume-up fa-2x";                  
+                }else if($noticia->tipo_contenido=='pdf'){
+                  $icon="fa fa-file-pdf-o fa-2x";                  
+                }else{
+                  $icon="fa fa-newspaper-o fa-2x";
                 }
               ?>
               <div class="meta-right"><span class="<?php echo $icon; ?>" aria-hidden="true"></span></div>
@@ -89,7 +82,7 @@
               </div>
               <br/><br/>
               <p>
-                <a class="btn btn-warning" href="<?php echo base_url()."index.php/noticias_detalle/".$noticia->id;?>">Ver más</a>
+                <a class="btn btn-warning btn-mas" href="<?php echo base_url()."index.php/noticias_detalle/".$noticia->id;?>">Ver más</a>
                 <?php if($noticia->tipo_contenido=='video'){ ?>
                 <?php $id_video = substr($noticia->url_video,strpos($noticia->url_video,'?v=')+3); ?>
                   <button type="button" id="<?php echo $id_video; ?>" class="btn btn-primary btn-video" data-toggle="modal" data-target=".modal-video-<?php echo $id_video; ?>">Ver video</button>
@@ -127,6 +120,26 @@
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-default btn-close-modal-audio" data-dismiss="modal">Cerrar</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <?php }else if($noticia->tipo_contenido=='pdf'){ ?>
+                  <button type="button" id="btn-pdf-<?php echo $noticia->id; ?>" class="btn btn-danger btn-pdf" data-toggle="modal" data-target=".modal-pdf-<?php echo $noticia->id; ?>">Ver pdf</button>
+                  <div class="modal fade modal-pdf-<?php echo $noticia->id; ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                    <div class="modal-dialog modal-lg" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close btn-close-modal-pdf" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title" id="myModalLabel"><?php echo $noticia->titulo; ?></h4>
+                        </div>
+                        <div class="modal-body pdf">
+                          <div style="text-align: center;">                            
+                            <iframe src="<?php echo base_url('assets/pdf/'.$noticia->doc_pdf); ?>" style="width:100%; height:500px;" frameborder="0"></iframe>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default btn-close-modal-pdf" data-dismiss="modal">Cerrar</button>
                         </div>
                       </div>
                     </div>
@@ -159,16 +172,7 @@
         <div class="col-xs-12 col-sm-6 col-md-4 noticia-container">
           <div class="noticia-border">
             <div class="nombre-seccion">
-              <h6>
-              <?php if($noticia->tipo_contenido=='texto'){
-                  echo 'NOTICIA';
-                }else if($noticia->tipo_contenido=='video'){
-                  echo 'VIDEO';
-                }else if($noticia->tipo_contenido=='audio'){
-                  echo 'AUDIO';                  
-                }
-              ?>
-              </h6>
+              <h6><?php echo $noticia->rotulo; ?></h6>
             </div>
             <?php
               if(!empty($noticia->imagen)){
@@ -193,12 +197,15 @@
                   <span class="fecha"><i class="fa fa-calendar" aria-hidden="true"></i> <?php echo date("d-m-Y", strtotime($noticia->creado)); ?></span>
                 </h6>
               </div>
-              <?php if($noticia->tipo_contenido=='texto'){
-                  $icon="fa fa-newspaper-o fa-2x";
-                }else if($noticia->tipo_contenido=='video'){
+              <?php 
+                if($noticia->tipo_contenido=='video'){
                   $icon="fa fa-play-circle fa-2x";
                 }else if($noticia->tipo_contenido=='audio'){
                   $icon="fa fa-volume-up fa-2x";                  
+                }else if($noticia->tipo_contenido=='pdf'){
+                  $icon="fa fa-file-pdf-o fa-2x";                  
+                }else{
+                  $icon="fa fa-newspaper-o fa-2x";
                 }
               ?>
               <div class="meta-right"><span class="<?php echo $icon; ?>" aria-hidden="true"></span></div>
@@ -210,7 +217,7 @@
               </div>
               <br/><br/>
               <p>
-                <a class="btn btn-warning" href="<?php echo base_url()."index.php/noticias_detalle/".$noticia->id;?>">Ver más</a>
+                <a class="btn btn-warning btn-mas" href="<?php echo base_url()."index.php/noticias_detalle/".$noticia->id;?>">Ver más</a>
                 <?php if($noticia->tipo_contenido=='video'){ ?>
                 <?php $id_video = substr($noticia->url_video,strpos($noticia->url_video,'?v=')+3); ?>
                   <button type="button" id="<?php echo $id_video; ?>" class="btn btn-primary btn-video" data-toggle="modal" data-target=".modal-video-<?php echo $id_video; ?>">Ver video</button>
@@ -248,6 +255,26 @@
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-default btn-close-modal-audio" data-dismiss="modal">Cerrar</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <?php }else if($noticia->tipo_contenido=='pdf'){ ?>
+                  <button type="button" id="btn-pdf-<?php echo $noticia->id; ?>" class="btn btn-danger btn-pdf" data-toggle="modal" data-target=".modal-pdf-<?php echo $noticia->id; ?>">Ver pdf</button>
+                  <div class="modal fade modal-pdf-<?php echo $noticia->id; ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                    <div class="modal-dialog modal-lg" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close btn-close-modal-pdf" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title" id="myModalLabel"><?php echo $noticia->titulo; ?></h4>
+                        </div>
+                        <div class="modal-body pdf">
+                          <div style="text-align: center;">                            
+                            <iframe src="<?php echo base_url('assets/pdf/'.$noticia->doc_pdf); ?>" style="width:100%; height:500px;" frameborder="0"></iframe>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default btn-close-modal-pdf" data-dismiss="modal">Cerrar</button>
                         </div>
                       </div>
                     </div>
