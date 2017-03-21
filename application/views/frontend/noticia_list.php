@@ -37,7 +37,7 @@
               }
             ?>
             <div class="noticia-imagen">
-              <img src="<?php echo $img; ?>" class="img-responsive" alt="">
+              <img src="<?php echo $img; ?>" class="img-responsive" alt="" style="margin: 0 auto; max-height: 200px;">
             </div>
             <div class="noticia-content-title noticia-border">
               <div class="meta-left">
@@ -80,7 +80,7 @@
                         </div>
                         <div class="modal-body">
                           <div style="margin: 0 auto;">                            
-                            <iframe class="playerid<?php echo $id_video; ?>" width="560" height="315" src="https://www.youtube.com/embed/<?php echo $id_video; ?>?rel=0" frameborder="0" allowfullscreen></iframe>
+                            <iframe class="playerid<?php echo $id_video; ?>" width="100%" height="350" src="" frameborder="0" allowfullscreen></iframe>
                           </div>
                         </div>
                         <div class="modal-footer">
@@ -158,9 +158,8 @@ $(document).ready(function(){
   var video,id_video;
   $('.btn-video').click(function(){
     id_video=$(this).attr('id');
-    video = $(".playerid"+id_video).attr("src");
-    $(".playerid"+id_video).attr("src","");
-    $(".playerid"+id_video).attr("src",video+"&autoplay=1");
+    var link='https://www.youtube.com/embed/'+id_video+'?rel=0&autoplay=1';
+    $('.playerid'+id_video).attr('src',link);
   });
   $('.btn-close-modal-video').click(function(){
     $(".playerid"+id_video).attr("src","");

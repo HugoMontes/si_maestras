@@ -272,7 +272,7 @@
                         $this->load->library('upload');
                         $config['upload_path'] = './assets/img/noticias';
                         $config['allowed_types'] = 'gif|jpg|png|jpeg';    
-                        $config['max_size'] = 200; 
+                        $config['max_size'] = 1000; 
                         $config['encrypt_name'] = FALSE;
             
                         $this->upload->initialize($config);
@@ -347,10 +347,13 @@
                     // begin : upload pdf
                     // -------------------------------------------------------------------
                     if (!empty($_FILES['docPdf']['name'])){
-                        $config['upload_path'] = './assets/pdf';
-                        $config['allowed_types'] = 'pdf';     
-                        $config['encrypt_name'] = FALSE;
-                        $this->load->library('upload', $config);
+                        $this->load->library('upload');
+                        $config2['upload_path'] = './assets/pdf';
+                        $config2['allowed_types'] = 'pdf';     
+                        $config2['encrypt_name'] = FALSE;
+                        $config2['max_size']    = '1000000';
+                        //$this->load->library('upload', $config);
+                        $this->upload->initialize($config2);
                         if (!$this->upload->do_upload('docPdf')){
                             $sw = 0;                            
                             $this->session->set_flashdata('error',$this->upload->display_errors());

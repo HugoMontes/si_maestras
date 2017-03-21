@@ -90,7 +90,7 @@
                             <div class="form-group">
                               <label for="imagen">Imagen destacada </label>
                               <?php echo form_error('imagen', '<span class="error-form">', '</span><br/><br/>'); ?>
-                              <input type="file" name="imagen" />                
+                              <input type="file" name="imagen" accept="image/gif, image/jpeg, image/png, image/jpg"/>                
                               <p class="help-block"><?php echo $this->lang->line('score_imagen_upload').'&nbsp;&nbsp;'.$this->lang->line('score_noticia_img_condiciones');?></p>
                             </div>
 

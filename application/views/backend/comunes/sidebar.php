@@ -384,6 +384,7 @@
         </li>
         <?php } ?>
         
+        <!--
         <?php if($usuario_sesion->perfil_id == SUPER){ ?>
         <li class="treeview <?php echo $class_menu_publicacion_0;?>">
           <a href="#">
@@ -398,6 +399,7 @@
           </ul>
         </li>
         <?php } ?>
+        -->
 
         <?php if($usuario_sesion->perfil_id == SUPER){ ?>
         <li class="treeview <?php echo $class_menu_usuario_0;?>">
