@@ -396,6 +396,7 @@ class Especialista extends CI_Controller{
     }
 
     public function importar_csv(){
+        
         if($this->input->method()=='get'){
             $data['titulo'] = 'Importar documento CSV';
             $this->load->view('backend/especialista_csv',$data);
@@ -417,9 +418,8 @@ class Especialista extends CI_Controller{
                 $csvfilepath = "./assets/uploads/" . $file_info['file_name'];
                 $this->load->library('csvreader');
                 $result = $this->csvreader->parse_file($csvfilepath);
-                
+                $data = array();
                 foreach($result as $field){
-                    $data = array();
                     $data = array (
                         'ci' => $field['CI'],
                         'id_departamento' => 1,
@@ -436,24 +436,73 @@ class Especialista extends CI_Controller{
                         'creado_por'=>$usuario_sesion->id,
                         'publicado'=>date('Y-m-d H:i:s')
                     );                             
-                    $this->especialista_trabajador_model->insert($data);
+                    $especialista_id = $this->especialista_trabajador_model->insert($data);
+                    if($field['OBRA GRUESA']!=''){
+                        $data = array (
+                            'id_trabajador' => $especialista_id,
+                            'id_especialidad' => 1,
+                            'anios_experiencia' => $field['OBRA GRUESA'],
+                        );
+                        $this->especialista_trabajador_especialidad_model->insert($data);
+                    }
+                    if($field['OBRA FINA']!=''){
+                        $data = array (
+                            'id_trabajador' => $especialista_id,
+                            'id_especialidad' => 2,
+                            'anios_experiencia' => $field['OBRA FINA'],
+                        );
+                        $this->especialista_trabajador_especialidad_model->insert($data);
+                    }
+                    if($field['PLOMERIA']!=''){
+                        $data = array (
+                            'id_trabajador' => $especialista_id,
+                            'id_especialidad' => 3,
+                            'anios_experiencia' => $field['PLOMERIA'],
+                        );
+                        $this->especialista_trabajador_especialidad_model->insert($data);
+                    }
+                    if($field['INSTALACION ELECTRICA']!=''){
+                        $data = array (
+                            'id_trabajador' => $especialista_id,
+                            'id_especialidad' => 4,
+                            'anios_experiencia' => $field['INSTALACION ELECTRICA'],
+                        );
+                        $this->especialista_trabajador_especialidad_model->insert($data);
+                    }
+                    if($field['PINTURA']!=''){
+                        $data = array (
+                            'id_trabajador' => $especialista_id,
+                            'id_especialidad' => 2,
+                            'anios_experiencia' => $field['PINTURA'],
+                        );
+                        $this->especialista_trabajador_especialidad_model->insert($data);
+                    }
                 }
-                
                 /*
-                print_r($result);
                 foreach($result as $field){
                     echo $field['CI'].'<br/>';
                     echo $field['DEPTO'].'<br/>';
                     echo $field['NOMBRES'].'<br/>';
                     echo $field['APELLIDOS'].'<br/>';
+                    echo $field['FECHA NAC.'].'<br/>';
+                    echo 'OBRA GRUESA:'.$field['OBRA GRUESA'].'<br/>';
+                    echo 'OBRA FINA:'.$field['OBRA FINA'].'<br/>';
+                    echo 'PLOMERIA:'.$field['PLOMERIA'].'<br/>';
+                    echo 'INSTALACION ELECTRICA:'.$field['INSTALACION ELECTRICA'].'<br/>';
+                    echo 'PINTURA:'.$field['PINTURA'].'<br/>';
                     echo $field['CIUDAD'].'<br/>';
                     echo $field['TELF. CONTACTO'].'<br/>';
                     echo $field['TELF. REFERENCIA'].'<br/>';
                     echo $field['EMAIL'].'<br/>';
+                    echo '==========================================</br>';
+
                 }
                 */
+                $this->session->set_flashdata('mensaje', 'Los especialistas del documento CSV se han guardado correctamente');
+                redirect('administrador/especialista');
             }
 
         }
+
     }
 }
