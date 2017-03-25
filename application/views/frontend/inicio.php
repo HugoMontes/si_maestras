@@ -125,7 +125,7 @@
                     </div>
                   </div>
                 <?php }else if($noticia->tipo_contenido=='pdf'){ ?>
-                  <button type="button" id="btn-pdf-<?php echo $noticia->id; ?>" class="btn btn-danger btn-pdf" data-toggle="modal" data-target=".modal-pdf-<?php echo $noticia->id; ?>">Ver pdf</button>
+                  <button type="button" id="btn-pdf-<?php echo $noticia->id; ?>" class="btn btn-danger btn-pdf" data-toggle="modal" data-target=".modal-pdf-<?php echo $noticia->id; ?>" url-pdf="<?php echo base_url('assets/pdf/'.$noticia->doc_pdf); ?>" id-noticia="<?php echo $noticia->id; ?>">Ver pdf</button>
                   <div class="modal fade modal-pdf-<?php echo $noticia->id; ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                     <div class="modal-dialog modal-lg" role="document">
                       <div class="modal-content">
@@ -135,7 +135,7 @@
                         </div>
                         <div class="modal-body pdf">
                           <div style="text-align: center;">                            
-                            <iframe src="<?php echo base_url('assets/pdf/'.$noticia->doc_pdf); ?>" style="width:100%; height:500px;" frameborder="0"></iframe>
+                            <iframe id="iframe-pdf-<?php echo $noticia->id; ?>" src="" style="width:100%; height:500px;" frameborder="0"></iframe>          
                           </div>
                         </div>
                         <div class="modal-footer">
@@ -260,7 +260,7 @@
                     </div>
                   </div>
                 <?php }else if($noticia->tipo_contenido=='pdf'){ ?>
-                  <button type="button" id="btn-pdf-<?php echo $noticia->id; ?>" class="btn btn-danger btn-pdf" data-toggle="modal" data-target=".modal-pdf-<?php echo $noticia->id; ?>">Ver pdf</button>
+                  <button type="button" id="btn-pdf-<?php echo $noticia->id; ?>" class="btn btn-danger btn-pdf" data-toggle="modal" data-target=".modal-pdf-<?php echo $noticia->id; ?>" url-pdf="<?php echo base_url('assets/pdf/'.$noticia->doc_pdf); ?>" id-noticia="<?php echo $noticia->id; ?>">Ver pdf</button>
                   <div class="modal fade modal-pdf-<?php echo $noticia->id; ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                     <div class="modal-dialog modal-lg" role="document">
                       <div class="modal-content">
@@ -270,7 +270,7 @@
                         </div>
                         <div class="modal-body pdf">
                           <div style="text-align: center;">                            
-                            <iframe src="<?php echo base_url('assets/pdf/'.$noticia->doc_pdf); ?>" style="width:100%; height:500px;" frameborder="0"></iframe>
+                            <iframe id="iframe-pdf-<?php echo $noticia->id; ?>" src="" style="width:100%; height:500px;" frameborder="0"></iframe>          
                           </div>
                         </div>
                         <div class="modal-footer">
@@ -336,6 +336,11 @@ $(document).ready(function(){
     id_video=$(this).attr('id');
     var link='https://www.youtube.com/embed/'+id_video+'?rel=0&autoplay=1';
     $('.playerid'+id_video).attr('src',link);
+  });
+  $('.btn-pdf').click(function(){
+    var link=$(this).attr('url-pdf');
+    var id_noticia=$(this).attr('id-noticia');
+    $('#iframe-pdf-'+id_noticia).attr('src',link);
   });
   $('.btn-close-modal-video').click(function(){
     $(".playerid"+id_video).attr("src","");
