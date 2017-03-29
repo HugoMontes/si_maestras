@@ -219,6 +219,7 @@ $route['administrador/noticia/publicar'] = 'backend/noticia/publicar';
 $route['administrador/noticia/editar/(:num)/(:num)'] = 'backend/noticia/existe/$1/$2';
 $route['administrador/noticia/guardar'] = 'backend/noticia/guardar';
 $route['administrador/noticia/nuevo/(:num)'] = 'backend/noticia/nuevo/$1';
+$route['administrador/noticia/preview/(:num)'] = 'frontend/noticia/find_noticia_by_id/$1';
 
 $route['administrador/noticia/configuracion/(:num)']='backend/noticia/configuracion/$1';
 $route['administrador/noticia/configuracion/guardar']='backend/noticia/configuracion_guardar';

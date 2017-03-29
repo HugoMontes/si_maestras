@@ -216,10 +216,11 @@
                             </td>
                             <?php } ?>
 
-                            <td style="text-align: center;">                      
+                            <td style="text-align: center;" width="150px">                      
                                 <div class="btn-group">
                                     <a href="<?php echo base_url('index.php/administrador/'.$categoria.'/editar/'.$noticia->id."/".$grupo->id);?>" class="btn btn-default <?php echo $sw_user?'':'not-active-link'; ?>" data-container="body" data-toggle="tooltip"  data-placement="top" title="<?php echo $this->lang->line('score_editar_tooltip'); ?>"><i class="fa fa-pencil"></i></a>
                                     <a href="javascript:;" onclick="eliminar(<?php echo $noticia->id; ?>,'<?php echo $noticia->titulo; ?>')" class="btn btn-default <?php echo $sw_user?'':'not-active-link'; ?>" data-container="body" data-toggle="tooltip"  data-placement="top" title="<?php echo $this->lang->line('score_eliminar_tooltip'); ?>"><i class="fa fa-trash-o"></i></a>
+                                    <a href="<?php echo base_url('index.php/administrador/'.$categoria.'/preview/'.$noticia->id);?>" class="btn btn-default <?php echo $sw_user?'':'not-active-link'; ?>" data-container="body" data-toggle="tooltip"  data-placement="top" title="Previsualizar" target="_blank"><i class="fa fa-eye"></i></a>
                                 </div>
                             </td>
                         </tr>

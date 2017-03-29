@@ -105,7 +105,7 @@
                             </div>
 
                             <label for="imagen">Tipo de contenido </label>
-                            <input type="hidden" id="tipo" name="tipo" name="texto">
+                            <input type="hidden" id="tipo" name="tipo" value="texto">
                             <!-- Start: Nav tabs -->
                             <ul class="nav nav-tabs" role="tablist">
                               <li role="presentation" class="active"><a href="#pdf" aria-controls="pdf" role="tab" data-toggle="tab">PDF</a></li>
