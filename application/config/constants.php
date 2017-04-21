@@ -36,6 +36,7 @@ define('CONTACTOS','contactos');
 define('SLIDES','slides');
 define('ESPECIALISTAS','especialistas');
 define('ESPECIALIDADES','especialidades');
+define('CENTROS_FORMACION','centros_formacion');
 // generos
 define('VARON','varon');
 define('MUJER','mujer');

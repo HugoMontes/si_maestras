@@ -36,14 +36,14 @@
     $class_menu_formador_0 = '';
     $class_menu_formador_1 = '';
     $class_menu_formador_2 = '';
+    // menu centros
+    $class_menu_centro_0 = '';
+    $class_menu_centro_1 = '';
+    $class_menu_centro_2 = '';
     // menu especialistas
     $class_menu_especialista_0 = '';
     $class_menu_especialista_1 = '';
     $class_menu_especialista_2 = '';
-    // menu especialidades
-    $class_menu_especialidades_0 = '';
-    $class_menu_especialidades_1 = '';
-    $class_menu_especialidades_2 = '';
     // menu testimonio
     $class_menu_testimonio_0 = '';
     $class_menu_testimonio_1 = '';
@@ -132,6 +132,14 @@
         else{
             $class_menu_formador_1 = 'active';
         }        
+    }elseif(strpos($url, 'centro') !== false AND strpos($url, 'search_key=') === false){
+        $class_menu_centro_0 = 'active';
+        if(strpos($url, 'nuevo') !== false){
+            $class_menu_centro_2 = 'active';
+        }
+        else{
+            $class_menu_centro_1 = 'active';
+        }        
     }elseif(strpos($url, 'especialista') !== false AND strpos($url, 'search_key=') === false){
         $class_menu_especialista_0 = 'active';
         if(strpos($url, 'nuevo') !== false){
@@ -139,14 +147,6 @@
         }
         else{
             $class_menu_especialista_1 = 'active';
-        }        
-    }elseif(strpos($url, 'especialidad') !== false AND strpos($url, 'search_key=') === false){
-        $class_menu_especialidades_0 = 'active';
-        if(strpos($url, 'nuevo') !== false){
-            $class_menu_especialidades_2 = 'active';
-        }
-        else{
-            $class_menu_especialidades_1 = 'active';
         }        
     }elseif(strpos($url, 'testimonio') !== false AND strpos($url, 'search_key=') === false){
         $class_menu_testimonio_0 = 'active';
@@ -227,6 +227,7 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li class="header">ADMINISTRACIÓN DEL SITIO</li>
+
         <li class="<?php echo $class_menu_escritorio_0;?>">
           <a href="<?php echo base_url('index.php/administrador/escritorio'); ?>">
             <i class="fa fa-dashboard"></i> <span>Escritorio</span>
@@ -351,35 +352,68 @@
           </ul>
         </li>
         <?php } ?>
-        
-        <?php if($usuario_sesion->perfil_id == SUPER OR 
-                 $usuario_sesion->perfil_id == CENTRO_FORMACION){ ?>
-        <li class="treeview <?php echo $class_menu_especialista_0;?>">
+
+        <?php if($usuario_sesion->perfil_id == SUPER){ ?>
+        <li class="treeview <?php echo $class_menu_apariencia_0;?>">
           <a href="#">
-            <i class="fa fa-users"></i> <span>Especialistas</span>
+            <i class="fa fa-paint-brush"></i> <span>Apariencia</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="<?php echo $class_menu_especialista_1;?>"><a href="<?php echo base_url('index.php/administrador/especialista'); ?>"><i class="fa fa-circle-o"></i> Todos los especialistas</a></li>
-            <li class="<?php echo $class_menu_especialista_2;?>"><a href="<?php echo base_url('index.php/administrador/especialista/nuevo'); ?>"><i class="fa fa-circle-o"></i> Añadir nuevo</a></li>
+            <li class="<?php echo $class_menu_apariencia_3;?>"><a href="<?php echo base_url('index.php/administrador/modulo/editar/logo'); ?>"><i class="fa fa-circle-o"></i> Logotipo</a></li>
+            <li class="<?php echo $class_menu_apariencia_1;?>"><a href="<?php echo base_url('index.php/administrador/modulo/editar/1'); ?>"><i class="fa fa-circle-o"></i> Pie de página</a></li>
+            <li class="<?php echo $class_menu_apariencia_2;?>"><a href="<?php echo base_url('index.php/administrador/css/editar');?>"><i class="fa fa-circle-o"></i> CSS personalizado</a></li>
+          </ul>
+        </li>
+        <?php } ?>
+
+        <?php if($usuario_sesion->perfil_id == SUPER){ ?>
+        <li class="treeview <?php echo $class_menu_ajuste_0;?>">
+          <a href="#">
+            <i class="fa fa-gear"></i> <span>Ajustes</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="<?php echo $class_menu_ajuste_1;?>"><a href="<?php echo base_url('index.php/administrador/email/editar'); ?>"><i class="fa fa-circle-o"></i> Email de notificación</a></li>            
+          </ul>
+        </li>      
+        <?php } ?>
+      </ul>
+
+      <ul class="sidebar-menu">
+        <li class="header">MÓDULO MAESTRAS CONSTRUCTORAS</li>
+
+        <?php if($usuario_sesion->perfil_id == SUPER){ ?>
+        <li class="treeview <?php echo $class_menu_centro_0;?>">
+          <a href="#">
+            <i class="fa fa-university"></i> <span>Centros de formación</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="<?php echo $class_menu_centro_1;?>"><a href="<?php echo base_url('index.php/administrador/centro'); ?>"><i class="fa fa-circle-o"></i> Todos los centros de form...</a></li>
+            <li class="<?php echo $class_menu_centro_2;?>"><a href="<?php echo base_url('index.php/administrador/centro/nuevo'); ?>"><i class="fa fa-circle-o"></i> Añadir nuevo</a></li>
           </ul>
         </li>
         <?php } ?>
 
         <?php if($usuario_sesion->perfil_id == SUPER OR 
                  $usuario_sesion->perfil_id == CENTRO_FORMACION){ ?>
-        <li class="treeview <?php echo $class_menu_especialidades_0;?>">
+        <li class="treeview <?php echo $class_menu_especialista_0;?>">
           <a href="#">
-            <i class="fa fa-suitcase"></i> <span>Especialidades</span>
+            <i class="fa fa-users"></i> <span>Maestras constructoras</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="<?php echo $class_menu_especialidades_1;?>"><a href="<?php echo base_url('index.php/administrador/especialidad'); ?>"><i class="fa fa-circle-o"></i> Todas las especialidades</a></li>
-            <li class="<?php echo $class_menu_especialidades_2;?>"><a href="<?php echo base_url('index.php/administrador/especialidad/nuevo'); ?>"><i class="fa fa-circle-o"></i> Añadir nuevo</a></li>
+            <li class="<?php echo $class_menu_especialista_1;?>"><a href="<?php echo base_url('index.php/administrador/especialista'); ?>"><i class="fa fa-circle-o"></i> Todas las maestras cons...</a></li>
+            <li class="<?php echo $class_menu_especialista_2;?>"><a href="<?php echo base_url('index.php/administrador/especialista/nuevo'); ?>"><i class="fa fa-circle-o"></i> Añadir nuevo</a></li>
           </ul>
         </li>
         <?php } ?>
@@ -415,36 +449,6 @@
             <li class="<?php echo $class_menu_usuario_3;?>"><a href="<?php echo base_url('index.php/administrador/usuario/editar/'.$usuario_sesion->id);?>"><i class="fa fa-circle-o"></i> Tu perfil</a></li>
           </ul>
         </li>
-        <?php } ?>
-
-        <?php if($usuario_sesion->perfil_id == SUPER){ ?>
-        <li class="treeview <?php echo $class_menu_apariencia_0;?>">
-          <a href="#">
-            <i class="fa fa-paint-brush"></i> <span>Apariencia</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li class="<?php echo $class_menu_apariencia_3;?>"><a href="<?php echo base_url('index.php/administrador/modulo/editar/logo'); ?>"><i class="fa fa-circle-o"></i> Logotipo</a></li>
-            <li class="<?php echo $class_menu_apariencia_1;?>"><a href="<?php echo base_url('index.php/administrador/modulo/editar/1'); ?>"><i class="fa fa-circle-o"></i> Pie de página</a></li>
-            <li class="<?php echo $class_menu_apariencia_2;?>"><a href="<?php echo base_url('index.php/administrador/css/editar');?>"><i class="fa fa-circle-o"></i> CSS personalizado</a></li>
-          </ul>
-        </li>
-        <?php } ?>
-
-        <?php if($usuario_sesion->perfil_id == SUPER){ ?>
-        <li class="treeview <?php echo $class_menu_ajuste_0;?>">
-          <a href="#">
-            <i class="fa fa-gear"></i> <span>Ajustes</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li class="<?php echo $class_menu_ajuste_1;?>"><a href="<?php echo base_url('index.php/administrador/email/editar'); ?>"><i class="fa fa-circle-o"></i> Email de notificación</a></li>            
-          </ul>
-        </li>      
         <?php } ?>
       </ul> 
     </section>

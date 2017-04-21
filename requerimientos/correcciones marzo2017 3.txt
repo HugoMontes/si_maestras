@@ -1,0 +1,27 @@
+Estimado Ramiro,
+
+Según las últimas reuniones que tuvimos con 3 de los 4 centros de formación y mientras esperamos las listas de especializaciones adjunto una lista de cambios generales que por el momento se deben hacer a la plataforma.
+
+1.	Poner la columna “Centro de Formación” en la base de datos (reporte que llega al usuario donde fue formada).
+2.	Adecuar la hoja Excel para bases de datos grupales y finalizarla.
+3.	Colocar dentro de la plataforma un link a la página del Administrador, para que se pueda ingresar de la misma página y no sea un link aparte.
+
+*****4.	Colocar la opción de fotografía para las alumnas.
+
+5.	Dar acceso a los centros de formación también a la parte de “Noticias” e “Información de Interés” para subir información referente a constructoras (siempre pasando por el filtro de CABOCO).
+6.	Habilitar la opción de e-mail de retroalimentación que le llega al empleador luego de realizado el trabajo.
+	El sistema manda una encuesta:
+		Cual es el nivel de satisfaccion
+7.	En vez del término “Especialidad Requerida” en la página de inicio poner el término “Rubro Requerido”
+8.	En vez del término “Especialistas” en toda la página utilizar el término “Maestra Constructora”
+9.      Agregar captcha al formulario de solicitud
+10.     Mostrar nombres de maestras constructoras aleatoriamente.
+
+Por mi parte yo insistiré con los Centros para que me pasen las especializaciones y también los links a sus páginas para que se puedan entrar desdelos logos que hay en la plataforma.
+
+Hay otras observaciones que hicieron que creo que tendríamos que analizar más a fondo luego de la última capacitación que tengamos con la Secretaría de Desarrollo Económico por ejemplo:
+
+RED HABITAT: Opción para que la persona que busca pueda dejar sus datos y las trabajadores se contacten con ellos (dejar un aviso).
+
+INFOCAL: Consultar con CABOCO acerca de las especializaciones para hacer una lista final.
+                     Realizar filtros en la búsqueda de Especialidades, de lo general a lo específico.

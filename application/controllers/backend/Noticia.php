@@ -120,14 +120,10 @@
             $this->load->view('backend/noticias',$data);
     	}
 
-        public function nuevo($idgrupo)
-        {
-             if($this->session->flashdata('mensaje'))
-             {
+        public function nuevo($idgrupo){
+             if($this->session->flashdata('mensaje')){
                 $data['mensaje'] = $this->session->flashdata('mensaje');
-             } 
-             elseif ($this->session->flashdata('error'))
-             {
+             }elseif ($this->session->flashdata('error')){
                 
                 $data['error'] = $this->session->flashdata('error');
              }

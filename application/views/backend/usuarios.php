@@ -135,8 +135,7 @@
                           <th class="first" scope="col"><div>Apellidos<ul class="sort"><li class="up"><?=$this->page->create_sort_link('apellidos', 'asc'); ?></li><li class="down"><?=$this->page->create_sort_link('apellidos', 'desc'); ?></li></ul></div></th>
                           <th scope="col">Nombres</th>
                           <th scope="col">Usuario</th>
-                          <th scope="col">Correo electrónico</th>
-                          <th scope="col">Perfil</th>
+                          <th scope="col">Centro de formación</th>
                           <th scope="col">Fecha de la última visita</th>
                           <th scope="col">Fecha de registro</th>
                           <th scope="col" class="col-id" style="text-align: center;">ID</th>
@@ -155,18 +154,16 @@
                             <td class="row-title"><a href="<?php echo base_url('index.php/administrador/usuario/editar/'.$usuario->id);?>" data-toggle="tooltip" data-placement="top" title="<?php echo $this->lang->line('score_editar_tooltip'); ?>"><?php echo $usuario->apellidos?></a></td>                          
                             <td class="row-title"><a href="<?php echo base_url('index.php/administrador/usuario/editar/'.$usuario->id);?>" data-toggle="tooltip" data-placement="top" title="<?php echo $this->lang->line('score_editar_tooltip'); ?>"><?php echo $usuario->nombres?></a></td>                         
                             <td><?php echo $usuario->usuario; ?></td>
-                            <td><?php echo $usuario->email; ?></td>
-                            <td>
-                            <?php 
-                            if($this->perfil_model->exists('id',$usuario->perfil))
-                            {
-                                $perfil = $this->perfil_model->get_values('nombre',array('id'=>$usuario->perfil));
-                                echo $perfil->nombre;                            
-                            }
-                            else
-                                echo '';                            
+                            <?php
+                              $centro_formacion='';
+                              if($this->centro_model->exists('id',$usuario->centro_formacion)){
+                                $centro = $this->centro_model->get_values('descripcion',array('id'=>$usuario->centro_formacion));
+                                $centro_formacion=strtoupper($centro->descripcion);
+                              }else{
+                                $centro_formacion='CABOCO';                            
+                              }
                             ?>
-                            </td>
+                            <td><?php echo $centro_formacion; ?></td>
                             <td>
                             <?php 
                             if($usuario->ultima_visita == '0000-00-00 00:00:00')

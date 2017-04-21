@@ -1,7 +1,6 @@
 <?php
     class Usuario extends CI_Controller{
-        public function __construct()
-        {
+        public function __construct(){
             parent::__construct();
             
             //existe_sesion_urse();
@@ -10,6 +9,7 @@
             $this->load->model('usuario_model');
             $this->load->model('email_model');
             $this->load->model('perfil_model');
+            $this->load->model('centro_model');
             $this->load->model('navegacion_model');
             
             // helpers
@@ -19,8 +19,11 @@
             $this->load->library('session');
         }
         
-        public function index()
-    	{
+        public function index(){
+           if($this->session->userdata('usuario')['perfil_id']!=1){
+                redirect(base_url('index.php/administrador/escritorio'));
+            }
+
            if($this->session->flashdata('mensaje'))
            {
                $data['mensaje'] = $this->session->flashdata('mensaje');
@@ -131,20 +134,29 @@
             
             $data['titulo'] = $this->lang->line('score_usuario_nuevo_titulo');
             
-            $perfiles = $this->perfil_model->get_all('id, nombre',array(),'','','id ASC','');
+            // get all perfiles
+            $perfiles = $this->perfil_model->get_all('id, nombre',array(),'','','id DESC','');
             $perfiles_ = array();
             foreach ($perfiles as $perfil)
             {
               $perfiles_[$perfil['id']] = $perfil['nombre'];      
             }
+
+            // get all centros
+            $this->load->model('centro_model');
+            $centros = $this->centro_model->get_all('id, descripcion',array(),'','','id ASC','');
+            $centros_ = array();
+            foreach ($centros as $centro)
+            {
+              $centros_[$centro['id']] = $centro['descripcion'];      
+            }
             
             $data['perfiles'] = $perfiles_;
-            
+            $data['centros'] = $centros_;
             $this->load->view('backend/usuario_nuevo',$data);
         }
         
-        public function existe($usuario_id = FALSE)
-        {
+        public function existe($usuario_id = FALSE){
             $navegacion = $this->navegacion_model->get_values('navegacion',array('vista'=>USUARIOS));
             if($usuario_id == FALSE)
             {
@@ -162,40 +174,45 @@
             }
         }
         
-        public function editar($usuario_id = FALSE)
-        {
-            if($usuario_id == FALSE)
-            {
+        public function editar($usuario_id = FALSE){
+            $this->verificar_usuario($usuario_id);
+
+            if($usuario_id == FALSE){
                 $this->nuevo();
             }
             
-            if($this->session->flashdata('mensaje'))
-            {
+            if($this->session->flashdata('mensaje')){
                $data['mensaje'] = $this->session->flashdata('mensaje');
-            } 
-            elseif ($this->session->flashdata('error'))
-            {    
+            }elseif ($this->session->flashdata('error')){    
                 $data['error'] = $this->session->flashdata('error');
             }
 
             $data['titulo'] = $this->lang->line('score_usuario_editar_titulo');
 
+            // get all perfiles
             $perfiles = $this->perfil_model->get_all('id, nombre',array(),'','','id ASC','');
             $perfiles_ = array();
-            foreach ($perfiles as $perfil)
-            {
+            foreach ($perfiles as $perfil){
               $perfiles_[$perfil['id']] = $perfil['nombre'];      
             }
+
+            // get all centros
+            $this->load->model('centro_model');
+            $centros = $this->centro_model->get_all('id, descripcion',array(),'','','id ASC','');
+            $centros_ = array();
+            foreach ($centros as $centro){
+              $centros_[$centro['id']] = $centro['descripcion'];      
+            }
             
-            $data['perfiles'] = $perfiles_;            
-            
+            $data['perfiles'] = $perfiles_;
+            $data['centros'] = $centros_;
             $data['usuario']=$this->usuario_model->get($usuario_id);
                    
             $this->load->view('backend/usuario_editar',$data);
         }
 
-        public function eliminar($usuario_id = FALSE)
-        {
+        public function eliminar($usuario_id = FALSE){
+            $this->verificar_usuario($usuario_id);
             $navegacion = $this->navegacion_model->get_values('navegacion',array('vista'=>USUARIOS));
             
             if($usuario_id == FALSE)
@@ -285,7 +302,8 @@
                     $usuario = $this->input->post('usuario');
                     $password = $this->input->post('password');
                     $email = $this->input->post('email');
-                    $perfil = $this->input->post('perfil');                
+                    $perfil = $this->input->post('perfil');
+                    $centro = $perfil==1?0:$this->input->post('centro');                
                     $estado = $this->input->post('estado');
                     $guardar = $this->input->post("guardar");
                     
@@ -381,10 +399,11 @@
                                             'fotografia' => $fotografia,
                                             'thumb'=> $fotografia_thumb,
                                             'perfil' => $perfil,
+                                            'centro_formacion' => $centro,
                                             'estado' =>$estado,
                                             'creado_por'=>$usuario_sesion->id);
                                             
-                                            
+                            print_r($data);
                             if($estado == HABILITADO)                
                                 $data['habilitado'] = date('Y-m-d H:i:s');
                             if($estado == DESHABILITADO)    
@@ -419,10 +438,7 @@
                             }
                                                                                                                                             
                             $this->session->set_flashdata('mensaje', $this->lang->line('score_usuario_guardado').$add_mensaje);
-                            
-                            redirect('administrador/usuario/editar/'.$usuario_id);
-                            //$this->editar($usuario_id);
-                            
+                            redirect('administrador/usuario/editar/'.$usuario_id);                            
                         }
     
                         if($guardar == EDICION)
@@ -435,6 +451,7 @@
                                            'fotografia' => $fotografia,
                                            'thumb'=> $fotografia_thumb,
                                            'perfil' => $perfil,
+                                           'centro_formacion' => $centro,
                                            'estado' =>$estado,
                                            'modificado_por'=>$usuario_sesion->id);
                                               
@@ -719,5 +736,14 @@
             $this->session->sess_destroy();
             redirect('administrador/usuario/iniciar_sesion');
             //$this->iniciar_sesion();
-        }        
+        }
+
+        public function verificar_usuario($usuario_id){
+            if($usuario_id!=$this->session->userdata('usuario')['id']){
+                if($this->session->userdata('usuario')['perfil']!=1){
+                    redirect(base_url('index.php/administrador/escritorio'));
+                }
+            }
+        }
+
     }

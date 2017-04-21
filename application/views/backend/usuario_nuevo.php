@@ -65,6 +65,8 @@
                     <!-- form start -->
                         <form role="form" enctype="multipart/form-data"  method="post" action="<?php echo base_url('index.php/administrador/usuario/guardar');?>">
                           <div class="box-body">
+
+                            <!-- begin : nombre usuario -->
                             <div class="form-group">
                               <label for="usuario">Nombre de usuario <span class="required">*</span></label>
                               <?php echo form_error('usuario', '<span class="error-form">', '</span><br/><br/>'); ?>
@@ -74,6 +76,9 @@
                                 </div>
                               </div>      
                             </div>
+                            <!-- end : nombre usuario -->
+
+                            <!-- begin : email -->
                             <div class="form-group">
                               <label for="email">Correo electrónico  <span class="required">*</span></label>
                               <?php echo form_error('email', '<span class="error-form">', '</span><br/><br/>'); ?>
@@ -82,7 +87,10 @@
                                     <input type="text" class="form-control " id="email" name="email" value="<?php echo set_value('email');?>" placeholder="Correo electrónico"/>
                                 </div>
                               </div>      
-                            </div>                                                      
+                            </div>
+                            <!-- end : email -->   
+
+                            <!-- begin : nombres -->                                                 
                             <div class="form-group">
                               <label for="nombres">Nombres <span class="required">*</span></label>
                               <?php echo form_error('nombres', '<span class="error-form">', '</span><br/><br/>'); ?>
@@ -92,6 +100,9 @@
                                 </div>
                               </div>      
                             </div>
+                            <!-- end : nombres -->  
+
+                            <!-- begin : apellidos -->  
                             <div class="form-group">
                               <label for="apellidos">Apellidos <span class="required">*</span></label>
                               <?php echo form_error('apellidos', '<span class="error-form">', '</span><br/><br/>'); ?>
@@ -101,13 +112,17 @@
                                 </div>
                               </div>      
                             </div>
+                            <!-- end : apellidos -->  
                             
+                            <!-- begin : fotografia -->  
                             <div class="form-group">
                               <label for="fotografia">Fotografía </label>
                               <input type="file" name="fotografia" />                
                               <p class="help-block"><?php echo $this->lang->line('score_imagen_upload').'&nbsp;&nbsp;'.$this->lang->line('score_usuario_img_condiciones');?></p>
                             </div>
+                            <!-- end : fotografia --> 
                             
+                            <!-- begin : password --> 
                             <div class="form-group">
                               <label for="password">Contraseña <span class="required">*</span></label>
                               <?php echo form_error('password', '<span class="error-form">', '</span><br/><br/>'); ?>
@@ -118,7 +133,9 @@
                                 </div>
                               </div>      
                             </div>
- 
+                            <!-- end : password -->
+
+                            <!-- begin : aviso -->  
                             <div class="form-group">
                                <label for="">Enviar aviso al usuario</label>
                                 <div class="checkbox" style="margin-top: 0px;">
@@ -129,12 +146,14 @@
                                    </label>
                                 </div>  
                             </div>
-                                                                                                            
+                            <!-- end : aviso -->
+
+                            <!-- begin : perfil -->                                                                                                             
                             <div class="form-group">
                               <label for="perfil">Perfil</label>
                               <?php echo form_error('perfil', '<span class="error-form">', '</span><br/><br/>'); ?>  
                               <div class="row">
-                                <div class="col-lg-3">
+                                <div class="col-lg-6">
                               <?php
                               $data = array(
                                   'name'  => 'perfil',
@@ -147,9 +166,31 @@
                               ?>
                                 </div>
                               </div> 
-                            </div> 
-                                                 
+                            </div>
+                            <!-- end : perfil -->
 
+                            <!-- begin : centro formacion -->                                                                                                             
+                            <div id="form-group-centro-formacion" class="form-group">
+                              <label for="centro">Centro de formación</label>
+                              <?php echo form_error('centro', '<span class="error-form">', '</span><br/><br/>'); ?>  
+                              <div class="row">
+                                <div class="col-lg-6">
+                              <?php
+                              $data = array(
+                                  'name'  => 'centro',
+                                  'id'    => 'centro',
+                                  'class' => 'form-control selectpicker',
+                                  'data-style' => 'btn-info'
+                                );
+                              $opciones = (array)$centros;                               
+                              echo form_dropdown($data, $opciones, set_value('centro'));                              
+                              ?>
+                                </div>
+                              </div> 
+                            </div>
+                            <!-- end : centro formacion -->
+                                                 
+                            <!-- begin : estado --> 
                             <div class="form-group">
                               <label for="estado">Estado</label>
                               <?php echo form_error('estado', '<span class="error-form">', '</span><br/><br/>'); ?>  
@@ -170,13 +211,13 @@
                               $opciones = array(
                                   HABILITADO  => 'Habilitado',
                                   DESHABILITADO  => 'Deshabilitado'
-                               ); 
-                               
+                               );               
                                echo form_dropdown($data, $opciones, set_value('estado'));                               
                               ?>
                                 </div>
                               </div> 
                             </div>                          
+                            <!-- end : estado -->
 
                           </div>
                           <!-- /.box-body -->
@@ -216,5 +257,14 @@
     <script src="<?php echo base_url('assets/js/password.min.js')?>"></script>
     <script src="<?php echo base_url('assets/js/backend.js')?>"></script>
     <script>$('#password').hidePassword(true);</script>
+    <script>
+      $('#perfil').on('change',function(){
+        if($(this).val()==1){
+          $('#form-group-centro-formacion').hide();
+        }else if($(this).val()==2){
+          $('#form-group-centro-formacion').show();
+        }
+      });
+    </script>
   </body>
 </html>

@@ -57,7 +57,6 @@ function auth() {
 // we instantiate the Filemanager
 $fm = new Filemanager();
 
-$folderPath = '/si_maestras/assets/filemanager/userfiles/escuelas/';
+$folderPath = '/si_maestras/assets/filemanager/userfiles/'.$_SESSION['usuario']['dir_imagenes'];
 $fm->setFileRoot($folderPath);
-
 ?>

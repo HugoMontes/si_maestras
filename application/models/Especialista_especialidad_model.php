@@ -74,6 +74,18 @@ class Especialista_especialidad_model extends CI_Model{
         return $data;
     }
 
+    public function get_all_distinct(){
+        $this->db->distinct();
+        $this->db->select('descripcion');
+        $this->db->order_by('descripcion','asc');
+        $query = $this->db->get($this->table_name);
+        if ($query->num_rows() > 0){
+            $data=$query->result();
+            $query->free_result();
+            return $data;
+        }
+    }
+
     public function insert($data) {
         $data['creado'] = $data['modificado'] = date('Y-m-d H:i:s');
 

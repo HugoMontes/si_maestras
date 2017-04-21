@@ -37,7 +37,8 @@
               }
             ?>
             <div class="noticia-imagen">
-              <img src="<?php echo $img; ?>" class="img-responsive" alt="" style="margin: 0 auto; max-height: 200px;">
+              <!--img src="<?php echo $img; ?>" class="img-responsive" alt="" style="margin: 0 auto; max-height: 200px;"-->
+              <img src="<?php echo $img; ?>" class="img-responsive" alt="">
             </div>
             <div class="noticia-content-title noticia-border">
               <div class="meta-left">

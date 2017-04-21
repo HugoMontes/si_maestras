@@ -149,12 +149,13 @@
                                    </label>
                                 </div>  
                             </div>
-                                                                                                            
+                            
+                            <!-- begin : perfil -->                                                                       
                             <div class="form-group">
                               <label for="perfil">Perfil</label>
                               <?php echo form_error('perfil', '<span class="error-form">', '</span><br/><br/>'); ?>  
                               <div class="row">
-                                <div class="col-lg-3">
+                                <div class="col-lg-6">
                               <?php
                               $data = array(
                                   'name'  => 'perfil',
@@ -167,9 +168,31 @@
                               ?>
                                 </div>
                               </div> 
-                            </div> 
-                                                 
+                            </div>
+                            <!-- end : perfil -->
+                            
+                            <!-- begin : centro formacion -->                                                                                                             
+                            <div id="form-group-centro-formacion" class="form-group" style="<?php echo $usuario->centro_formacion==0?'display:none;':''; ?> ">
+                              <label for="centro">Centro de formación</label>
+                              <?php echo form_error('centro', '<span class="error-form">', '</span><br/><br/>'); ?>  
+                              <div class="row">
+                                <div class="col-lg-6">
+                              <?php
+                              $data = array(
+                                  'name'  => 'centro',
+                                  'id'    => 'centro',
+                                  'class' => 'form-control selectpicker',
+                                  'data-style' => 'btn-info'
+                                );
+                              $opciones = (array)$centros;                               
+                              echo form_dropdown($data, $opciones, set_value('centro',$usuario->centro_formacion));                              
+                              ?>
+                                </div>
+                              </div> 
+                            </div>
+                            <!-- end : centro formacion -->
 
+                            <!-- begin : estado --> 
                             <div class="form-group">
                               <label for="estado">Estado</label>
                               <?php echo form_error('estado', '<span class="error-form">', '</span><br/><br/>'); ?>  
@@ -197,6 +220,7 @@
                                 </div>
                               </div> 
                             </div>                          
+                            <!-- end : estado -->
 
                           </div>
                           <!-- /.box-body -->
@@ -239,5 +263,14 @@
     <script src="<?php echo base_url('assets/js/password.min.js')?>"></script>
     <script src="<?php echo base_url('assets/js/backend.js')?>"></script>
     <script>$('#password').hidePassword(true);</script>
+     <script>
+      $('#perfil').on('change',function(){
+        if($(this).val()==1){
+          $('#form-group-centro-formacion').hide();
+        }else if($(this).val()==2){
+          $('#form-group-centro-formacion').show();
+        }
+      });
+    </script>
   </body>
 </html>

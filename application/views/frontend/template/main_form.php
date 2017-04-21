@@ -45,10 +45,9 @@
 			    	<select id="txtEspecialidad" name="txtEspecialidad" class="form-control" style="/*width: 225px; margin-right: 10px;*/">
 				      <option value="" selected="selected" style="display: none;">Especialidad requerida</option>
 				      <?php 
-				        foreach ($especialidades as $especialidad) { 
-				          $especialidad = (object) $especialidad; 
+				        foreach ($especialidades as $especialidad) {  
 				      ?>
-				      	<option value="<?php echo $especialidad->id; ?>"><?php echo $especialidad->descripcion; ?></option>
+				      	<option value="<?php echo $especialidad->descripcion; ?>"><?php echo $especialidad->descripcion; ?></option>
 				      <?php } ?>
 				    </select>
 			     </div>
@@ -80,6 +79,7 @@
 			</div>        
 			<hr/>
 			<div class="form-controles">
+				<h2 style="float: left;">BASE DE DATOS EN COSNTRUCCIÓN</h2>
 				<button id="btn-continuar" type="button" class="btn btn-success">Siguiente <span class="glyphicon glyphicon-chevron-right"></span></button>
 		  		<span class="clear"></span>
 		  	</div>

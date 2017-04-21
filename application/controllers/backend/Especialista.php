@@ -193,13 +193,14 @@ class Especialista extends CI_Controller{
                 $correo = $this->input->post('correo');
                 $estado = $this->input->post('estado');
                 $guardar = $this->input->post("guardar");
-                
                 /*
-                echo "ESPECIALIDADES<br/>";
+                echo "<br/>MAESTRA<br/>";
+                echo "Nombre: ".$nombres;
+                echo "<br/>ESPECIALIDADES<br/>";
                 print_r($especialidades);
-                echo "AÑOS EXPERIENCIA<br/>";
+                echo "<br/>AÑOS EXPERIENCIA<br/>";
                 print_r($experiencia);
-                */
+                */                
                
                 if($guardar == NUEVO){
                     $data = array();
@@ -252,7 +253,6 @@ class Especialista extends CI_Controller{
                         'telefono_referencia' => $telefono2,
                         'correo' =>$correo,
                         'estado' =>$estado,
-                        'modificado_por'=>$usuario_sesion->id
                     );                                    
                     if($estado == PUBLICADO){
                         $data['publicado'] = date('Y-m-d H:i:s');
@@ -264,11 +264,14 @@ class Especialista extends CI_Controller{
                         $this->especialista_trabajador_model->update($data, $especialista_id);
                         $this->especialista_trabajador_especialidad_model->delete_id_especialista($especialista_id);
                         for($i=0;$i<count($especialidades);$i++) {
+                            $data=array();
                             $data = array (
                                 'id_trabajador' => $especialista_id,
                                 'id_especialidad' => $especialidades[$i],
                                 'anios_experiencia' => $experiencia[$i]==''?0:$experiencia[$i],
                             );
+                            echo "========";
+                            echo $especialista_id."-".$especialidades[$i]."-".$experiencia[$i]."<br>";
                             $this->especialista_trabajador_especialidad_model->insert($data);
                         }
                         $this->session->set_flashdata('mensaje', $this->lang->line('caboco_especialista_guardado'));
@@ -277,7 +280,7 @@ class Especialista extends CI_Controller{
                         redirect('administrador/especialista/nuevo');
                     }    
                 }
-                           
+                 
             }
         }else{
             redirect(base_url($navegacion->navegacion));
@@ -361,8 +364,21 @@ class Especialista extends CI_Controller{
         foreach ($ciudades as $c) {
             $ciudades_array[$c->id]=$c->descripcion;    
         }
+
         // Seleccion especialidades 
-        $data['especialidades']=$this->especialista_especialidad_model->get_all('',array(),'','','','');      
+        //$data['especialidades']=$this->especialista_especialidad_model->get_all('',array(),'','','','');      
+        
+        // Seleccion centros de formacion
+        $this->load->model('centro_model');
+        $centros=$this->centro_model->get_all('',array('estado'=>1),'','','descripcion','');
+        $centros_formacion=array();
+        foreach ($centros as $centro) {
+            $centro=(object)$centro;
+            $especialidades=$this->especialista_especialidad_model->get_all('',array('id_centro'=>$centro->id),'','','','');
+            $centros_formacion[]=array('centro'=>$centro,'especialidades'=>$especialidades);
+        }
+        $data['centros_formacion']=$centros_formacion;
+        
         // Seleccion dia, mes, año
         $dia[0]="Dia";
         for($i=1;$i<=31;$i++){

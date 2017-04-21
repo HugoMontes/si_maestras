@@ -197,6 +197,14 @@ $route['administrador/formador/publicar'] = 'backend/formador/publicar';
 $route['administrador/formador/editar/(:num)'] = 'backend/formador/existe/$1';
 $route['administrador/formador/guardar'] = 'backend/formador/guardar';
 $route['administrador/formador/nuevo'] = 'backend/formador/nuevo';
+// centro
+$route['administrador/centro'] = 'backend/centro_formacion';
+$route['administrador/centro/nuevo'] = 'backend/centro_formacion/nuevo';
+$route['administrador/centro/eliminar/(:any)'] = 'backend/centro_formacion/eliminar/$1';
+$route['administrador/centro/guardar'] = 'backend/centro_formacion/guardar';
+$route['administrador/centro/editar/(:num)'] = 'backend/centro_formacion/existe/$1';
+$route['administrador/centro/valida/eliminar/especialidad'] = 'backend/centro_formacion/valida_eliminar_especialidad';
+$route['administrador/centro/delete/especialidad'] = 'backend/centro_formacion/delete_especialidad';
 // especialistas
 $route['administrador/especialista'] = 'backend/especialista';
 $route['administrador/especialista/nuevo'] = 'backend/especialista/nuevo';

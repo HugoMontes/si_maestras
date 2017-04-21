@@ -28,7 +28,6 @@
             <a href="<?php echo base_url('index.php/administrador/especialista/nuevo');?>" class="btn btn-default btn-sm title-action"><?php echo $this->lang->line('score_nuevo'); ?></a>
             <small></small>
             <div style="float: right;">
-                <a href="<?php echo base_url(); ?>assets/csv/maestras_constructoras.csv" class="btn btn-info btn-sm title-action">Descargar documento CSV</a>
                 <a href="<?php echo base_url('index.php/administrador/especialista/importar/csv');?>" class="btn btn-success btn-sm title-action">Importar documento CSV</a>
             </div>
         </h1>

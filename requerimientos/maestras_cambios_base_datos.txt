@@ -1,0 +1,30 @@
+CAMBIOS ARCHIVOS SISTEMA:
+
+	modified:   application/config/constants.php
+	modified:   application/config/routes.php
+        modified:   application/controllers/Inicio.php
+        modified:   application/language/spanish/score_lang.php
+        modified:   application/models/Especialista_especialidad_model.php
+        modified:   application/views/backend/comunes/sidebar.php
+        modified:   application/views/frontend/template/main_form.php
+
+
+	application/controllers/backend/Centro_formacion.php
+        application/models/Centro_model.php
+        application/views/backend/centro_formacion.php
+        application/views/backend/centro_formacion_editar.php
+        application/views/backend/centro_formacion_nuevo.php
+        assets/filemanager/userfiles/escuelas/_thumbs/
+        requerimientos/
+
+CREAR CARPETAS VACIAS:
+
+	si_maestras\assets\filemanager\userfiles\escuela_de_gestores_municipales
+	si_maestras\assets\filemanager\userfiles\infocal
+	si_maestras\assets\filemanager\userfiles\red_habitat
+	si_maestras\assets\filemanager\userfiles\secretaria_municipal_de_desarrollo_economico
+
+CAMBIOS BASE DE DATOS:
+	Nueva tabla:  centro_formacion
+	Editar tabla: especialista_especialidad
+	Editar tabla: usuario

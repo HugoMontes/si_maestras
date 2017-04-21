@@ -25,7 +25,8 @@ class Inicio extends CI_Controller{
       $data['metapalabras_clave'] = $pagina_inicio->metapalabras_clave;
       $data['menus'] = $this->nested_set->getMenuBootstrap();
       $data['ciudades'] = $this->especialista_ciudad_model->get_all('',array(),'','','','');
-      $data['especialidades'] = $this->especialista_especialidad_model->get_all('',array(),'','','orden asc','');
+      // $data['especialidades'] = $this->especialista_especialidad_model->get_all('',array(),'','','','');
+      $data['especialidades'] = $this->especialista_especialidad_model->get_all_distinct();
       $data['slides'] = $this->slide_model->get_all('',array('estado'=>PUBLICADO),'','','id ASC','');
       $data['noticias_generales'] = $this->noticia_model->get_all('',array('id_grupo'=>1,'estado'=>PUBLICADO),'',6,'creado desc','');
       $data['noticias_capacitacion'] = $this->noticia_model->get_all('',array('id_grupo'=>2,'estado'=>PUBLICADO),'',3,'creado desc','');

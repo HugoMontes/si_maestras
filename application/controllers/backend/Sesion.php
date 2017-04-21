@@ -48,7 +48,7 @@
                         $remember = $this->input->post('remember_me');
                         
                         // verificamos que el nombre de usuario y password sean corretos
-                        $usuario_ = $this->usuario_model->get_values('nombres, apellidos, creado, perfil, thumb, id',array('password'=>$password, 'usuario'=>$usuario, 'estado'=>HABILITADO));
+                        $usuario_ = $this->usuario_model->get_values('id, nombres, apellidos, creado, perfil, thumb, centro_formacion',array('password'=>$password, 'usuario'=>$usuario, 'estado'=>HABILITADO));
                         
                         if(!empty($usuario_)){
                             if(!empty($usuario_->thumb)){
@@ -71,6 +71,7 @@
                                $perfil_id = 0; 
                             }
                             
+                            $this->load->model('centro_model');
                             $array = array(
                                 'id' => $usuario_->id,
                                 'usuario' => $usuario,
@@ -79,7 +80,8 @@
                                 'apellidos' => $usuario_->apellidos,
                                 'creado' => $usuario_->creado,
                                 'perfil_id' => $perfil_id,                                
-                                'perfil' => $perfil
+                                'perfil' => $perfil,
+                                'dir_imagenes'=>$perfil_id==1?'':$this->centro_model->get($usuario_->centro_formacion)->directorio_imagenes.'/',
                             );
 
                             $this->session->set_userdata('usuario', $array);

@@ -373,13 +373,13 @@ $lang['score_formador_eliminado'] = 'Un formador ha sido eliminado correctamente
 $lang['score_formador_default'] = 'Formador SCORE Certificado';
 $lang['score_formador_img_condiciones'] = '(Tamaño máximo 128 kb)';
 // especialistas
-$lang['caboco_especialista_nuevo_titulo'] = 'Añadir nuevo especialista';
-$lang['caboco_especialista_editar_titulo'] = 'Editar especialista';
-$lang['caboco_especialista_guardado'] = 'Especialista guardado correctamente';
+$lang['caboco_especialista_nuevo_titulo'] = 'Añadir maestra constructora';
+$lang['caboco_especialista_editar_titulo'] = 'Editar maestra constructora';
+$lang['caboco_especialista_guardado'] = 'Registro guardado correctamente';
 $lang['caboco_especialista_error_enlace'] = 'No le está permitido usar este enlace para acceder directamente a esta seccion';
-$lang['caboco_especialista_eliminado'] = 'Un especialista ha sido eliminado correctamente';
-$lang['caboco_especialista_eliminar_confirmacion'] = '¿Seguro que quiere eliminar este especialista?';
-$lang['caboco_especialistas'] = 'Especialistas';
+$lang['caboco_especialista_eliminado'] = 'El registro ha sido eliminado correctamente';
+$lang['caboco_especialista_eliminar_confirmacion'] = '¿Seguro que quiere eliminar este registro?';
+$lang['caboco_especialistas'] = 'Maestras constructoras';
 // especialidades
 $lang['caboco_especialidad_nuevo_titulo'] = 'Añadir nueva especialidad';
 $lang['caboco_especialidad_editar_titulo'] = 'Editar especialidad';
@@ -388,6 +388,14 @@ $lang['caboco_especialidad_error_enlace'] = 'No le está permitido usar este enl
 $lang['caboco_especialidad_eliminado'] = 'La especialidad ha sido eliminada correctamente';
 $lang['caboco_especialidad_eliminar_confirmacion'] = '¿Seguro que quiere eliminar esta especialidad?';
 $lang['caboco_especialidades'] = 'Especialidades';
+// centros de formacion
+$lang['maestras_centros_nuevo_titulo'] = 'Añadir nuevo centro de formación';
+$lang['maestras_centros_editar_titulo'] = 'Editar centro de formación';
+$lang['maestras_centros_guardado'] = 'Centro de formación guardado correctamente';
+$lang['maestras_centros_error_enlace'] = 'No le está permitido usar este enlace para acceder directamente a esta seccion';
+$lang['maestras_centros_eliminado'] = 'El centro de formación ha sido eliminado correctamente';
+$lang['maestras_centros_eliminar_confirmacion'] = '¿Seguro que quiere eliminar este centro de formación?';
+$lang['maestras_centros'] = 'Centros de formación';
 ############################################################################################################
 # frontend
 ############################################################################################################

@@ -135,40 +135,54 @@
             </div>      
           </div>
           <div class="form-group">
-            <label for="especialidad">Seleccione una o mas especialidades </label>
+            <label for="especialidad">Seleccione los rubros y los años de experiencia.</label>
             <?php echo form_error('especialidad', '<span class="error-form">', '</span><br/><br/>'); ?>  
-            <div class="row">
+            
+            <?php
+            $cont=0;
+            foreach ($centros_formacion as $cf) { 
+              $centro = (object) $cf['centro'];
+            ?>
+            <div class="row">      
               <div class="col-md-6">
-                <table class="table table-striped">
-                  <tr>
-                    <th>Especialidad</th>
-                    <th>Años de experiencia</th>
-                  </tr>
-                  <?php 
-                  $cont=0;
-                  foreach ($especialidades as $especialidad) { 
-                    $especialidad = (object) $especialidad;
-                    $activo=activa_especialidad($especialidad->id, $especialista_especialidades);
-                    if($activo){
-                      $valor_exp=$especialista_especialidades[$cont]->anios_experiencia;
-                      $cont++;
-                    }else{
-                      $valor_exp="";
-                    }
-                  ?>
-                  <tr>
-                    <td>
-                      <input class="magic-checkbox especialidades" type="checkbox" name="especialidades[]" id="<?php echo $especialidad->id; ?>" value="<?php echo $especialidad->id; ?>" <?php echo $activo?"checked":""; ?> >
-                      <label class="text" style="font-weight: 400;" for="<?php echo $especialidad->id; ?>"><?php echo $especialidad->descripcion; ?></label>
-                    </td>
-                    <td>
-                      <input type="text" class="form-control experiencia" name="experiencia[]" value="<?php echo $valor_exp; ?>" placeholder="Ingrese los años de experiencia" <?php echo $activo?"":"disabled"; ?>/>
-                    </td>
-                  </tr>
-                  <?php } ?>
-                </table>
+                <div class="panel panel-success">
+                  <div class="panel-heading">
+                    <h3 class="panel-title"><?php echo strtoupper($centro->descripcion); ?></h3>
+                  </div>
+                  <div class="panel-body">
+                    <table class="table table-striped">
+                      <tr>
+                        <th>Rubro de formación</th>
+                        <th style="width: 150px;">Años de experiencia</th>
+                      </tr>
+                      <?php
+                        foreach ($cf['especialidades'] as $especialidad) { 
+                          $especialidad = (object) $especialidad;
+                          $activo=activa_especialidad($especialidad->id, $especialista_especialidades);
+                          if($activo){
+                            $valor_exp=$especialista_especialidades[$cont]->anios_experiencia;
+                            $cont++;
+                          }else{
+                            $valor_exp="";
+                          }
+                      ?>
+                      <tr>
+                        <td>
+                          <input class="magic-checkbox especialidades" type="checkbox" name="especialidades[]" id="<?php echo $especialidad->id; ?>" value="<?php echo $especialidad->id; ?>" <?php echo $activo?"checked":""; ?> >
+                          <label class="text" style="font-weight: 400;" for="<?php echo $especialidad->id; ?>"><?php echo $especialidad->descripcion; ?></label>
+                        </td>
+                        <td>
+                          <input type="text" class="form-control experiencia" name="experiencia[]" value="<?php echo $valor_exp; ?>" placeholder="Ingrese años" <?php echo $activo?"":"disabled"; ?> >
+                        </td>
+                      </tr>
+                      <?php } ?>
+                    </table>
+                  </div>
+                </div>
               </div>
-            </div> 
+            </div>      
+            <?php } ?>
+
           </div> 
           <div class="form-group">
             <label for="direccion">Dirección <span class="required">*</span></label>
