@@ -38,7 +38,7 @@
 			  </div>
 			</div>
 		  	<div class="form-group">
-			  <label for="txtEspecialidad" class="col-sm-5 control-label caboco-label">Especialidad requerida <span>*</span> <p class="label-descripcion">Especialidad requerida en una determinada área</p></label>
+			  <label for="txtEspecialidad" class="col-sm-5 control-label caboco-label">Rubro Requerido <span>*</span> <p class="label-descripcion">Especialidad requerida en una determinada área</p></label>
 			  <div class="col-sm-6">
 			  	<div class="input-group">
 			  	  <div class="input-group-addon"><span class="glyphicon glyphicon-briefcase"></span></div>
