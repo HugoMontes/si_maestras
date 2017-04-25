@@ -79,7 +79,8 @@
                                 'nombres' => $usuario_->nombres,
                                 'apellidos' => $usuario_->apellidos,
                                 'creado' => $usuario_->creado,
-                                'perfil_id' => $perfil_id,                                
+                                'perfil_id' => $perfil_id,
+                                'centro_formacion' => $usuario_->centro_formacion,                                
                                 'perfil' => $perfil,
                                 'dir_imagenes'=>$perfil_id==1?'':$this->centro_model->get($usuario_->centro_formacion)->directorio_imagenes.'/',
                             );

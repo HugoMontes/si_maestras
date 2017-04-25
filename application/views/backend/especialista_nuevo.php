@@ -1,3 +1,4 @@
+<?php $usuario_sesion = get_user_session(); ?>
 <?php $this->load->view('backend/template/header'); ?> 
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -142,6 +143,7 @@
                   <?php
                     foreach ($centros_formacion as $cf) { 
                       $centro = (object) $cf['centro'];
+                      if($usuario_sesion->perfil_id == SUPER || $usuario_sesion->centro_formacion == $centro->id){
                   ?>
                   <div class="row">      
                     <div class="col-md-6">
@@ -173,7 +175,8 @@
                         </div>
                       </div>
                     </div>
-                  </div>      
+                  </div>
+                    <?php } ?>    
                   <?php } ?>
                   
               </div>

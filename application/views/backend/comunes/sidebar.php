@@ -336,7 +336,8 @@
           </ul>
         </li>
 
-        <?php if($usuario_sesion->perfil_id == SUPER){ ?>
+        <?php if($usuario_sesion->perfil_id == SUPER OR 
+                 $usuario_sesion->perfil_id == CENTRO_FORMACION){ ?>
         <li class="treeview <?php echo $class_menu_informacion_0;?>">
           <a href="#">
             <i class="fa fa-info-circle"></i>

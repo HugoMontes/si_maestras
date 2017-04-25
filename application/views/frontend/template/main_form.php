@@ -21,7 +21,7 @@
 		<fieldset>
 		  <div class="form-maestras form-solicitud">
 		  	<div class="form-group">
-			  <label for="txtCiudad" class="col-sm-5 control-label caboco-label">Ciudad <span>*</span> <p class="label-descripcion">Ciudad donde se dearrollara el trabajo</p></label>
+			  <label for="txtCiudad" class="col-sm-5 control-label caboco-label">Ciudad <span>*</span> <p class="label-descripcion">Ciudad donde se desarrollará el trabajo</p></label>
 			  <div class="col-sm-6">
 			  	<div class="input-group">
 			  	  <div class="input-group-addon"><span class="fa fa-building"></span></div>
@@ -38,12 +38,12 @@
 			  </div>
 			</div>
 		  	<div class="form-group">
-			  <label for="txtEspecialidad" class="col-sm-5 control-label caboco-label">Rubro Requerido <span>*</span> <p class="label-descripcion">Especialidad requerida en una determinada área</p></label>
+			  <label for="txtEspecialidad" class="col-sm-5 control-label caboco-label">Rubro Requerido <span>*</span> <p class="label-descripcion">Rubro requerido dentro de un área determinada</p></label>
 			  <div class="col-sm-6">
 			  	<div class="input-group">
 			  	  <div class="input-group-addon"><span class="glyphicon glyphicon-briefcase"></span></div>
 			    	<select id="txtEspecialidad" name="txtEspecialidad" class="form-control" style="/*width: 225px; margin-right: 10px;*/">
-				      <option value="" selected="selected" style="display: none;">Especialidad requerida</option>
+				      <option value="" selected="selected" style="display: none;">Rubro Requerido</option>
 				      <?php 
 				        foreach ($especialidades as $especialidad) {  
 				      ?>
@@ -54,7 +54,7 @@
 			  </div>
 			</div>
 			<div class="form-group">
-			  <label for="txtNumero" class="col-sm-5 control-label caboco-label">Numero de trabajadores <span>*</span> <p class="label-descripcion">Cantidad de trabajadores requeridos</p></label>
+			  <label for="txtNumero" class="col-sm-5 control-label caboco-label">Número de trabajadores <span>*</span> <p class="label-descripcion">Cantidad de trabajadores requeridos</p></label>
 			  <div class="col-sm-6">
 			  	<div class="input-group">
 			  	  <div class="input-group-addon"><span class="fa fa-users"></span></div>
@@ -79,7 +79,7 @@
 			</div>        
 			<hr/>
 			<div class="form-controles">
-				<h2 style="float: left;">BASE DE DATOS EN COSNTRUCCIÓN</h2>
+				<h2 style="float: left; color:red;">BASE DE DATOS EN CONSTRUCCIÓN</h2>
 				<button id="btn-continuar" type="button" class="btn btn-success">Siguiente <span class="glyphicon glyphicon-chevron-right"></span></button>
 		  		<span class="clear"></span>
 		  	</div>
