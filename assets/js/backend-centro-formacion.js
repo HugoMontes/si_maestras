@@ -2,15 +2,7 @@
 *	EVENTOS DE CONTROLES
 ********************************************************/
 $(document).on('click','#btn-add-rubro',function(){
-  var html='<tr>';
-  html+='<td>';
-  html+='<input type="text" class="form-control especialidad" name="especialidades[]" placeholder="Ingrese nombre del rubro">';
-  html+='</td>';
-  html+='<td style="width: 50px;">';
-  html+='<button type="button" class="btn btn-danger btn-remove-dialog" title="Eliminar rubro"><i class="fa fa-trash" aria-hidden="true"></i></button>';
-  html+='</td>';
-  html+='</tr>';
-  $('#tbl-especialidades').append(html);
+  $('#foco-rubro table tbody tr').clone().appendTo('#tbl-especialidades tbody');
 });
 
 var row_rubro;
@@ -63,6 +55,30 @@ $(document).on('click','#btn-remove-confirm',function(){
 	row_rubro.remove();
 });
 
+$(document).on('click','#btn-guardar',function(event){
+	event.preventDefault();
+	var sw=true;
+	if($('#descripcion').val()=='' || $('#descripcion').val()==null){
+		$('#descripcion').parent().parent().parent().addClass('has-error');
+		$('#descripcion').parent().find('.help-block').show();
+		sw=false;
+	}
+	$('#tbl-especialidades tbody tr').each(function(){
+		if($(this).find(".especialidad").val()=='' || $(this).find(".especialidad").val()==null){
+			$(this).children().eq(0).addClass('has-error');
+			$(this).children().eq(0).find('span').show();
+			sw=false;
+		}
+		if($(this).find(".area").val()=='0'){
+			$(this).children().eq(1).addClass('has-error');
+			$(this).children().eq(1).find('span').show();
+			sw=false;
+		}
+	});
+	if(sw){
+		$("#form-centro").submit();
+	}
+});
 /*******************************************************
 *	FUNCIONES
 ********************************************************/

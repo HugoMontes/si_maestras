@@ -218,6 +218,31 @@ if(!function_exists('get_autor'))
     }
 }
 
+if(!function_exists('get_centro'))    
+{
+    function get_centro($centro_id = FALSE)
+    {
+       if(empty($centro_id))
+       {
+           return ''; 
+       } 
+       else
+       {
+           $CI =& get_instance();
+           $CI->load->model('centro_model');
+           if($CI->usuario_model->exists('id',$centro_id))
+           {
+               $autor = $CI->centro_model->get_values('descripcion', array('id'=>$centro_id));
+               return strtoupper($autor->descripcion); 
+           }
+           else
+           {
+               return ''; 
+           }           
+       }      
+    }
+}
+
 
 if(!function_exists('get_nombre_biblioteca'))    
 {

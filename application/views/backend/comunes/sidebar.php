@@ -329,15 +329,16 @@
             <?php if($usuario_sesion->perfil_id == SUPER){ ?>
                 <li class="<?php echo $class_menu_noticia_1;?>"><a href="<?php echo base_url('index.php/administrador/noticia/1') ?>"><i class="fa fa-circle-o"></i> Generales</a></li>
             <?php } ?>
-            <?php if($usuario_sesion->perfil_id == SUPER OR 
-                 $usuario_sesion->perfil_id == CENTRO_FORMACION){ ?>
+            <?php if($usuario_sesion->perfil_id == SUPER){ ?>
             <li class="<?php echo $class_menu_noticia_2;?>"><a href="<?php echo base_url('index.php/administrador/noticia/2') ?>"><i class="fa fa-circle-o"></i> Capacitacion</a></li>
+            <?php } ?>
+            <?php if($usuario_sesion->perfil_id == CENTRO_FORMACION){ ?>
+            <li class="<?php echo $class_menu_noticia_2;?>"><a href="<?php echo base_url('index.php/administrador/noticia/centro/2') ?>"><i class="fa fa-circle-o"></i> Capacitacion</a></li>
             <?php } ?>
           </ul>
         </li>
 
-        <?php if($usuario_sesion->perfil_id == SUPER OR 
-                 $usuario_sesion->perfil_id == CENTRO_FORMACION){ ?>
+        <?php if($usuario_sesion->perfil_id == SUPER){ ?>
         <li class="treeview <?php echo $class_menu_informacion_0;?>">
           <a href="#">
             <i class="fa fa-info-circle"></i>
@@ -350,6 +351,23 @@
             <li class="<?php echo $class_menu_informacion_1;?>"><a href="<?php echo base_url('index.php/administrador/informacion/3') ?>"><i class="fa fa-circle-o"></i> Equidad de genero</a></li>
             <li class="<?php echo $class_menu_informacion_2;?>"><a href="<?php echo base_url('index.php/administrador/informacion/4') ?>"><i class="fa fa-circle-o"></i> Derechos laborales</a></li>
             <li class="<?php echo $class_menu_informacion_3;?>"><a href="<?php echo base_url('index.php/administrador/informacion/5') ?>"><i class="fa fa-circle-o"></i> Salud y seguridad</a></li>
+          </ul>
+        </li>
+        <?php } ?>
+
+        <?php if($usuario_sesion->perfil_id == CENTRO_FORMACION){ ?>
+        <li class="treeview <?php echo $class_menu_informacion_0;?>">
+          <a href="#">
+            <i class="fa fa-info-circle"></i>
+            <span>Información de interes</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="<?php echo $class_menu_informacion_1;?>"><a href="<?php echo base_url('index.php/administrador/noticia/centro/3') ?>"><i class="fa fa-circle-o"></i> Equidad de genero</a></li>
+            <li class="<?php echo $class_menu_informacion_2;?>"><a href="<?php echo base_url('index.php/administrador/noticia/centro/4') ?>"><i class="fa fa-circle-o"></i> Derechos laborales</a></li>
+            <li class="<?php echo $class_menu_informacion_3;?>"><a href="<?php echo base_url('index.php/administrador/noticia/centro/5') ?>"><i class="fa fa-circle-o"></i> Salud y seguridad</a></li>
           </ul>
         </li>
         <?php } ?>
@@ -403,8 +421,7 @@
         </li>
         <?php } ?>
 
-        <?php if($usuario_sesion->perfil_id == SUPER OR 
-                 $usuario_sesion->perfil_id == CENTRO_FORMACION){ ?>
+        <?php if($usuario_sesion->perfil_id == SUPER){ ?>
         <li class="treeview <?php echo $class_menu_especialista_0;?>">
           <a href="#">
             <i class="fa fa-users"></i> <span>Maestras constructoras</span>
@@ -415,6 +432,21 @@
           <ul class="treeview-menu">
             <li class="<?php echo $class_menu_especialista_1;?>"><a href="<?php echo base_url('index.php/administrador/especialista'); ?>"><i class="fa fa-circle-o"></i> Todas las maestras cons...</a></li>
             <li class="<?php echo $class_menu_especialista_2;?>"><a href="<?php echo base_url('index.php/administrador/especialista/nuevo'); ?>"><i class="fa fa-circle-o"></i> Añadir nuevo</a></li>
+          </ul>
+        </li>
+        <?php } ?>
+
+        <?php if($usuario_sesion->perfil_id == CENTRO_FORMACION){ ?>
+        <li class="treeview <?php echo $class_menu_especialista_0;?>">
+          <a href="#">
+            <i class="fa fa-users"></i> <span>Maestras constructoras</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="<?php echo $class_menu_especialista_1;?>"><a href="<?php echo base_url('index.php/administrador/especialista/centro'); ?>"><i class="fa fa-circle-o"></i> Todas las maestras cons...</a></li>
+            <li class="<?php echo $class_menu_especialista_2;?>"><a href="<?php echo base_url('index.php/administrador/especialista/centro/nuevo'); ?>"><i class="fa fa-circle-o"></i> Añadir nuevo</a></li>
           </ul>
         </li>
         <?php } ?>

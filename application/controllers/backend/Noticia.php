@@ -221,19 +221,14 @@
                     $pdf = $this->input->post('docPdf');
                 }
 
-                //if($guardar == NUEVO){
-                //   if (empty($_FILES['imagen']['name']))
-                //    $this->form_validation->set_rules('imagen', 'Imagen destacada', 'required');
-                //}
-
                 //required=campo obligatorio||xss_clean=evitamos inyecciones de codigo
     			$this->form_validation->set_rules('titulo', 'Título', 'trim|required');
                 $this->form_validation->set_rules('resumen', 'Resumen', 'trim|required');
                 $this->form_validation->set_rules('contenido', 'Contenido', 'trim|required');
                 $this->form_validation->set_rules('rotulo', 'Rotulo', 'trim|required');
-                $this->form_validation->set_rules('urlvideo', 'Url de video', 'trim|valid_url_format|url_exists');
-                $this->form_validation->set_rules('url', 'Url externa', 'trim|valid_url_format|url_exists');                
-                $this->form_validation->set_rules('estado', 'Estado', 'integer|required');  
+                //$this->form_validation->set_rules('urlvideo', 'Url de video', 'trim|valid_url_format|url_exists');
+                //$this->form_validation->set_rules('url', 'Url externa', 'trim|valid_url_format|url_exists');                
+                //$this->form_validation->set_rules('estado', 'Estado', 'integer|required');  
 
     			$this->form_validation->set_message('required', 'Falta el campo %s');
                                 
@@ -256,9 +251,12 @@
                     $url = $this->input->post('url');
                     $tipo_contenido = $this->input->post('tipo');
                     $fuente = trim($this->input->post('fuente'));
-                    $estado = $this->input->post('estado');
-                    $guardar = $this->input->post("guardar");
-                    
+                    $guardar = $this->input->post("guardar");                   
+                    if($usuario_sesion->perfil==1){
+                        $estado = $this->input->post('estado');
+                    }else{
+                        $estado = 3;
+                    }     
                     // -------------------------------------------------------------------
                     // begin : upload imagen
                     // -------------------------------------------------------------------
@@ -369,7 +367,7 @@
                     // -------------------------------------------------------------------
 
                     if($sw == 1){
-                        if($guardar == NUEVO){                                            
+                        if($guardar == NUEVO){                                       
                             $data = array();
                             $data = array ('titulo' =>$titulo,
                                             'resumen' => $resumen,
@@ -384,9 +382,9 @@
                                             'imagen' => $imagen,
                                             'thumb' => $imagen_thumb,
                                             'id_grupo'=>$grupo,
-                                            'estado' =>$estado,
-                                            'creado_por'=>$usuario_sesion->id);                                            
-                                            
+                                            'estado' => $estado,
+                                            'id_centro' =>$usuario_sesion->centro_formacion,
+                                            'creado_por'=>$usuario_sesion->id);
                             if($estado == PUBLICADO)                
                                 $data['publicado'] = date('Y-m-d H:i:s');
                             if($estado == DESPUBLICADO)    
@@ -413,10 +411,8 @@
                                             'fuente'=> $fuente,
                                             'imagen' => $imagen,
                                             'thumb' => $imagen_thumb,
-                                            'id_grupo'=>$grupo,
-                                            'estado' =>$estado,
-                                            'modificado_por'=>$usuario_sesion->id);                                          
-                                            
+                                            'estado' => $estado,
+                                            'modificado_por'=>$usuario_sesion->id);
                             if($estado == PUBLICADO)                
                                 $data['publicado'] = date('Y-m-d H:i:s');
                             if($estado == DESPUBLICADO)    
@@ -518,5 +514,27 @@
             $navegacion = $this->navegacion_model->get_values('navegacion',array('id'=>$grupo_noticia->id_navegacion));
             $this->session->set_flashdata('mensaje', 'Se ha guardado correctamente la configuración.');
             redirect(base_url($navegacion->navegacion));
+        }
+
+        public function change_status_noticia(){
+            $noticia_id = $this->input->get('id');
+            $estado = $this->input->get('estado');
+            $message='No fue posible modificar el estado de la noticia';
+            $status=500;
+            if($this->noticia_model->exists('id', $noticia_id)){
+                $noticia = $this->noticia_model->get($noticia_id);
+                $data = array(
+                    'estado'=> $estado,
+                );                    
+                $this->noticia_model->update($data, $noticia_id);              
+                $message = 'La noticia ha cambiado de estado';
+                $status=200;
+            }
+            $data=array(
+                'mensaje'=>$message,
+                'status'=>$status,
+            );            
+            header('Content-Type: application/json');
+            echo json_encode($data);
         }
     }

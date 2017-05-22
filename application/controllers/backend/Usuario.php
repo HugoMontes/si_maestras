@@ -161,7 +161,7 @@
             if($usuario_id == FALSE)
             {
                 $this->session->set_flashdata('error', $this->lang->line('score_usuario_error_enlace'));
-                redirect(base_url($navegacion->navegacion));
+                echo "error";
             } 
             if($this->usuario_model->exists('id', $usuario_id))
             {
@@ -170,11 +170,13 @@
             else
             {
                 $this->session->set_flashdata('error', $this->lang->line('score_usuario_error_enlace').' (#'.$usuario_id.')');
-                redirect(base_url($navegacion->navegacion));
+                echo "else";
             }
+            
         }
         
         public function editar($usuario_id = FALSE){
+            $usuario_sesion = get_user_session();
             $this->verificar_usuario($usuario_id);
 
             if($usuario_id == FALSE){
@@ -207,8 +209,12 @@
             $data['perfiles'] = $perfiles_;
             $data['centros'] = $centros_;
             $data['usuario']=$this->usuario_model->get($usuario_id);
-                   
-            $this->load->view('backend/usuario_editar',$data);
+            
+            if($usuario_sesion->perfil_id==1){  
+                $this->load->view('backend/usuario_editar',$data);
+            }else{
+                $this->load->view('backend/usuario_centro_editar',$data);
+            }
         }
 
         public function eliminar($usuario_id = FALSE){
@@ -275,8 +281,8 @@
                 //required=campo obligatorio||xss_clean=evitamos inyecciones de codigo
     			$this->form_validation->set_rules('nombres', 'Nombres', 'trim|required');
                 $this->form_validation->set_rules('apellidos', 'Apellidos', 'trim|required');
-                $this->form_validation->set_rules('perfil', 'Perfil', 'integer|required');              
-                $this->form_validation->set_rules('estado', 'Estado', 'integer|required');  
+                //$this->form_validation->set_rules('perfil', 'Perfil', 'integer|required');              
+                //$this->form_validation->set_rules('estado', 'Estado', 'integer|required');  
 
     			$this->form_validation->set_message('required', 'Falta el campo %s');
                                 
@@ -302,9 +308,11 @@
                     $usuario = $this->input->post('usuario');
                     $password = $this->input->post('password');
                     $email = $this->input->post('email');
-                    $perfil = $this->input->post('perfil');
-                    $centro = $perfil==1?0:$this->input->post('centro');                
-                    $estado = $this->input->post('estado');
+                    if($usuario_sesion->perfil_id==1){
+                        $perfil = $this->input->post('perfil');
+                        $centro = $perfil==1?0:$this->input->post('centro');                
+                        $estado = $this->input->post('estado');
+                    }
                     $guardar = $this->input->post("guardar");
                     
                     /*********************************************************************/
@@ -450,11 +458,12 @@
                                            'email' => $email,
                                            'fotografia' => $fotografia,
                                            'thumb'=> $fotografia_thumb,
-                                           'perfil' => $perfil,
-                                           'centro_formacion' => $centro,
-                                           'estado' =>$estado,
                                            'modificado_por'=>$usuario_sesion->id);
-                                              
+                            if($usuario_sesion->perfil_id==1){
+                                $data['perfil'] = $perfil;
+                                $data['centro_formacion'] = $centro;
+                                $data['estado'] = $estado;
+                            }
                             if(!empty($password))
                             {
                                 $data['password'] = $password;
@@ -739,11 +748,11 @@
         }
 
         public function verificar_usuario($usuario_id){
-            if($usuario_id!=$this->session->userdata('usuario')['id']){
-                if($this->session->userdata('usuario')['perfil']!=1){
+            $usuario_sesion = get_user_session();
+            if($usuario_sesion->id!=$usuario_id){
+                if($usuario_sesion->perfil_id!=1){
                     redirect(base_url('index.php/administrador/escritorio'));
                 }
             }
         }
-
     }

@@ -13,9 +13,7 @@
     <link href="<?php echo base_url('assets/css/backend.css')?>" rel="stylesheet"/>
     <link href="<?php echo base_url('assets/css/bootstrap-select.min.css')?>" rel="stylesheet"/>
     <link href="<?php echo base_url('assets/css/magic-check.min.css')?>" rel="stylesheet"/>
-    <!--
     <link href="<?php echo base_url('assets/frontend_caboco/asset/jquery_ui/jquery-ui.min.css')?>" rel="stylesheet"/>
-    -->
     <link href="<?php echo base_url('assets/css/backend_pagination.css')?>" rel="stylesheet"/>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">

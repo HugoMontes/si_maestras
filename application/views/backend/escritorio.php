@@ -66,7 +66,6 @@
               <!-- inicio cuadros informativos -->
               <div class="row">
                 
-                <?php if($usuario_sesion->perfil_id == SUPER){ ?>
                 <div class="col-lg-3 col-xs-6">
                   <div class="small-box bg-aqua">
                     <div class="inner">
@@ -79,90 +78,46 @@
                     <a href="<?php echo base_url('index.php/administrador/contacto');?>" class="small-box-footer">Ver contactos <i class="fa fa-arrow-circle-right"></i></a>
                   </div>
                 </div>
-                <?php } ?>  
                 
-                <?php if($usuario_sesion->perfil_id == SUPER){ ?>
                 <div class="col-lg-3 col-xs-6">
                   <div class="small-box bg-green">
                     <div class="inner">
-                      <h3><?php echo $noticias_publicadas;?></h3>
-        
+                      <h3><?php echo $noticias_publicadas_generales;?></h3>
                       <p>Noticias generales</p>
                     </div>
                     <div class="icon">
                       <i class="ion ion-ios-paper"></i>
                     </div>
-                    <a href="<?php echo base_url('index.php/administrador/noticia');?>" class="small-box-footer">Ver noticias <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="<?php echo base_url('index.php/administrador/noticia/1');?>" class="small-box-footer">Ver noticias <i class="fa fa-arrow-circle-right"></i></a>
                   </div>
                 </div>
-                <?php } ?>
 
-                <?php if($usuario_sesion->perfil_id == CENTRO_FORMACION){ ?>
-                <div class="col-lg-3 col-xs-6">
-                  <div class="small-box bg-green">
-                    <div class="inner">
-                      <h3><?php echo $noticias_publicadas_capacitacion;?></h3>
-                      <p>Noticias sobre capacitacion</p>
-                    </div>
-                    <div class="icon">
-                      <i class="ion ion-ios-paper"></i>
-                    </div>
-                    <a href="<?php echo base_url('index.php/administrador/capacitacion');?>" class="small-box-footer">Ver noticias <i class="fa fa-arrow-circle-right"></i></a>
-                  </div>
-                </div>
-                <?php } ?>
-
-                <?php if($usuario_sesion->perfil_id == SUPER OR 
-                         $usuario_sesion->perfil_id == CENTRO_FORMACION){ ?>
                 <div class="col-lg-3 col-xs-6">
                   <div class="small-box bg-yellow">
                     <div class="inner">
                       <h3><?php echo $especialistas_publicados; ?></h3>
-                      <p>Especialistas</p>
+                      <p>Maestras Constructoras</p>
                     </div>
                     <div class="icon">
                       <i class="fa fa-users"></i>
                     </div>
-                    <a href="<?php echo base_url('index.php/administrador/especialista');?>" class="small-box-footer">Ver especialistas <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="<?php echo base_url('index.php/administrador/especialista');?>" class="small-box-footer">Ver maestras constructoras <i class="fa fa-arrow-circle-right"></i></a>
                   </div>
                 </div>
-                <?php } ?>
 
-                <?php if($usuario_sesion->perfil_id == SUPER OR 
-                         $usuario_sesion->perfil_id == CENTRO_FORMACION){ ?>
                 <div class="col-lg-3 col-xs-6">
                   <div class="small-box bg-red">
                     <div class="inner">
-                      <h3><?php echo $especialidades_publicados; ?></h3>
-                      <p>Especialidades</p>
+                      <h3><?php echo $centros_formacion; ?></h3>
+                      <p>Centros de Formación</p>
                     </div>
                     <div class="icon">
                       <i class="fa fa-suitcase"></i>
                     </div>
-                    <a href="<?php echo base_url('index.php/administrador/especialidad');?>" class="small-box-footer">Ver especialidades <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="<?php echo base_url('index.php/administrador/centro');?>" class="small-box-footer">Ver centros de formación <i class="fa fa-arrow-circle-right"></i></a>
                   </div>
                 </div>
-                <?php } ?>
 
-                <!--
-                <?php if($usuario_sesion->perfil_id == SUPER){ ?>
-                <div class="col-lg-3 col-xs-6">
-                  <div class="small-box bg-red">
-                    <div class="inner">
-                      <h3><?php echo $testimonios_publicados;?></h3>
-                      <p>Testimonios</p>
-                    </div>
-                    <div class="icon">
-                      <i class="ion ion-chatbubbles"></i>
-                    </div>
-                    <a href="<?php echo base_url('index.php/administrador/testimonio');?>" class="small-box-footer">Ver testimonios <i class="fa fa-arrow-circle-right"></i></a>
-                  </div>
-                </div>
-              </div>
-              <?php } ?>
-              -->
-
-              <?php if($usuario_sesion->perfil_id == SUPER){ ?>
               <!-- inicio cuadros informativos --> 
               <div class="row">
                 <!-- inicio paginas visitadas -->
@@ -333,7 +288,6 @@
                 <!-- fin ultimas páginas -->              
               </div>                                                
               <!-- fin vistas de escritorio -->
-              <?php } ?>
 
             </section>
             <!-- /.content -->

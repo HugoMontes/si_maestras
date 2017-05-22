@@ -17,6 +17,10 @@ class Especialista_trabajador_model extends CI_Model{
     public function get($id) {
         return $this->db->get_where($this->table_name, array($this->primary_key => $id))->row();
     }
+
+    public function get_by_ci($ci) {
+        return $this->db->get_where($this->table_name, array('ci' => $ci))->row();
+    }
     
     public function get_values($fields = '', $where = array()){
         $row = NULL;
@@ -97,7 +101,13 @@ class Especialista_trabajador_model extends CI_Model{
 
         return $this->db->delete($this->table_name);
     }
-    
+
+    public function delete_relations($id_trabajador, $id_centro){
+        return $this->db->query("DELETE FROM especialista_trabajador_especialidad 
+                                WHERE especialista_trabajador_especialidad.id_especialidad
+                                IN(SELECT id FROM especialista_especialidad WHERE id_centro = $id_centro)
+                                AND especialista_trabajador_especialidad.id_trabajador= $id_trabajador");
+    }
     
     public function exists($key, $value)
     {
@@ -111,6 +121,18 @@ class Especialista_trabajador_model extends CI_Model{
         }
     }
     
+    public function get_all_trabajadores_by_id_centro($id){
+        $query = $this->db->query("SELECT et.id, et.ci, et.nombres, et.apellidos, et.fecha_nacimiento, et.direccion, et.telefono_contacto, et.correo, et.estado, cc.descripcion  FROM especialista_trabajador et
+                                    JOIN especialista_trabajador_especialidad ete ON ete.id_trabajador=et.id
+                                    JOIN especialista_especialidad ee ON ee.id=ete.id_especialidad
+                                    JOIN centro_formacion cc ON cc.id=ee.id_centro AND cc.id=$id GROUP BY et.id ORDER BY et.id");
+        $row = $query->result_array();
+        if(isset($row)){
+            return $row;
+        }
+       
+    }
+
     public function get_count($where = '', $order_by = '')
     {
         if ($where != '') {
@@ -124,6 +146,17 @@ class Especialista_trabajador_model extends CI_Model{
         $Q = $this->db->get($this->table_name);
         return $Q->num_rows();
     }
+
+    public function get_count_by_id_centro($id){
+        $query = $this->db->query("SELECT et.id, et.ci, et.nombres, et.apellidos, et.fecha_nacimiento, et.direccion, et.telefono_contacto, et.correo, et.estado, cc.descripcion  FROM especialista_trabajador et
+                                    JOIN especialista_trabajador_especialidad ete ON ete.id_trabajador=et.id
+                                    JOIN especialista_especialidad ee ON ee.id=ete.id_especialidad
+                                    JOIN centro_formacion cc ON cc.id=ee.id_centro AND cc.id=$id GROUP BY et.id ORDER BY et.id");
+        $row = $query->result_array();
+        if(isset($row)){
+            return count($row);
+        }
+    }    
     
     public function get_pagination($cur_page = 1, $rows_per_page = 25, $where = '', $order_by = '')
     {

@@ -20,7 +20,7 @@ class Especialista_trabajador_especialidad_model extends CI_Model{
     }
 
     public function get_especialidades($id){
-        $this->db->select('ete.id, ete.id_trabajador, ete.id_especialidad, ete.anios_experiencia');
+        $this->db->select('ete.id, ete.id_trabajador, ete.id_especialidad, ete.fecha_certificacion');
         $this->db->from($this->table_name.' as ete');
         $this->db->join('especialista_especialidad as ee','ee.id=ete.id_especialidad');
         $this->db->where('ete.id_trabajador',$id);  
@@ -81,7 +81,6 @@ class Especialista_trabajador_especialidad_model extends CI_Model{
 
     public function insert($data) {
         $data['creado'] = $data['modificado'] = date('Y-m-d H:i:s');
-
         $success = $this->db->insert($this->table_name, $data);
         if ($success) {
             return $this->db->insert_id();

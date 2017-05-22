@@ -1,6 +1,6 @@
 <?php (defined('BASEPATH')) OR exit('No direct script access allowed');
 
-class centro_model extends CI_Model{
+class Centro_model extends CI_Model{
 
 	protected $table_name = 'centro_formacion';
     protected $primary_key = 'id';

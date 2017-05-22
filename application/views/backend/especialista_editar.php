@@ -134,56 +134,62 @@
               </div>
             </div>      
           </div>
-          <div class="form-group">
-            <label for="especialidad">Seleccione los rubros y los años de experiencia.</label>
-            <?php echo form_error('especialidad', '<span class="error-form">', '</span><br/><br/>'); ?>  
-            
-            <?php
-            $cont=0;
-            foreach ($centros_formacion as $cf) { 
-              $centro = (object) $cf['centro'];
-            ?>
-            <div class="row">      
-              <div class="col-md-6">
-                <div class="panel panel-success">
-                  <div class="panel-heading">
-                    <h3 class="panel-title"><?php echo strtoupper($centro->descripcion); ?></h3>
-                  </div>
-                  <div class="panel-body">
-                    <table class="table table-striped">
-                      <tr>
-                        <th>Rubro de formación</th>
-                        <th style="width: 150px;">Años de experiencia</th>
-                      </tr>
-                      <?php
-                        foreach ($cf['especialidades'] as $especialidad) { 
-                          $especialidad = (object) $especialidad;
-                          $activo=activa_especialidad($especialidad->id, $especialista_especialidades);
-                          if($activo){
-                            $valor_exp=$especialista_especialidades[$cont]->anios_experiencia;
-                            $cont++;
-                          }else{
-                            $valor_exp="";
-                          }
-                      ?>
-                      <tr>
-                        <td>
-                          <input class="magic-checkbox especialidades" type="checkbox" name="especialidades[]" id="<?php echo $especialidad->id; ?>" value="<?php echo $especialidad->id; ?>" <?php echo $activo?"checked":""; ?> >
-                          <label class="text" style="font-weight: 400;" for="<?php echo $especialidad->id; ?>"><?php echo $especialidad->descripcion; ?></label>
-                        </td>
-                        <td>
-                          <input type="text" class="form-control experiencia" name="experiencia[]" value="<?php echo $valor_exp; ?>" placeholder="Ingrese años" <?php echo $activo?"":"disabled"; ?> >
-                        </td>
-                      </tr>
-                      <?php } ?>
-                    </table>
+
+          <div class="panel panel-primary">
+            <div class="panel-heading">CERTIFICACIONES</div>
+            <div class="panel-body">
+              <?php echo form_error('especialidad', '<span class="error-form">', '</span><br/><br/>'); ?>          
+              <?php
+              $cont=0;
+              foreach ($centros_formacion as $cf) { 
+                $centro = (object) $cf['centro'];
+              ?>
+              <div class="row">      
+                <div class="col-md-12">
+                  <div class="panel panel-success">
+                    <div class="panel-heading">
+                      <h3 class="panel-title"><?php echo strtoupper($centro->descripcion); ?></h3>
+                    </div>
+                    <div class="panel-body">
+                      <table class="table table-striped">
+                        <tr>
+                          <th>Certificación en: </th>
+                          <th>Area</th>
+                          <th style="width: 200px;">Fecha de certificacion</th>
+                        </tr>
+                        <?php
+                          foreach ($cf['especialidades'] as $especialidad) { 
+                            $especialidad = (object) $especialidad;
+                            $activo=activa_especialidad($especialidad->id, $especialista_especialidades);
+                            if($activo){
+                              $valor_exp=$especialista_especialidades[$cont]->fecha_certificacion;
+                              $cont++;
+                            }else{
+                              $valor_exp="";
+                            }
+                        ?>
+                        <tr>
+                          <td>
+                            <input class="magic-checkbox especialidades" type="checkbox" name="especialidades[]" id="<?php echo $especialidad->id; ?>" value="<?php echo $especialidad->id; ?>" <?php echo $activo?"checked":""; ?> >
+                            <label class="text" style="font-weight: 400;" for="<?php echo $especialidad->id; ?>"><?php echo $especialidad->descripcion; ?></label>
+                          </td>
+                          <td>
+                            <input type="text" class="form-control" value="<?php echo $especialidad->area; ?>" disabled="true">
+                          </td>
+                          <td>
+                            <input type="text" class="form-control fecha-certificacion" name="fecha-certificacion[]" value="<?php echo $valor_exp; ?>" placeholder="Ingrese años" <?php echo $activo?"":"disabled"; ?> >
+                          </td>
+                        </tr>
+                        <?php } ?>
+                      </table>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>      
-            <?php } ?>
+              </div>      
+              <?php } ?>
+            </div>
+          </div>
 
-          </div> 
           <div class="form-group">
             <label for="direccion">Dirección <span class="required">*</span></label>
             <?php echo form_error('direccion', '<span class="error-form">', '</span><br/><br/>'); ?>
@@ -269,14 +275,6 @@
 <!-- /.content -->
 </div>
 <?php $this->load->view('backend/template/footer'); ?>
-<script>
-$(document).on('click','.especialidades',function(){
-  if($(this).is(':checked')){
-    $(this).parent().parent().find('.experiencia').removeAttr('disabled');
-    $(this).parent().parent().find('.experiencia').focus();
-  }else{
-    $(this).parent().parent().find('.experiencia').attr('disabled','true');
-    $(this).parent().parent().find('.experiencia').val('');
-  }
-});
-</script>
+<script src="<?php echo base_url('assets/frontend_caboco/asset/jquery_ui/jquery-ui.min.js')?>"></script> 
+<script src="<?php echo base_url('assets/frontend_caboco/js/calendar-es.js')?>"></script>
+<script src="<?php echo base_url('assets/js/backend-especialista.js')?>"></script>

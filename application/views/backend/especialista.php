@@ -27,9 +27,12 @@
             <?php echo $this->lang->line('caboco_especialistas');?>
             <a href="<?php echo base_url('index.php/administrador/especialista/nuevo');?>" class="btn btn-default btn-sm title-action"><?php echo $this->lang->line('score_nuevo'); ?></a>
             <small></small>
-            <div style="float: right;">
-                <a href="<?php echo base_url('index.php/administrador/especialista/importar/csv');?>" class="btn btn-success btn-sm title-action">Importar documento CSV</a>
-            </div>
+            <!--div style="float: right;">
+                <a href="<?php echo base_url('index.php/administrador/especialista/exportar/excel');?>" class="btn btn-info btn-sm title-action"><span class="glyphicon glyphicon-download-alt"></span> Descargar archivo excel</a>
+                <button type="button" class="btn btn-success btn-sm title-action" data-toggle="modal" data-target="#mdl-upload-excel">
+                    <span class="glyphicon glyphicon-upload"></span> Subir archivo excel
+                </button>
+            </div-->
         </h1>
     </section>
 
@@ -114,12 +117,11 @@
                                     if(count($trabajadores)>0){
                                         foreach ($trabajadores as $trabajador):
                                             $trabajador = (object) $trabajador;
-                                            $sw_user=es_item_usuario($trabajador->creado_por);
                                     ?>
-                                    <tr class="<?php echo $sw_user?'':'not-active-row'; ?>">
-                                        <td class="row-title"><a href="<?php echo base_url('index.php/administrador/especialista/editar/'.$trabajador->id);?>" class="<?php echo $sw_user?'':'not-active-link'; ?>" data-toggle="tooltip" data-placement="top" title="<?php echo $this->lang->line('score_editar_tooltip'); ?>"><?php echo $trabajador->ci; ?></a></td>
-                                        <td class="row-title"><a href="<?php echo base_url('index.php/administrador/especialista/editar/'.$trabajador->id);?>" class="<?php echo $sw_user?'':'not-active-link'; ?>" data-toggle="tooltip" data-placement="top" title="<?php echo $this->lang->line('score_editar_tooltip'); ?>"><?php echo $trabajador->apellidos; ?></a></td>                          
-                                        <td class="row-title"><a href="<?php echo base_url('index.php/administrador/especialista/editar/'.$trabajador->id);?>" class="<?php echo $sw_user?'':'not-active-link'; ?>" data-toggle="tooltip" data-placement="top" title="<?php echo $this->lang->line('score_editar_tooltip'); ?>"><?php echo $trabajador->nombres; ?></a></td>                         
+                                    <tr>
+                                        <td class="row-title"><a href="<?php echo base_url('index.php/administrador/especialista/editar/'.$trabajador->id);?>" data-toggle="tooltip" data-placement="top" title="<?php echo $this->lang->line('score_editar_tooltip'); ?>"><?php echo $trabajador->ci; ?></a></td>
+                                        <td class="row-title"><a href="<?php echo base_url('index.php/administrador/especialista/editar/'.$trabajador->id);?>" data-toggle="tooltip" data-placement="top" title="<?php echo $this->lang->line('score_editar_tooltip'); ?>"><?php echo $trabajador->apellidos; ?></a></td>                          
+                                        <td class="row-title"><a href="<?php echo base_url('index.php/administrador/especialista/editar/'.$trabajador->id);?>" data-toggle="tooltip" data-placement="top" title="<?php echo $this->lang->line('score_editar_tooltip'); ?>"><?php echo $trabajador->nombres; ?></a></td>                         
                                         <td><?php echo $trabajador->fecha_nacimiento; ?></td>
                                         <td><?php echo $trabajador->direccion; ?></td>
                                         <td><?php echo $trabajador->telefono_contacto; ?></td>
@@ -130,18 +132,18 @@
                                                 <?php 
                                                   if($trabajador->estado == PUBLICADO){
                                                 ?>
-                                                    <a href="javascript:;" onclick="publicar(<?php echo $trabajador->id;?>)" class="btn btn-success btn-xs <?php echo $sw_user?'':'not-active-link'; ?>" data-toggle="tooltip" data-placement="top" title="<?php echo $this->lang->line('score_despublicar_tooltip'); ?>"><i class="fa fa-check-circle"></i></a>
+                                                    <a href="javascript:;" onclick="publicar(<?php echo $trabajador->id;?>)" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="<?php echo $this->lang->line('score_despublicar_tooltip'); ?>"><i class="fa fa-check-circle"></i></a>
                                                 <?php   
                                                   }else{
                                                 ?>
-                                                    <a href="javascript:;" onclick="publicar(<?php echo $trabajador->id;?>)" class="btn btn-danger btn-xs <?php echo $sw_user?'':'not-active-link'; ?>" data-toggle="tooltip" data-placement="top" title="<?php echo $this->lang->line('score_publicar_tooltip');?>"><i class="fa fa-times-circle"> </i></a>
+                                                    <a href="javascript:;" onclick="publicar(<?php echo $trabajador->id;?>)" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="<?php echo $this->lang->line('score_publicar_tooltip');?>"><i class="fa fa-times-circle"> </i></a>
                                                 <?php } ?>
                                             </div>                                 
                                         </td>
                                         <td style="text-align: center;">                      
                                             <div class="btn-group">
-                                                <a href="<?php echo base_url('index.php/administrador/especialista/editar/'.$trabajador->id);?>" class="btn btn-default <?php echo $sw_user?'':'not-active-link'; ?>" data-container="body" data-toggle="tooltip"  data-placement="top" title="<?php echo $this->lang->line('score_editar_tooltip'); ?>"><i class="fa fa-pencil"></i></a>
-                                                <a href="javascript:;" onclick="eliminar(<?php echo $trabajador->id; ?>,'<?php echo $trabajador->nombres." ".$trabajador->apellidos; ?>')" class="btn btn-default <?php echo $sw_user?'':'not-active-link'; ?>" data-container="body" data-toggle="tooltip"  data-placement="top" title="<?php echo $this->lang->line('score_eliminar_tooltip'); ?>"><i class="fa fa-trash-o"></i></a>
+                                                <a href="<?php echo base_url('index.php/administrador/especialista/editar/'.$trabajador->id);?>" class="btn btn-default" data-container="body" data-toggle="tooltip"  data-placement="top" title="<?php echo $this->lang->line('score_editar_tooltip'); ?>"><i class="fa fa-pencil"></i></a>
+                                                <a href="javascript:;" onclick="eliminar(<?php echo $trabajador->id; ?>,'<?php echo $trabajador->nombres." ".$trabajador->apellidos; ?>')" class="btn btn-default" data-container="body" data-toggle="tooltip"  data-placement="top" title="<?php echo $this->lang->line('score_eliminar_tooltip'); ?>"><i class="fa fa-trash-o"></i></a>
                                             </div>
                                         </td>               
                                     </tr>
@@ -168,4 +170,53 @@
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+
+
+<!-- begin : Modal Importar-->
+<div class="modal fade" id="mdl-upload-excel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-primary">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Subir archivo excel</h4>
+      </div>
+      <form role="form" enctype="multipart/form-data" action="<?php echo base_url('index.php/administrador/especialista/importar/excel');?>" method="post">
+            <div class="modal-body">
+                <!-- inicio cuadro mensaje -->  
+                <!--div id="contenido_ajax">
+                    <?php if (isset($mensaje)) { ?>
+                        <div class="callout callout-success">
+                            <h4>Mensaje</h4>
+                            <p><?php echo $mensaje;?></p>
+                        </div>
+                    <?php    
+                        $this->session->unset_userdata('mensaje');
+                        } elseif (isset($error)) {
+                    ?>                
+                        <div class="callout callout-danger">
+                            <h4>Error</h4>
+                            <p><?php echo $error;?></p>
+                        </div>          
+                    <?php
+                        $this->session->unset_userdata('error');
+                    }?>                
+                </div-->       
+                <!-- fin cuadro mensaje  -->
+                <div class="form-group">
+                  <label>Seleccionar archivo excel debidamente llenado:</label>
+                  <!--input type="file" name="txtcsv" accept=".csv" /-->
+                  <input type="file" name="txtcsv" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+                  <p class="help-block">Seleccionar un archivo con extension .xlsx (Tamaño máximo 128 kb)</p>
+                </div>
+            </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+            <button type="submit"  class="btn btn-primary">Guardar cambios</button>
+          </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- end : Modal Importar -->
+
 <?php $this->load->view('backend/template/footer'); ?>

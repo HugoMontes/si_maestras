@@ -29,7 +29,8 @@
 <!-- Start Contenido -->
 <div class="container container-caboco">
   <div class="row">
-    <div class="col-md-10">
+
+    <div class="col-md-offset-3 col-md-6 col-md-offset-3">
       <h1><?php echo $noticia->titulo; ?></h1>
       <br/>
       <div class="fb-like" data-href="http://www.maestrasconstructoras.org/" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
@@ -62,7 +63,8 @@
       <?php } ?>
 
       <div class="content-noticia" style="text-align: justify; margin-top: 10px; font-size: 16px;" >
-          <?php // echo $noticia->contenido; ?>
+          <?php echo $noticia->contenido; ?>
+          <!--
           <div class="row">
             <?php if(strlen($noticia->contenido)>200){ ?>
               <div class="col-xs-12 col-md-6">
@@ -77,6 +79,7 @@
               </div>
             <?php } ?>
           </div>
+          -->
       </div>
       <hr>
       <div class="fb-comments" data-href="http://www.maestrasconstructoras.org" data-numposts="5" data-width="100%"></div>

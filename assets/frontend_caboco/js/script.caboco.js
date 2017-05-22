@@ -70,7 +70,7 @@ function validateEmail(email) {
   return re.test(email);
 }
 
-function validaCampo(campo,rules){
+function validaCampo(campo, rules){
     var mensaje='', sw=0;
     var valor=campo.val();
     if(typeof campo.parent().parent().find("p")!='undefined'){
@@ -83,10 +83,15 @@ function validaCampo(campo,rules){
       }
     }
     if(rules.number){
-      if(isNaN(valor)){
-        mensaje+='<p class="error">Ingrese un valor numérico entero valido</p>';
-        sw=1;
-      }
+        if(isNaN(valor)){
+            mensaje+='<p class="error">Ingrese un valor numérico entero valido</p>';
+            sw=1;
+        }else{
+            if(valor<=0){
+                mensaje+='<p class="error">Ingrese un valor numérico mayor a cero</p>';
+                sw=1;
+            }
+        }
     }
     if(rules.email){
       if(valor!=''){
@@ -114,6 +119,7 @@ function validaFormularioSolicitud(){
     return (sw1 && sw2 && sw3);
 }
 
+
 function validaFormularioEmpleado(){
     var campo_nombre=$("#solicitudForm #txtNombre");
     var campo_correo=$("#solicitudForm #txtCorreo");
@@ -122,7 +128,17 @@ function validaFormularioEmpleado(){
     var sw1=validaCampo(campo_nombre,{"required":true});
     var sw2=validaCampo(campo_correo,{"required":true,"email":true});
     var sw3=validaCampo(campo_direccion,{"required":true});
-    return (sw1 && sw2 && sw3);
+    var sw4=validaRecaptcha();
+    return (sw1 && sw2 && sw3 && sw4);
+}
+
+function validaRecaptcha(){
+    var recaptcha=grecaptcha.getResponse();
+    if(recaptcha==""){
+        alert('Comprobar que no eres un robot');
+        return false;
+    }
+    return true;
 }
 
 function validaFormularioSolicitudMain(){
@@ -137,13 +153,25 @@ function validaFormularioSolicitudMain(){
     var sw3=validaCampo(campo_fecha_fin,{"required":true});
     var sw4=validaCampo(campo_ciudad,{"required":true});
     var sw5=validaCampo(campo_especialidad,{"required":true});
+    //var sw6=comparaFechas(campo_fecha_ini, campo_fecha_fin);
     return (sw1 && sw2 && sw3 && sw4 && sw5);
+}
+
+function comparaFechas(campo_fecha_ini, campo_fecha_fin){
+    var fecha_ini = new Date(campo_fecha_ini);
+    var fecha_fin = new Date(campo_fecha_fin);
+    if(fecha_ini<fecha_fin){
+        return true;
+    }
+    alert("La fecha final no puede ser posterior a la fecha de inicio.");
+    return false;
 }
 
 // START FORMULARIO SOLICITUD DE ESPECIALISTAS MAIN
 var current_fs, next_fs, previous_fs; //fieldsets
 var left, opacity, scale; //propiedades fieldset que vamos a animar
 var animating; //
+
 $("#btn-continuar").click(function(){
     if(validaFormularioSolicitudMain()){
         current_fs = $(this).parent().parent().parent();

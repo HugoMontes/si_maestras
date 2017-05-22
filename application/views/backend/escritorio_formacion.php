@@ -65,231 +65,32 @@
               <!-- inicio vistas de escritorio -->
               <!-- inicio cuadros informativos -->
               <div class="row">
-              <!--
-                <div class="col-lg-3 col-xs-6">
-                  <div class="small-box bg-aqua">
-                    <div class="inner">
-                      <h3><?php echo get_contactos(); ?></h3>
-        
-                      <p>Nuevos contactos</p>
-                    </div>
-                    <div class="icon">
-                      <i class="ion ion-email"></i>
-                    </div>
-                    <a href="<?php echo base_url('index.php/administrador/contacto');?>" class="small-box-footer">Ver contactos <i class="fa fa-arrow-circle-right"></i></a>
-                  </div>
-                </div>
-              -->
                 <div class="col-lg-3 col-xs-6">
                   <div class="small-box bg-green">
                     <div class="inner">
-                      <h3><?php echo $noticias_publicadas;?></h3>
-        
-                      <p>Noticias</p>
+                      <h3><?php echo $noticias_publicadas_capacitacion;?></h3>
+                      <p>Noticias de Capacitación</p>
                     </div>
                     <div class="icon">
                       <i class="ion ion-ios-paper"></i>
                     </div>
-                    <a href="<?php echo base_url('index.php/administrador/noticia');?>" class="small-box-footer">Ver noticias <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="<?php echo base_url('index.php/administrador/noticia/centro/2');?>" class="small-box-footer">Ver noticias <i class="fa fa-arrow-circle-right"></i></a>
                   </div>
                 </div>
                 <div class="col-lg-3 col-xs-6">
                   <div class="small-box bg-yellow">
                     <div class="inner">
                       <h3><?php echo $especialistas_publicados; ?></h3>
-        
-                      <p>Especialistas</p>
+                      <p>Maestras Constructoras</p>
                     </div>
                     <div class="icon">
                       <i class="ion-android-walk"></i>
                     </div>
-                    <a href="<?php echo base_url('index.php/administrador/especialista');?>" class="small-box-footer">Ver especialistas <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="<?php echo base_url('index.php/administrador/especialista/centro');?>" class="small-box-footer">Ver maestras constructoras <i class="fa fa-arrow-circle-right"></i></a>
                   </div>
                 </div>
-              <!--
-                <div class="col-lg-3 col-xs-6">
-                  <div class="small-box bg-red">
-                    <div class="inner">
-                      <h3><?php echo $testimonios_publicados;?></h3>
-        
-                      <p>Testimonios</p>
-                    </div>
-                    <div class="icon">
-                      <i class="ion ion-chatbubbles"></i>
-                    </div>
-                    <a href="<?php echo base_url('index.php/administrador/testimonio');?>" class="small-box-footer">Ver testimonios <i class="fa fa-arrow-circle-right"></i></a>
-                  </div>
-                </div>
-              -->
               </div>
-              <!-- inicio cuadros informativos --> 
-              <div class="row">
-                <!-- inicio paginas visitadas -->
-                <div class="col-md-6">
-                    <div class="box box-info">
-                        <div class="box-header with-border">
-                          <h3 class="box-title">Páginas populares <small>creadas</small></h3>
-            
-                          <div class="box-tools pull-right">
-                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                            </button>
-                          </div>
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-                          <div class="table-responsive">
-                            <table class="table no-margin">
-                              <thead>
-                              <tr>
-                                <th>Página</th>
-                                <th>Creado</th>
-                                <th>Visitas</th>
-                              </tr>
-                              </thead>
-                              <tbody>
-                              <?php
-                              //var_dump($paginas_visitadas);
-                              foreach($paginas_visitadas as $pagina_visitada):
-                              $pagina_visitada = (object)$pagina_visitada;
-                              ?>
-                              <tr>
-                                <td><a href="<?php echo base_url('index.php/administrador/pagina/editar/'.$pagina_visitada->id)?>"><?php echo $pagina_visitada->titulo;?></a></td>
-                                <td><?php echo $pagina_visitada->creado;?></td>
-                                <td><span class="badge bg-blue"><?php echo $pagina_visitada->hits;?></span></td>
-                              </tr>                              
-                              <?php
-                              endforeach;
-                              ?>
-                              </tbody>
-                            </table>
-                          </div>
-                          <!-- /.table-responsive -->
-                        </div>
-                        <!-- /.box-body -->
-                        <div class="box-footer text-center">
-                            <a href="<?php echo base_url('index.php/administrador/pagina');?>" class="uppercase">Ver todas las páginas</a>
-                        </div>                        
-                        <!-- /.box-footer -->
-                      </div>                
-                </div>
-                <div class="col-md-6">
-                    <div class="box box-info">
-                        <div class="box-header with-border">
-                          <h3 class="box-title">Páginas populares <small>prediseñadas</small></h3>
-            
-                          <div class="box-tools pull-right">
-                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                            </button>
-                          </div>
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-                          <div class="table-responsive">
-                            <table class="table no-margin">
-                              <thead>
-                              <tr>
-                                <th>Página</th>
-                                <th>Creado</th>
-                                <th>Visitas</th>
-                              </tr>
-                              </thead>
-                              <tbody>
-                              <?php
-                              //var_dump($paginas_visitadas);
-                              foreach($paginas_predisenadas_visitadas as $pagina_predisenada_visitada):
-                              $pagina_predisenada_visitada = (object)$pagina_predisenada_visitada;
-                              ?>
-                              <tr>
-                                <td><?php echo $pagina_predisenada_visitada->titulo;?></td>
-                                <td><?php echo $pagina_predisenada_visitada->creado;?></td>
-                                <td><span class="badge bg-blue"><?php echo $pagina_predisenada_visitada->hits;?></span></td>
-                              </tr>                              
-                              <?php
-                              endforeach;
-                              ?>
-                              </tbody>
-                            </table>
-                          </div>
-                          <!-- /.table-responsive -->
-                        </div>
-                        <!-- /.box-body -->
-                        <div class="box-footer text-center">
-                            <a href="<?php echo base_url('index.php/administrador/pagina_predisenada');?>" class="uppercase">Ver todas las páginas</a>
-                        </div>
-                        <!-- /.box-footer -->
-                      </div>                
-                </div>                
-                <!-- fin paginas visitadas -->               
 
-              </div> 
-              <div class="row">
-                <!-- inicio ultimas paginas -->
-                <div class="col-md-12">
-                    <div class="box box-info">
-                        <div class="box-header with-border">
-                          <h3 class="box-title">Páginas agregadas recientemente</small></h3>
-            
-                          <div class="box-tools pull-right">
-                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                            </button>
-                          </div>
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-                          <div class="table-responsive">
-                            <table class="table no-margin">
-                             <thead>
-                                <tr>
-                                  <th>Titulo</th>
-                                  <th>Autor</th>
-                                  <th>Creado</th>
-                                  <th>Estado</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <?php
-                                //var_dump($paginas);
-                                foreach ($paginas_recientes as $pagina_reciente):
-                                $pagina_reciente = (object) $pagina_reciente;
-                                ?>
-                                <tr>
-                                    <td><a href="<?php echo base_url('index.php/administrador/pagina/editar/'.$pagina_reciente->id); ?>"><?php echo $pagina_reciente->titulo?></a></td>
-                                    <td><?php echo get_autor($pagina_reciente->creado_por);?></td>
-                                    <td><?php echo $pagina_reciente->creado?></td>
-                                    <td> 
-                                        <?php 
-                                        if($pagina_reciente->estado == PUBLICADO)
-                                        {
-                                            ?>
-                                            <span class="label label-success">Publicado</span>
-                                            <?php   
-                                        }
-                                        else
-                                        {
-                                            ?>
-                                            <span class="label label-danger">Despublicado</span>
-                                            <?php
-                                        }
-                                        ?>                                 
-                                    </td>
-                                </tr>
-                                <?php
-                                endforeach;
-                                ?>
-                              </tbody>
-                            </table>
-                          </div>
-                          <!-- /.table-responsive -->
-                        </div>
-                        <!-- /.box-body -->
-                        <div class="box-footer text-center">
-                            <a href="<?php echo base_url('index.php/administrador/pagina');?>" class="uppercase">Ver todas las páginas</a>
-                        </div>
-                        <!-- /.box-footer -->
-                      </div>                
-                </div>
-                <!-- fin ultimas páginas -->              
-              </div>                                                
               <!-- fin vistas de escritorio -->
                            
             </section>

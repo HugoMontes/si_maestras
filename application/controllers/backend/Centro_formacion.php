@@ -5,7 +5,7 @@ class Centro_formacion extends CI_Controller{
         parent::__construct();
         //existe_sesion_urse(); 
         // modelos
-        //$this->load->model('formador_model');
+        $this->load->model('especialista_area_model');
         $this->load->model('centro_model');
         $this->load->model('navegacion_model');
         $this->load->model('especialista_especialidad_model');
@@ -96,6 +96,7 @@ class Centro_formacion extends CI_Controller{
            $data['error'] = $this->session->flashdata('error');
         }
         $data['titulo'] = $this->lang->line('score_formador_nuevo_titulo');
+        $data=$this->inicio_valores_formulario($data);
         $this->load->view('backend/centro_formacion_nuevo',$data);
     }
     
@@ -125,7 +126,8 @@ class Centro_formacion extends CI_Controller{
         }
         $data['titulo'] = $this->lang->line('maestras_centros_editar_titulo');
         $data['centro']=$this->centro_model->get($centro_id);
-        $data['especialidades']=$this->especialista_especialidad_model->get_all('',array('id_centro'=>$centro_id),'','','','');     
+        $data['especialidades']=$this->especialista_especialidad_model->get_all('',array('id_centro'=>$centro_id),'','','','');
+        $data=$this->inicio_valores_formulario($data);
         $this->load->view('backend/centro_formacion_editar',$data);
     }
 
@@ -176,6 +178,7 @@ class Centro_formacion extends CI_Controller{
                 $descripcion = $this->input->post('descripcion');
                 $nombre_carpeta=str_replace(" ", "_", $descripcion);
                 $especialidades = $this->input->post('especialidades');
+                $areas = $this->input->post('areas');
                 $estado = $this->input->post('estado');
                 $guardar = $this->input->post("guardar");
 
@@ -198,6 +201,7 @@ class Centro_formacion extends CI_Controller{
                         if($especialidades[$i]!=""){
                             $data = array (
                                 'id_centro' => $centro_id,
+                                'id_area' => $areas[$i],
                                 'descripcion' => $especialidades[$i],
                                 'creado_por' => $usuario_sesion->id,
                                 'estado' => 1,
@@ -225,11 +229,12 @@ class Centro_formacion extends CI_Controller{
                     }
                     
                     if($this->centro_model->exists('id',$centro_id)){
-                        // ACTIALIZAR CENTRO
+                        // ACTUALIZAR CENTRO
                         $this->centro_model->update($data, $centro_id);                        
                         // ACTUALIZAR ESPECIALIDADES/RUBROS LOS QUE TIENEN ID
                         for($i=0;$i<count($id_especialidades);$i++) {
                             $data = array (
+                                'id_area' => $areas[$i],
                                 'descripcion' => $especialidades[$i],
                             );
                             $this->centro_model->update_especialidad($data,$id_especialidades[$i]);
@@ -239,6 +244,7 @@ class Centro_formacion extends CI_Controller{
                             if($especialidades[$j]!=""){
                                 $data = array (
                                     'id_centro' => $centro_id,
+                                    'id_area' => $areas[$i],
                                     'descripcion' => $especialidades[$j],
                                     'creado_por' => $usuario_sesion->id,
                                     'estado' => 1,
@@ -350,5 +356,18 @@ class Centro_formacion extends CI_Controller{
         header('Content-type: application/json; charset=utf-8');
         echo json_encode($data,JSON_NUMERIC_CHECK);
         exit();   
+    }
+
+    private function inicio_valores_formulario($data){
+        // $data['areas']=$this->especialista_area_model->get_all('',array('estado'=>1),'','','','');
+        // Seleccion areas
+        $areas=$this->especialista_area_model->get_all('',array('estado'=>1),'','','descripcion','');
+        $areas_array = array();
+        $areas_array[0]='Seleccionar una area';
+        foreach ($areas as $area) {
+            $areas_array[$area->id]=$area->descripcion;
+        }
+        $data['areas'] = $areas_array;
+        return $data;
     }
 }

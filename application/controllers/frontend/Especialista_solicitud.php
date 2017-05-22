@@ -63,8 +63,9 @@ class Especialista_solicitud extends CI_Controller{
             echo 'Fech Fin: '.$fechaFin.'<br/>';
             echo 'Nombre: '.$nombre.'<br/>';
             echo 'Email: '.$correo.'<br/>';
-            echo 'Direccion: '.$direccion.'<br/>';  
+            echo 'Direccion: '.$direccion.'<br/>'; 
             */
+            
             $data=array(
                 'nombre'=>$nombre,
                 'correo'=>$correo,
@@ -72,15 +73,15 @@ class Especialista_solicitud extends CI_Controller{
             );
             $empleador_id=$this->especialista_empleador_model->insert($data);
             $data=array(
-                    'cantidad'=>$nroTrab,
-                    'fecha_ini'=>$fechaIni,
-                    'fecha_fin'=>$fechaFin,
-                    'id_empleador'=>$empleador_id,
-                    'id_ciudad'=>$idCiudad,
-                    'id_especialidad'=>$idEspecialidad,
-                );
+                'cantidad'=>$nroTrab,
+                'fecha_ini'=>$fechaIni,
+                'fecha_fin'=>$fechaFin,
+                'id_empleador'=>$empleador_id,
+                'id_ciudad'=>$idCiudad,
+                'id_especialidad'=>$idEspecialidad,
+            );
             $this->especialista_solicitud_model->insert($data);
-        }        
+        }           
         $this->enviarEmail($correo,$empleador_id);
         $pagina_especialistas = $this->pagina_predisenada_model->get_values('metadescripcion, metapalabras_clave, id, hits,estado', array('alias'=>'inscripciones-formadores-score-bolivia'));
         $this->pagina_predisenada_model->update(array('hits'=>$pagina_especialistas->hits + 1),$pagina_especialistas->id);  

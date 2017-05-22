@@ -205,19 +205,33 @@ $route['administrador/centro/guardar'] = 'backend/centro_formacion/guardar';
 $route['administrador/centro/editar/(:num)'] = 'backend/centro_formacion/existe/$1';
 $route['administrador/centro/valida/eliminar/especialidad'] = 'backend/centro_formacion/valida_eliminar_especialidad';
 $route['administrador/centro/delete/especialidad'] = 'backend/centro_formacion/delete_especialidad';
-// especialistas
+
+// especialistas_administrador
 $route['administrador/especialista'] = 'backend/especialista';
 $route['administrador/especialista/nuevo'] = 'backend/especialista/nuevo';
 $route['administrador/especialista/eliminar/(:any)'] = 'backend/especialista/eliminar/$1';
 $route['administrador/especialista/guardar'] = 'backend/especialista/guardar';
 $route['administrador/especialista/editar/(:num)'] = 'backend/especialista/existe/$1';
-$route['administrador/especialista/importar/csv'] = 'backend/especialista/importar_csv';
+$route['administrador/especialista/exportar/excel'] = 'backend/especialista/exportar_archivo';
+$route['administrador/especialista/importar/excel'] = 'backend/especialista/importar_archivo';
+
+// especialistas_centro_formacion
+$route['administrador/especialista/centro'] = 'backend/especialista_centro';
+$route['administrador/especialista/centro/nuevo'] = 'backend/especialista_centro/nuevo';
+$route['administrador/especialista/centro/eliminar/(:any)'] = 'backend/especialista_centro/eliminar/$1';
+$route['administrador/especialista/centro/guardar'] = 'backend/especialista_centro/guardar';
+$route['administrador/especialista/centro/editar/(:num)'] = 'backend/especialista_centro/existe/$1';
+
 // especialidades
 $route['administrador/especialidad'] = 'backend/especialidad';
 $route['administrador/especialidad/nuevo'] = 'backend/especialidad/nuevo';
 $route['administrador/especialidad/eliminar/(:any)'] = 'backend/especialidad/eliminar/$1';
 $route['administrador/especialidad/guardar'] = 'backend/especialidad/guardar';
 $route['administrador/especialidad/editar/(:num)'] = 'backend/especialidad/existe/$1';
+
+// noticia_centro_formacion
+$route['administrador/noticia/centro/(:num)'] = 'backend/noticia_centro/listar/$1';
+
 // noticia
 $route['administrador/noticia/(:num)'] = 'backend/noticia/listar/$1';
 $route['administrador/noticia/upload'] = 'backend/noticia/upload';
@@ -229,12 +243,14 @@ $route['administrador/noticia/guardar'] = 'backend/noticia/guardar';
 $route['administrador/noticia/nuevo/(:num)'] = 'backend/noticia/nuevo/$1';
 $route['administrador/noticia/preview/(:num)'] = 'frontend/noticia/find_noticia_by_id/$1';
 
+$route['administrador/noticia/estado'] = 'backend/noticia/change_status_noticia';
 $route['administrador/noticia/configuracion/(:num)']='backend/noticia/configuracion/$1';
 $route['administrador/noticia/configuracion/guardar']='backend/noticia/configuracion_guardar';
 // informacion
 $route['administrador/informacion/(:num)'] = 'backend/noticia/listar/$1';
 $route['administrador/informacion/editar/(:num)/(:num)'] = 'backend/noticia/existe/$1/$2';
 $route['administrador/informacion/nuevo/(:num)'] = 'backend/noticia/nuevo/$1';
+$route['administrador/informacion/preview/(:num)'] = 'frontend/noticia/find_noticia_by_id/$1';
 // pagina prediseñada
 $route['administrador/pagina_predisenada'] = 'backend/pagina_predisenada';
 $route['administrador/pagina_predisenada/publicar_mensaje'] = 'backend/pagina_predisenada/publicar_mensaje';
@@ -257,7 +273,7 @@ $route['administrador/formador/editar/ckeditor/plugins/imageuploader/'] = '';
 // solicitar especialistas
 $route['formulario_solicitud_especialistas'] = 'frontend/especialista_solicitud';
 $route['finalizar_solicitud_especialistas'] = 'frontend/especialista_solicitud/guardar_solicitud';
-$route['solicitar_especialistas'] = 'frontend/especialista_solicitud/save_solicitud';
+$route['solicitar/especialistas'] = 'frontend/especialista_solicitud/save_solicitud';
 $route['listar_especialistas/(:num)'] = 'frontend/especialista_solicitud/listar_especialistas/$1';
 // inscripciones formadores
 $route['formador_inscripcion_previo/autenticar'] = 'frontend/formador_inscripcion_previo/autenticar';

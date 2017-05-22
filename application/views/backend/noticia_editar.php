@@ -229,37 +229,38 @@
                             </div>      
 
                             <?php if ($perfil==1){ ?>
-                            <div class="form-group">
-                              <label for="estado">Estado</label>
-                              <?php echo form_error('estado', '<span class="error-form">', '</span><br/><br/>'); ?>
-                              <div class="row">
-                                <div class="col-lg-3"> 
-                              <?php
-                              if(set_value('estado', $noticia->estado) == PUBLICADO)
+                              <div class="form-group">
+                                <label for="estado">Estado</label>
+                                <?php echo form_error('estado', '<span class="error-form">', '</span><br/><br/>'); ?>
+                                <div class="row">
+                                  <div class="col-lg-3"> 
+                                <?php
+                                if(set_value('estado', $noticia->estado) == ACEPTADO){
                                   $class = 'btn-success';
-                              else
-                                  $class='btn-danger';                               
-                              
-                              $data = array(
-                                  'name'  => 'estado',
-                                  'id'    => 'estado',
-                                  'class' => 'form-control selectpicker',
-                                  'data-style' => $class
-                                );
-                              $opciones = array(
-                                  PUBLICADO  => 'Publicado',
-                                  DESPUBLICADO    => 'Despublicado'
-                               ); 
-                               
-                               echo form_dropdown($data, $opciones, set_value('estado',$noticia->estado));                               
-                              ?>
-                                </div>
-                              </div> 
-                            </div>   
+                                }elseif(set_value('estado', $noticia->estado) == OBSERVADO){
+                                  $class='btn-danger';
+                                }elseif(set_value('estado', $noticia->estado) == SIN_VERIFICAR OR set_value('estado')== null){
+                                  $class='btn-warning';
+                                }  
+                                $data = array(
+                                    'name'  => 'estado',
+                                    'id'    => 'estado',
+                                    'class' => 'form-control selectpicker',
+                                    'data-style' => $class
+                                  );
+                                $opciones = array(
+                                    ACEPTADO  => 'Aceptado',
+                                    OBSERVADO  => 'Observado',
+                                    SIN_VERIFICAR  => 'Sin verificar',
+                                 ); 
+                                 echo form_dropdown($data, $opciones, set_value('estado',$noticia->estado));                               
+                                ?>
+                                  </div>
+                                </div> 
+                              </div>
                             <?php }else{ ?>
-                              <input type="hidden" name="estado" value="<?php echo $noticia->estado; ?>">
-                            <?php } ?>                       
-
+                              <input type="hidden" name="estado" value="">
+                            <?php } ?> 
                           </div>
                           <!-- /.box-body -->
                           <input type="hidden" name="imagen_thumb" id="imagen_thumb" value="<?php echo $noticia->thumb;?>"/>

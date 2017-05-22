@@ -63,6 +63,10 @@ define('EMAIL_NO_ENVIADO', 0);
 // estados de respuesta
 define('RESPUESTA_ENVIADA', 1);
 define('RESPUESTA_NO_ENVIADA', 0);
+// estado de noticias
+define('ACEPTADO', 1);
+define('OBSERVADO', 2);
+define('SIN_VERIFICAR', 3);
 
 ###########################################################################
 # intranet

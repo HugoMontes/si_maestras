@@ -8,7 +8,6 @@ CAMBIOS ARCHIVOS SISTEMA:
         modified:   application/views/backend/comunes/sidebar.php
         modified:   application/views/frontend/template/main_form.php
 
-
 	application/controllers/backend/Centro_formacion.php
         application/models/Centro_model.php
         application/views/backend/centro_formacion.php

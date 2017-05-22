@@ -48,7 +48,7 @@
                   <div class="col-md-4">
                     <input type="text" class="form-control" id="ci" name="ci" value="<?php echo set_value('ci');?>" placeholder="Ingrese numero de cedula de identidad"/>
                   </div>
-                  <div class="col-md-2">                
+                  <div class="col-md-2">                      
                  	<?php
 	                 	$data = array(
 	                 		'name'  => 'depto',
@@ -56,7 +56,7 @@
 	                 		'class' => 'form-control',
 	                 		'data-style' => 'btn-primary'
 	                 		);                            
-	                 	echo form_dropdown($data, $departamentos, set_value('depto'));                              
+	                 	echo form_dropdown($data, $departamentos, set_value('depto'));               
                     ?>                 
                   </div>
                 </div>      
@@ -136,49 +136,53 @@
                 </div>      
               </div>  
 
-              <div class="form-group">
-                <label for="especialidad">Seleccione los rubros y los años de experiencia.</label>
-                <?php echo form_error('especialidad', '<span class="error-form">', '</span>'); ?>
-                
-                  <?php
-                    foreach ($centros_formacion as $cf) { 
-                      $centro = (object) $cf['centro'];
-                      if($usuario_sesion->perfil_id == SUPER || $usuario_sesion->centro_formacion == $centro->id){
-                  ?>
-                  <div class="row">      
-                    <div class="col-md-6">
-                      <div class="panel panel-success">
-                        <div class="panel-heading">
-                          <h3 class="panel-title"><?php echo strtoupper($centro->descripcion); ?></h3>
-                        </div>
-                        <div class="panel-body">
-                          <table class="table table-striped">
-                            <tr>
-                              <th>Rubro de formación</th>
-                              <th style="width: 150px;">Años de experiencia</th>
-                            </tr>
-                            <?php 
-                            foreach ($cf['especialidades'] as $especialidad) { 
-                              $especialidad = (object) $especialidad;
-                            ?>
-                            <tr>
-                              <td>
-                                <input class="magic-checkbox especialidades" type="checkbox" name="especialidades[]" id="<?php echo $especialidad->id; ?>" value="<?php echo $especialidad->id; ?>">
-                                <label class="text" style="font-weight: 400;" for="<?php echo $especialidad->id; ?>"><?php echo $especialidad->descripcion; ?></label>
-                              </td>
-                              <td>
-                                <input type="text" class="form-control experiencia" name="experiencia[]" value="<?php echo set_value('experiencia');?>" placeholder="Ingrese años" disabled="true"/>
-                              </td>
-                            </tr>
-                            <?php } ?>
-                          </table>
+              <div class="panel panel-primary">
+                <div class="panel-heading">CERTIFICACIONES</div>
+                <div class="panel-body">
+                  <?php echo form_error('especialidad', '<span class="error-form">', '</span>'); ?>
+                    <?php
+                      foreach ($centros_formacion as $cf) { 
+                        $centro = (object) $cf['centro'];
+                        if($usuario_sesion->perfil_id == SUPER || $usuario_sesion->centro_formacion == $centro->id){
+                    ?>
+                    <div class="row">      
+                      <div class="col-md-12">
+                        <div class="panel panel-success">
+                          <div class="panel-heading">
+                            <h3 class="panel-title"><?php echo strtoupper($centro->descripcion); ?></h3>
+                          </div>
+                          <div class="panel-body">
+                            <table class="table table-striped">
+                              <tr>
+                                <th>Certificación en: </th>
+                                <th>Area</th>
+                                <th>Fecha de certificacion</th>
+                              </tr>
+                              <?php 
+                              foreach ($cf['especialidades'] as $especialidad) { 
+                                $especialidad = (object) $especialidad;
+                              ?>
+                              <tr>
+                                <td>
+                                  <input class="magic-checkbox especialidades" type="checkbox" name="especialidades[]" id="<?php echo $especialidad->id; ?>" value="<?php echo $especialidad->id; ?>">
+                                  <label class="text" style="font-weight: 400;" for="<?php echo $especialidad->id; ?>"><?php echo $especialidad->descripcion; ?></label>
+                                </td>
+                                <td>
+                                  <input type="text" class="form-control" value="<?php echo $especialidad->area; ?>" disabled="true">
+                                </td>
+                                <td style="width: 200px;">
+                                  <input type="text" class="form-control fecha-certificacion" name="fecha-certificacion[]" value="<?php echo set_value('fecha-certificacion');?>" placeholder="Ingrese una fecha" disabled="true"/>
+                                </td>
+                              </tr>
+                              <?php } ?>
+                            </table>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                    <?php } ?>    
-                  <?php } ?>
-                  
+                      <?php } ?>    
+                    <?php } ?>
+                </div>
               </div>
 
 			        <div class="form-group">
@@ -265,14 +269,6 @@
   <!-- /.content -->
 </div>
 <?php $this->load->view('backend/template/footer'); ?>
-<script>
-$(document).on('click','.especialidades',function(){
-  if($(this).is(':checked')){
-    $(this).parent().parent().find('.experiencia').removeAttr('disabled');
-    $(this).parent().parent().find('.experiencia').focus();
-  }else{
-    $(this).parent().parent().find('.experiencia').attr('disabled','true');
-    $(this).parent().parent().find('.experiencia').val('');
-  }
-});
-</script>
+<script src="<?php echo base_url('assets/frontend_caboco/asset/jquery_ui/jquery-ui.min.js')?>"></script> 
+<script src="<?php echo base_url('assets/frontend_caboco/js/calendar-es.js')?>"></script>
+<script src="<?php echo base_url('assets/js/backend-especialista.js')?>"></script>

@@ -13,11 +13,12 @@
   <div class="image-curtain">
 	<div class="container">
 		<h2><strong>Encuentra tu TRABAJADORA CALIFICADA AQUÍ</strong></h2>
+		<h3 style="text-align: center; color:red; margin: 0px; font-size: 25px;">BASE DE DATOS EN CONSTRUCCIÓN</h3>
 	</div>
 
     <!-- Start Formulario Solicitud -->
 	<div class="container-maestras">
-	  <form id="solicitudForm" action="<?php echo base_url('index.php/solicitar_especialistas'); ?>" method="POST" class="form-horizontal">
+	  <form id="solicitudForm" action="<?php echo base_url('index.php/solicitar/especialistas'); ?>" method="POST" class="form-horizontal">
 		<fieldset>
 		  <div class="form-maestras form-solicitud">
 		  	<div class="form-group">
@@ -45,9 +46,9 @@
 			    	<select id="txtEspecialidad" name="txtEspecialidad" class="form-control" style="/*width: 225px; margin-right: 10px;*/">
 				      <option value="" selected="selected" style="display: none;">Rubro Requerido</option>
 				      <?php 
-				        foreach ($especialidades as $especialidad) {  
+				        foreach ($rubros as $rubro) {  
 				      ?>
-				      	<option value="<?php echo $especialidad->descripcion; ?>"><?php echo $especialidad->descripcion; ?></option>
+				      	<option value="<?php echo $rubro->id; ?>"><?php echo $rubro->descripcion; ?></option>
 				      <?php } ?>
 				    </select>
 			     </div>
@@ -88,7 +89,7 @@
 		<!-- Start Fomulario Empleador -->
 		<fieldset>		  
 		  <div class="form-maestras form-empleador">
-			  <p class="texto">Llene el siguiente formulario para enviar a su correo la información de las especialidades requeridas.</p>
+			  <p class="texto" style="text-align: center">Llene el siguiente formulario para enviar a su correo la información de las maestras constructoras requeridas.</p>
 			  <br/>
 			  <div class="form-group">
 				<label for="txtNombre" class="col-sm-5 control-label caboco-label">Nombre <span>*</span> <p class="label-descripcion">Nombre completo del empleador</p></label>
@@ -118,8 +119,10 @@
 				</div>
 			  </div>
 			  <hr/>
-			  <div class="form-controles">
-				  <button id="btn-enviar" type="submit" class="btn btn-primary">Enviar Solicitud</button>
+			  <div class="form-controles" style="margin-top: -20px; height: 68px;">
+			  	<?php echo $widget;?>
+                <?php echo $script;?>
+				<button id="btn-enviar" type="submit" class="btn btn-primary" style="margin-top: -80px;">Enviar Solicitud</button>
 			  </div>
 		  </div>
 		</fieldset>

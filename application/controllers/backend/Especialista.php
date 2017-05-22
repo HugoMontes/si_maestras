@@ -15,6 +15,10 @@ class Especialista extends CI_Controller{
     }
 
     public function index(){
+        $usuario_sesion = get_user_session();
+        if($usuario_sesion->perfil_id!=1){
+            redirect(base_url('index.php/administrador/escritorio'));
+        }        
         if($this->session->flashdata('mensaje')){
             $data['mensaje'] = $this->session->flashdata('mensaje');
         }elseif ($this->session->flashdata('error')){ 
@@ -26,6 +30,8 @@ class Especialista extends CI_Controller{
         $url = str_replace(base_url(),"",current_url());
         $navegacion = $this->navegacion_model->get_values('id',array('vista'=>ESPECIALISTAS)); 
         $this->navegacion_model->update(array('navegacion'=>$url),$navegacion->id); 
+        
+        
         ###################################################
         # Busqueda
         ###################################################
@@ -33,7 +39,7 @@ class Especialista extends CI_Controller{
         $search_in = (isset($_GET['search_in']) ? $_GET['search_in'] : null);
         $safe_columns = array('nombres','apellidos');
         if (!is_null($search_key) && !is_null($search_in) && in_array($search_in, $safe_columns)) {
-            $where = " `" . $search_in . "` LIKE '%" . $this->db->escape_like_str($search_key) . "%' ";
+            $where = " `" . $search_in . "` LIKE '%" . $this->db->escape_like_str($search_key) . "%'";
             $config['add_pars']['search_key'] = $search_key;
             $config['add_pars']['search_in'] = $search_in;
             $data['buscar'] = $search_key;
@@ -51,7 +57,7 @@ class Especialista extends CI_Controller{
             $config['add_pars']['col'] = $col;
             $config['add_pars']['dir'] = $dir;
         }else{
-            $order = " `creado` DESC ";
+            $order = " `especialista_trabajador.creado` DESC ";
         }
 
         ###################################################
@@ -61,7 +67,6 @@ class Especialista extends CI_Controller{
             $where = '';
         }
         $count = $this->especialista_trabajador_model->get_count($where, $order);
-
         ###################################################
         # Pagination
         ###################################################
@@ -81,12 +86,11 @@ class Especialista extends CI_Controller{
         $config['url_type'] = 'q';
 
         $this->page->initialize($config);
-
+        
         $data['trabajadores'] = $this->especialista_trabajador_model->get_pagination($cur_page, $config['rows_per_page'], $where, $order);
         ########################################################################################  
         $data['titulo'] = $this->lang->line('caboco_especialistas');
-        //$data['noticias'] = $this->especialista_trabajador_model->get_all('',array(),'','','creado desc','');
-        $this->load->view('backend/especialista',$data);
+        $this->load->view('backend/especialista',$data);        
     }
 
     public function nuevo(){
@@ -97,6 +101,7 @@ class Especialista extends CI_Controller{
         }
         $data['titulo'] = $this->lang->line('score_formador_nuevo_titulo');
         $data=$this->inicio_valores_formulario($data);
+        //print_r($data['centros_formacion'][0]['especialidades']);
         $this->load->view('backend/especialista_nuevo',$data);
     }
     
@@ -186,7 +191,7 @@ class Especialista extends CI_Controller{
                 $fechanac = $anio.'-'.$mes.'-'.$dia;
                 $genero = 'mujer';
                 $especialidades = $this->input->post('especialidades');
-                $experiencia = $this->input->post('experiencia');
+                $fecha_certificacion = $this->input->post('fecha-certificacion');
                 $direccion = $this->input->post('direccion');
                 $telefono1 = $this->input->post('telefono1');
                 $telefono2 = $this->input->post('telefono2');
@@ -198,9 +203,9 @@ class Especialista extends CI_Controller{
                 echo "Nombre: ".$nombres;
                 echo "<br/>ESPECIALIDADES<br/>";
                 print_r($especialidades);
-                echo "<br/>AÑOS EXPERIENCIA<br/>";
-                print_r($experiencia);
-                */                
+                echo "<br/>FECHA CERTIFICACION<br/>";
+                print_r($fecha_certificacion);
+                */         
                
                 if($guardar == NUEVO){
                     $data = array();
@@ -230,7 +235,7 @@ class Especialista extends CI_Controller{
                         $data = array (
                             'id_trabajador' => $especialista_id,
                             'id_especialidad' => $especialidades[$i],
-                            'anios_experiencia' => $experiencia[$i]==''?0:$experiencia[$i],
+                            'fecha_certificacion' => $fecha_certificacion[$i]==''?date('Y-m-d H:i:s'):$fecha_certificacion[$i],
                         );
                         $this->especialista_trabajador_especialidad_model->insert($data);
                     }
@@ -268,10 +273,10 @@ class Especialista extends CI_Controller{
                             $data = array (
                                 'id_trabajador' => $especialista_id,
                                 'id_especialidad' => $especialidades[$i],
-                                'anios_experiencia' => $experiencia[$i]==''?0:$experiencia[$i],
+                                'fecha_certificacion' => $fecha_certificacion[$i]==''?date('Y-m-d H:i:s'):$fecha_certificacion[$i],
                             );
                             echo "========";
-                            echo $especialista_id."-".$especialidades[$i]."-".$experiencia[$i]."<br>";
+                            echo $especialista_id."-".$especialidades[$i]."-".$fecha_certificacion[$i]."<br>";
                             $this->especialista_trabajador_especialidad_model->insert($data);
                         }
                         $this->session->set_flashdata('mensaje', $this->lang->line('caboco_especialista_guardado'));
@@ -374,7 +379,7 @@ class Especialista extends CI_Controller{
         $centros_formacion=array();
         foreach ($centros as $centro) {
             $centro=(object)$centro;
-            $especialidades=$this->especialista_especialidad_model->get_all('',array('id_centro'=>$centro->id),'','','','');
+            $especialidades=$this->especialista_especialidad_model->get_all_join_area($centro->id);
             $centros_formacion[]=array('centro'=>$centro,'especialidades'=>$especialidades);
         }
         $data['centros_formacion']=$centros_formacion;
@@ -411,114 +416,223 @@ class Especialista extends CI_Controller{
         return $data;
     }
 
-    public function importar_csv(){
-        
-        if($this->input->method()=='get'){
-            $data['titulo'] = 'Importar documento CSV';
-            $this->load->view('backend/especialista_csv',$data);
+    public function exportar_archivo(){
+        $usuario_sesion = get_user_session();
+        // recuperar listado de especialidades segun el centro de formacion
+        if($usuario_sesion->centro_formacion==0){
+            $especialidades=$this->especialista_especialidad_model->get_all('', array('estado'=>1), '', '', 'descripcion', '');
         }else{
-            // echo "importar";
-            $config['upload_path'] = './assets/uploads/';
-            $config['allowed_types'] = 'csv';
-            $config['max_size'] = '5000';
-            $config['file_name'] = 'upload_' . time();
+            $especialidades=$this->especialista_especialidad_model->get_all('', array('estado'=>1,'id_centro'=>$usuario_sesion->centro_formacion), '', '', '', '');
+         }
 
-            $this->load->library('upload', $config);
+        // Generando documento excel
+        $this->load->library('excel');
+        $objPHPExcel = new PHPExcel();
+        $objPHPExcel->setActiveSheetIndex(0);
+        $objPHPExcel->getActiveSheet()->SetCellValue('A1', 'DEPTO: Se debe ingresar uno de los siguientes valores numericos: 1(La Paz), 2(Cochabamba), 3(Beni), 4(Chuquisaca), 5(Oruro), 6(Pando), 7(Potosi), 8(Santa Cruz), 9(Tarija)');
+        $objPHPExcel->getActiveSheet()->SetCellValue('A2', 'CIUDAD: Se debe ingresar uno de los siguientes valores numericos: 1(La Paz), 2(El Alto)');
+        $objPHPExcel->getActiveSheet()->SetCellValue('A3', 'FECHAS NAC: El formato de las fechas es dd/mm/aaaa');
+        $objPHPExcel->getActiveSheet()->SetCellValue('A4', 'CERTIFICACION: En el área correspondiente al rubro, debe ingresar la fecha de certificación con el formato dd/mm/aaaa donde corresponda');
+        //$objPHPExcel->getActiveSheet()->SetCellValue('B1', $indicador);
+        $objPHPExcel->getActiveSheet()->SetCellValue('A5', 'CI');
+        $objPHPExcel->getActiveSheet()->SetCellValue('B5', 'DEPTO');
+        $objPHPExcel->getActiveSheet()->SetCellValue('C5', 'NOMBRES');
+        $objPHPExcel->getActiveSheet()->SetCellValue('D5', 'APELLIDOS');
+        $objPHPExcel->getActiveSheet()->SetCellValue('E5', 'CIUDAD');
+        $objPHPExcel->getActiveSheet()->SetCellValue('F5', 'FECHA NAC.');
+        $objPHPExcel->getActiveSheet()->SetCellValue('G5', 'DIRECCION');
+        $objPHPExcel->getActiveSheet()->SetCellValue('H5', 'TELF. CONTACTO');
+        $objPHPExcel->getActiveSheet()->SetCellValue('I5', 'TELF. REFERENCIA');
+        $objPHPExcel->getActiveSheet()->SetCellValue('J5', 'EMAIL');
 
-            if(!$this->upload->do_upload('txtcsv')){
-              echo $this->upload->display_errors();  
-            }else{
-                $usuario_sesion = get_user_session();
-                
-                $file_info = $this->upload->data();
-                $csvfilepath = "./assets/uploads/" . $file_info['file_name'];
-                $this->load->library('csvreader');
-                $result = $this->csvreader->parse_file($csvfilepath);
-                $data = array();
-                foreach($result as $field){
-                    $data = array (
-                        'ci' => $field['CI'],
-                        'id_departamento' => 1,
-                        'nombres' => $field['NOMBRES'],
-                        'apellidos' => $field['APELLIDOS'],
-                        'id_ciudad' => 1,
-                        'fecha_nacimiento' => $field['FECHA NAC.'],
-                        'genero' => 'mujer',
-                        'direccion' => $field['DIRECCION'],
-                        'telefono_contacto' => $field['TELF. CONTACTO'],
-                        'telefono_referencia' => $field['TELF. REFERENCIA'],
-                        'correo' => $field['EMAIL'],
-                        'estado' => 1,
-                        'creado_por'=>$usuario_sesion->id,
-                        'publicado'=>date('Y-m-d H:i:s')
-                    );                             
-                    $especialista_id = $this->especialista_trabajador_model->insert($data);
-                    if($field['OBRA GRUESA']!=''){
-                        $data = array (
-                            'id_trabajador' => $especialista_id,
-                            'id_especialidad' => 1,
-                            'anios_experiencia' => $field['OBRA GRUESA'],
-                        );
-                        $this->especialista_trabajador_especialidad_model->insert($data);
-                    }
-                    if($field['OBRA FINA']!=''){
-                        $data = array (
-                            'id_trabajador' => $especialista_id,
-                            'id_especialidad' => 2,
-                            'anios_experiencia' => $field['OBRA FINA'],
-                        );
-                        $this->especialista_trabajador_especialidad_model->insert($data);
-                    }
-                    if($field['PLOMERIA']!=''){
-                        $data = array (
-                            'id_trabajador' => $especialista_id,
-                            'id_especialidad' => 3,
-                            'anios_experiencia' => $field['PLOMERIA'],
-                        );
-                        $this->especialista_trabajador_especialidad_model->insert($data);
-                    }
-                    if($field['INSTALACION ELECTRICA']!=''){
-                        $data = array (
-                            'id_trabajador' => $especialista_id,
-                            'id_especialidad' => 4,
-                            'anios_experiencia' => $field['INSTALACION ELECTRICA'],
-                        );
-                        $this->especialista_trabajador_especialidad_model->insert($data);
-                    }
-                    if($field['PINTURA']!=''){
-                        $data = array (
-                            'id_trabajador' => $especialista_id,
-                            'id_especialidad' => 2,
-                            'anios_experiencia' => $field['PINTURA'],
-                        );
-                        $this->especialista_trabajador_especialidad_model->insert($data);
-                    }
-                }
-                /*
-                foreach($result as $field){
-                    echo $field['CI'].'<br/>';
-                    echo $field['DEPTO'].'<br/>';
-                    echo $field['NOMBRES'].'<br/>';
-                    echo $field['APELLIDOS'].'<br/>';
-                    echo $field['FECHA NAC.'].'<br/>';
-                    echo 'OBRA GRUESA:'.$field['OBRA GRUESA'].'<br/>';
-                    echo 'OBRA FINA:'.$field['OBRA FINA'].'<br/>';
-                    echo 'PLOMERIA:'.$field['PLOMERIA'].'<br/>';
-                    echo 'INSTALACION ELECTRICA:'.$field['INSTALACION ELECTRICA'].'<br/>';
-                    echo 'PINTURA:'.$field['PINTURA'].'<br/>';
-                    echo $field['CIUDAD'].'<br/>';
-                    echo $field['TELF. CONTACTO'].'<br/>';
-                    echo $field['TELF. REFERENCIA'].'<br/>';
-                    echo $field['EMAIL'].'<br/>';
-                    echo '==========================================</br>';
+        // ajustar ancho de las celdas
+        $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setAutoSize(true);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setAutoSize(true);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setAutoSize(true);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('G')->setAutoSize(true);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('H')->setAutoSize(true);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('I')->setAutoSize(true);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('J')->setAutoSize(true);
 
-                }
-                */
-                $this->session->set_flashdata('mensaje', 'Los especialistas del documento CSV se han guardado correctamente');
-                redirect('administrador/especialista');
-            }
-
+        // cargamos encabezado de la tabla
+        $count_col=10;
+        foreach ($especialidades as $esp) {
+            $esp=(object)$esp;
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($count_col, 5, strtoupper($esp->descripcion));  
+            $objPHPExcel->getActiveSheet()->getColumnDimension(PHPExcel_Cell::stringFromColumnIndex($count_col))->setAutoSize(true);
+            $count_col++;
         }
+        
+        // asignamos formato del encabezado de la tabla
+        $objPHPExcel->getActiveSheet()->getStyle('A5:'.PHPExcel_Cell::stringFromColumnIndex($count_col-1).'5')->applyFromArray(array(
+          'font'  => array(
+            'color' => array('rgb' => 'ffffff'),
+          ),
+          'fill' => array(
+            'type' => PHPExcel_Style_Fill::FILL_SOLID,
+            'color' => array('rgb' => '366092')
+          ),
+        ));
 
+        // Retornando documento excel
+        $nombre_archivo='maestras_constructoras';
+        $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
+        header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        header("Content-Disposition: attachment; filename=$nombre_archivo.xlsx");
+        ob_clean();
+        $objWriter->save('php://output');
     }
+
+    public function importar_archivo(){
+        // echo "importar";
+        $config['upload_path'] = './assets/uploads/';
+        $config['allowed_types'] = 'xlsx|xls';
+        $config['max_size'] = '5000';
+        $config['file_name'] = 'upload_' . time();
+
+        $this->load->library('upload', $config);
+
+        if(!$this->upload->do_upload('txtcsv')){
+          $this->session->set_flashdata('error', $this->upload->display_errors());  
+        }else{
+            $usuario_sesion = get_user_session();
+            // Abriendo archivo que se ha subido al servidor
+            $file_info = $this->upload->data();
+            $filepath = "./assets/uploads/" . $file_info['file_name'];
+            $this->load->library('excel');
+            // Identificando el tipo de archivo
+            $inputFileType = PHPExcel_IOFactory::identify($filepath);
+            $objReader = PHPExcel_IOFactory::createReader($inputFileType);
+            $objPHPExcel  = $objReader->load($filepath);
+            // Contando columnas
+            $objPHPExcel->setActiveSheetIndex(0);
+            $count_col=0;
+            $count_fil=5;
+            $head=array();
+            $cell=$objPHPExcel->getActiveSheet()->getCellByColumnAndRow($count_col, $count_fil)->getValue();
+            while($cell!='' && $cell!=null){
+                $head[$count_col]=$cell;
+                $count_col++;
+                $cell=$objPHPExcel->getActiveSheet()->getCellByColumnAndRow($count_col, $count_fil)->getValue();
+            }
+            // Obteniendo datos del archivo
+            $objPHPExcel->setActiveSheetIndex(0);
+            $count_fil++;
+            $aux=$count_fil;
+            $data=array();
+            $cell=$objPHPExcel->getActiveSheet()->getCellByColumnAndRow(0, $count_fil)->getValue();
+            while($cell!='' && $cell!=null){
+                for($j=0;$j<$count_col;$j++){
+                    if($j==5 || $j>9){
+                        if($objPHPExcel->getActiveSheet()->getCellByColumnAndRow($j, $count_fil)->getValue()!=''){
+                            date_default_timezone_set('America/La_Paz');
+                            $data[$count_fil-$aux][$j]=date('Y-m-d', PHPExcel_Shared_Date::ExcelToPHP($objPHPExcel->getActiveSheet()->getCellByColumnAndRow($j, $count_fil)->getValue()));    
+                        }else{
+                            $data[$count_fil-$aux][$j]='';
+                        }                      
+                    }else{
+                        $data[$count_fil-$aux][$j]=$objPHPExcel->getActiveSheet()->getCellByColumnAndRow($j, $count_fil)->getValue();
+                    }
+                }
+                $count_fil++;
+                $cell=$objPHPExcel->getActiveSheet()->getCellByColumnAndRow(0, $count_fil)->getValue();             
+            }
+            // VALIDANDO DATOS DE EXCEL
+            if($this->valida_tabla($data)){
+                // GUARDAR DATOS
+                $this->guardar_datos($head, $data);
+                $this->session->set_flashdata('mensaje', 'Todos los registros del documento excel fueron guardados exitosamente');
+            }
+        }
+        redirect('administrador/especialista');
+    }
+
+    private function valida_tabla($data){
+        $nro_cols=count(current($data));
+        $nro_fils=count($data);
+        for($i=0;$i<$nro_fils;$i++){
+            for($j=0;$j<$nro_cols;$j++){
+                if($j<8 and $data[$i][$j]==''){
+                    $this->session->set_flashdata('error', 'En la fila '.($i+6).' del documento excel, verifique que todos los valores obligatorios fueron ingresados');
+                    return false;
+                }
+                if($j==1 and !is_numeric($data[$i][$j])){
+                    $this->session->set_flashdata('error', 'En la fila '.($i+6).' del documento excel, verifique que en la columna DEPTO el valor sea numérico');
+                    return false;
+                }
+                if($j==1 and ($data[$i][$j]<1 || $data[$i][$j]>9)){
+                    $this->session->set_flashdata('error', 'En la fila '.($i+6).' del documento excel, verifique que en la columna DEPTO el valor se encuentre en el rango de 1 a 9');
+                    return false;
+                }
+                if($j==4 and !is_numeric($data[$i][$j])){
+                    $this->session->set_flashdata('error', 'En la fila '.($i+6).' del documento excel, verifique que en la columna CIUDAD el valor sea numérico');
+                    return false;
+                }
+                if($j==4 and ($data[$i][$j]<1 || $data[$i][$j]>2)){
+                    $this->session->set_flashdata('error', 'En la fila '.($i+6).' del documento excel, verifique que en la columna CIUDAD el valor se encuentre en el rango de 1 a 2');
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private function mostrar_datos($data){
+        $nro_cols=count(current($data));
+        $nro_fils=count($data);
+        for($i=0;$i<$nro_fils;$i++){
+            for($j=0;$j<$nro_cols;$j++){
+                echo $data[$i][$j].',';
+            }
+            echo '<br>';
+        }
+    }
+
+    private function guardar_datos($head, $tabla){
+        $usuario_sesion = get_user_session();
+        $nro_cols=count(current($tabla));
+        $nro_fils=count($tabla);
+        for($i=0;$i<$nro_fils;$i++){
+            $especialista = $this->especialista_trabajador_model->get_by_ci($tabla[$i][0]);
+            if(!isset($especialista)){
+                $data = array (
+                    'ci' => $tabla[$i][0],
+                    'id_departamento' => $tabla[$i][1],
+                    'nombres' => $tabla[$i][2],
+                    'apellidos' => $tabla[$i][3],
+                    'id_ciudad' => $tabla[$i][4],
+                    'fecha_nacimiento' => $tabla[$i][5],
+                    'genero' => 'mujer',
+                    'direccion' => $tabla[$i][6],
+                    'telefono_contacto' => $tabla[$i][7],
+                    'telefono_referencia' => $tabla[$i][8],
+                    'correo' => $tabla[$i][9],
+                    'estado' => 1,
+                    'creado_por'=>$usuario_sesion->id,
+                    'publicado'=>date('Y-m-d H:i:s')
+                );                             
+                $especialista_id = $this->especialista_trabajador_model->insert($data);
+            }else{
+                $especialista_id = $especialista->id;
+            }
+            for($j=10;$j<$nro_cols;$j++){
+                if($tabla[$i][$j]!=''){
+                    $data = array (
+                        'id_trabajador' => $especialista_id,
+                        'id_especialidad' => $this->especialista_especialidad_model->findByDescripcion($head[$j])->id,
+                        'fecha_certificacion' => $tabla[$i][$j],
+                    );
+                    $this->especialista_trabajador_especialidad_model->insert($data);
+                }
+            }
+        }
+    }
+
+    private function validateDate($date, $format = 'Y-m-d H:i:s'){
+        $d = DateTime::createFromFormat($format, $date);
+        return $d && $d->format($format) == $date;
+    }
+
 }

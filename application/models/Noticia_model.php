@@ -86,12 +86,10 @@ class Noticia_model extends CI_Model{
 
     public function update($data, $id) {
         $data['modificado'] = date('Y-m-d H:i:s');
-
         $this->db->trans_start();
         $this->db->where($this->primary_key, $id);
         $this->db->update($this->table_name, $data);
         $this->db->trans_complete();
-
         return $this->db->trans_status();
             
     }

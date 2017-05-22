@@ -182,30 +182,31 @@
                               <div class="row">
                                 <div class="col-lg-3">
                               <?php
-                              if(set_value('estado') == PUBLICADO OR set_value('estado')== null)
+                                if(set_value('estado') == ACEPTADO OR set_value('estado')== null){
                                   $class = 'btn-success';
-                              else
+                                }elseif(set_value('estado') == OBSERVADO){
                                   $class='btn-danger';
-                                                          
-                              $data = array(
-                                  'name'  => 'estado',
-                                  'id'    => 'estado',
-                                  'class' => 'form-control selectpicker',
-                                  'data-style' => $class
-                                );
-                              $opciones = array(
-                                  PUBLICADO  => 'Publicado',
-                                  DESPUBLICADO    => 'Despublicado'
-                               );                                
-                               echo form_dropdown($data, $opciones, set_value('estado'));                               
+                                }elseif(set_value('estado') == SIN_VERIFICAR){
+                                  $class='btn-warning';
+                                }  
+                                                            
+                                $data = array(
+                                    'name'  => 'estado',
+                                    'id'    => 'estado',
+                                    'class' => 'form-control selectpicker',
+                                    'data-style' => $class
+                                  );
+                                $opciones = array(
+                                  ACEPTADO  => 'Aceptado',
+                                  OBSERVADO  => 'Observado',
+                                  SIN_VERIFICAR  => 'Sin verificar',
+                                );                                
+                                echo form_dropdown($data, $opciones, set_value('estado'));                               
                               ?>
                                 </div>
                               </div> 
                             </div>   
-                            <?php }else{ ?>
-                              <input type="hidden" name="estado" value="<?php echo DESPUBLICADO; ?>">
-                            <?php } ?>                       
-
+                            <?php } ?>
                           </div>
                           <!-- /.box-body -->
                           <input type="hidden" name="guardar" id="guardar" value="<?php echo NUEVO; ?>" />  

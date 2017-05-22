@@ -106,7 +106,7 @@
                 <div class="col-md-12">
                 <!-- inicio cuadro mensaje -->  
                 <input type="hidden" name="accion_eliminar" id="accion_eliminar" value="<?php echo base_url('index.php/administrador/noticia/eliminar');?>" />
-                <input type="hidden" name="accion_publicar" id="accion_publicar" value="<?php echo base_url('index.php/administrador/noticia/publicar');?>" />
+                <input type="hidden" name="accion_cambiar_estado" id="accion_cambiar_estado" value="<?php echo base_url('index.php/administrador/noticia/estado');?>" />
                 <input type="hidden" name="accion_publicar_mensaje" id="accion_publicar_mensaje" value="<?php echo base_url('index.php/administrador/noticia/publicar_mensaje');?>" />
                 <div id="contenido_ajax">
                 <?php if (isset($mensaje)) {
@@ -170,11 +170,10 @@
                         <tr class="headers">
                           <th class="first" scope="col"><div>Título<ul class="sort"><li class="up"><?=$this->page->create_sort_link('titulo', 'asc'); ?></li><li class="down"><?=$this->page->create_sort_link('titulo', 'desc'); ?></li></ul></div></th>
                           <th scope="col">Autor</th>
-                          <th scope="col">Creado</th>
-                          <?php if ($perfil==1){ ?>
-                            <th scope="col" class="col-id" style="text-align: center;">ID</th>
-                            <th scope="col" class="col-estado" style="text-align: center;">Estado</th>    
-                          <?php } ?>
+                          <th scope="col">Centro de Formación</th>
+                          <th scope="col">Fecha de Creación</th>
+                          <th scope="col" class="col-id" style="text-align: center;">ID</th>
+                          <th scope="col" class="col-estado" style="text-align: center;">Estado</th>    
                           <th scope="col" class="col-opciones" style="text-align: center;">Opciones</th>
                         </tr>
                       </thead>
@@ -184,43 +183,67 @@
                         {
                         foreach ($noticias as $noticia):
                         $noticia = (object) $noticia;
-                        $sw_user=es_item_usuario($noticia->creado_por);
                         ?>
-                        <tr class="<?php echo $sw_user?'':'not-active-row'; ?>">
+                        <tr>
                             <td class="row-title">
-                                <a href="<?php echo base_url('index.php/administrador/'.$categoria.'/editar/'.$noticia->id."/".$grupo->id);?>" class="<?php echo $sw_user?'':'not-active-link'; ?>" data-toggle="tooltip" data-placement="top" title="<?php echo $this->lang->line('score_editar_tooltip'); ?>"><?php echo $noticia->titulo?></a></td>
+                                <a href="<?php echo base_url('index.php/administrador/'.$categoria.'/editar/'.$noticia->id."/".$grupo->id);?>" data-toggle="tooltip" data-placement="top" title="<?php echo $this->lang->line('score_editar_tooltip'); ?>"><?php echo $noticia->titulo?></a></td>
                             <td>
                             <?php
                             $autor = get_autor($noticia->creado_por); 
                             if(!empty($autor))
                             {
                             ?>
-                                <a href="<?php echo base_url('index.php/administrador/usuario/editar/'.$noticia->creado_por);?>" class="<?php echo $sw_user?'':'not-active-link'; ?>" data-toggle="tooltip" data-placement="top" title="<?php echo $this->lang->line('score_autor'); ?>"><?php echo $autor?></a>
+                                <a href="<?php echo base_url('index.php/administrador/usuario/editar/'.$noticia->creado_por);?>" data-toggle="tooltip" data-placement="top" title="<?php echo $this->lang->line('score_autor'); ?>"><?php echo $autor?></a>
                             <?php
                             }
                             ?>
                             </td>
-                            <td><?php echo $noticia->creado?></td>
-
-                            <?php if ($perfil==1){ ?>
-                            <td style="text-align: center;"><?php echo $noticia->id?></td>
-                                                       
-                            <td style="text-align: center;"> 
-                                <div id="contenido_ajax_<?php echo $noticia->id; ?>">
-                                <?php if($noticia->estado == PUBLICADO){ ?>
-                                    <a href="javascript:;" onclick="publicar(<?php echo $noticia->id;?>)" class="btn btn-success btn-xs <?php echo $sw_user?'':'not-active-link'; ?>" data-toggle="tooltip" data-placement="top" title="<?php echo $this->lang->line('score_despublicar_tooltip'); ?>"><i class="fa fa-check-circle"></i></a>
-                                <?php }else{ ?>
-                                    <a href="javascript:;" onclick="publicar(<?php echo $noticia->id;?>)" class="btn btn-danger btn-xs <?php echo $sw_user?'':'not-active-link'; ?>" data-toggle="tooltip" data-placement="top" title="<?php echo $this->lang->line('score_publicar_tooltip');?>"><i class="fa fa-times-circle"> </i></a>
-                                <?php } ?>
-                                </div>                                 
+                            
+                            <td>
+                              <?php
+                                $centro = get_centro($noticia->id_centro); 
+                                if(!empty($centro)){
+                              ?>
+                                <?php echo $centro; ?>
+                              <?php }else{ ?>
+                                CABOCO
+                              <?php } ?>
                             </td>
-                            <?php } ?>
+
+                            <td><?php echo $noticia->creado; ?></td>
+
+                            <td style="text-align: center;"><?php echo $noticia->id?></td>
+                             
+                            <td>
+                              <?php 
+                                if($noticia->estado == ACEPTADO){
+                                  $verificar='Aceptado';
+                                  $class='btn-success';
+                                }elseif($noticia->estado == OBSERVADO){
+                                  $verificar='Observado';
+                                  $class='btn-danger';
+                                }elseif($noticia->estado == SIN_VERIFICAR){
+                                  $verificar='Sin verificar';
+                                  $class='btn-warning';
+                                }
+                              ?>
+                              <div class="btn-group">
+                                <button type="button" class="btn <?php echo $class; ?> btn-xs dropdown-toggle" style="width: 85px;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  <?php echo $verificar; ?> <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                  <li><a class="btn-pub-aceptar" href="<?php echo $noticia->id; ?>"><span class="glyphicon glyphicon-ok-sign"></span>Aceptado</a></li>
+                                  <li><a class="btn-pub-observar" href="<?php echo $noticia->id; ?>"><span class="glyphicon glyphicon-remove-sign"></span>Observado</a></li>
+                                  <li><a class="btn-pub-sinverificar" href="<?php echo $noticia->id; ?>"><span class="glyphicon glyphicon-exclamation-sign"></span>Sin verificar</a></li>
+                                </ul>
+                              </div>
+                            </td>
 
                             <td style="text-align: center;" width="150px">                      
                                 <div class="btn-group">
-                                    <a href="<?php echo base_url('index.php/administrador/'.$categoria.'/editar/'.$noticia->id."/".$grupo->id);?>" class="btn btn-default <?php echo $sw_user?'':'not-active-link'; ?>" data-container="body" data-toggle="tooltip"  data-placement="top" title="<?php echo $this->lang->line('score_editar_tooltip'); ?>"><i class="fa fa-pencil"></i></a>
-                                    <a href="javascript:;" onclick="eliminar(<?php echo $noticia->id; ?>,'<?php echo $noticia->titulo; ?>')" class="btn btn-default <?php echo $sw_user?'':'not-active-link'; ?>" data-container="body" data-toggle="tooltip"  data-placement="top" title="<?php echo $this->lang->line('score_eliminar_tooltip'); ?>"><i class="fa fa-trash-o"></i></a>
-                                    <a href="<?php echo base_url('index.php/administrador/'.$categoria.'/preview/'.$noticia->id);?>" class="btn btn-default <?php echo $sw_user?'':'not-active-link'; ?>" data-container="body" data-toggle="tooltip"  data-placement="top" title="Previsualizar" target="_blank"><i class="fa fa-eye"></i></a>
+                                    <a href="<?php echo base_url('index.php/administrador/'.$categoria.'/editar/'.$noticia->id."/".$grupo->id);?>" class="btn btn-default" data-container="body" data-toggle="tooltip"  data-placement="top" title="<?php echo $this->lang->line('score_editar_tooltip'); ?>"><i class="fa fa-pencil"></i></a>
+                                    <a href="javascript:;" onclick="eliminar(<?php echo $noticia->id; ?>,'<?php echo $noticia->titulo; ?>')" class="btn btn-default" data-container="body" data-toggle="tooltip"  data-placement="top" title="<?php echo $this->lang->line('score_eliminar_tooltip'); ?>"><i class="fa fa-trash-o"></i></a>
+                                    <a href="<?php echo base_url('index.php/administrador/'.$categoria.'/preview/'.$noticia->id);?>" class="btn btn-default" data-container="body" data-toggle="tooltip"  data-placement="top" title="Previsualizar" target="_blank"><i class="fa fa-eye"></i></a>
                                 </div>
                             </td>
                         </tr>
@@ -281,26 +304,82 @@
                   }
                 });
             });
+
             $('#btn-guardar-configuracion').click(function(){
-                $('#form-configuracion').submit();
-                /*
-                $('#modal-configuracion').hide();
-                $('.modal-backdrop').hide();
-                var data=$('#form-configuracion').serialize();
-                $.ajax({
-                  url: $('#form-configuracion').attr('action'),
+              $('#form-configuracion').submit();
+            });
+
+            $('.btn-pub-aceptar').click(function(event){
+              event.preventDefault();
+              url=$('#accion_cambiar_estado').val();
+              id=$(this).attr('href'); 
+              button=$(this).parent().parent().parent().find('button');      
+              $.ajax({
+                  url: url,
+                  data: { id : id, estado : 1 },
+                  type: 'GET',
                   dataType: "json",
-                  type: $('#form-configuracion').attr('method'),
-                  data: data,
                   success: function(data) {
-                    console.log('guardado...');
+                    console.log(data);
+                    if(data.status==200){                 
+                      button.html('Aceptado <span class="caret"></span>');
+                      button.removeAttr('class');
+                      button.attr('class','btn btn-success btn-xs dropdown-toggle');
+                    }
                   },
                   error: function(e) {
                     console.log(e.message);
                   }
-                });
-                */
+              });                       
             });
+
+            $('.btn-pub-observar').click(function(event){
+              event.preventDefault();
+              url=$('#accion_cambiar_estado').val();
+              id=$(this).attr('href'); 
+              button=$(this).parent().parent().parent().find('button');             
+              $.ajax({
+                  url: url,
+                  data: { id : id, estado : 2 },
+                  type: 'GET',
+                  dataType: "json",
+                  success: function(data) {
+                    console.log(data);
+                    if(data.status==200){                
+                      button.html('Observado <span class="caret"></span>');
+                      button.removeAttr('class');
+                      button.attr('class','btn btn-danger btn-xs dropdown-toggle');
+                    }
+                  },
+                  error: function(e) {
+                    console.log(e.message);
+                  }
+              });
+            });
+
+            $('.btn-pub-sinverificar').click(function(event){
+              event.preventDefault();
+              url=$('#accion_cambiar_estado').val();
+              id=$(this).attr('href'); 
+              button=$(this).parent().parent().parent().find('button');             
+              $.ajax({
+                  url: url,
+                  data: { id : id, estado : 3 },
+                  type: 'GET',
+                  dataType: "json",
+                  success: function(data) {
+                    console.log(data);
+                    if(data.status==200){                    
+                      button.html('Sin verificar <span class="caret"></span>');
+                      button.removeAttr('class');
+                      button.attr('class','btn btn-warning btn-xs dropdown-toggle');
+                    }
+                  },
+                  error: function(e) {
+                    console.log(e.message);
+                  }
+              });
+            });                        
         });        
     </script>
   </body>

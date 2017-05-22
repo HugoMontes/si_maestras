@@ -74,6 +74,23 @@ class Especialista_especialidad_model extends CI_Model{
         return $data;
     }
 
+    public function get_all_join_area($id_centro) {
+        $data = array();
+        //$this->db->select('*');
+        $this->db->select('t1.id, t1.descripcion descripcion, t2.descripcion area');
+        //$this->db->from($this->table_name.' t1');
+        $this->db->from('especialista_especialidad t1');
+        $this->db->join('especialista_area t2','t2.id=t1.id_area');
+        $this->db->where(array('id_centro'=>$id_centro));    
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+           $data=$query->result();
+            //$data=$query->result_array();
+           $query->free_result();
+        }
+        return $data;
+    }
+
     public function get_all_distinct(){
         $this->db->distinct();
         $this->db->select('descripcion');
@@ -205,5 +222,9 @@ class Especialista_especialidad_model extends CI_Model{
         $Q->free_result();
 
         return $data;       
+    }
+
+    public function findByDescripcion($descripcion){
+        return $this->db->get_where($this->table_name, array('descripcion' => $descripcion))->row();
     }
 }

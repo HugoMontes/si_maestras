@@ -1,0 +1,6 @@
+CAMBIOS BASE DE DATOS:
+	Editar tabla: centro_formacion
+	Reemplazar todas las tablas: especialista_x
+	Editar tabla: noticia
+		      Agregar campo id_centro y dejar todo en cero
+	Reemplazar tabla: pagina_predisenadas

@@ -70,7 +70,7 @@ class Especialista_solicitud_model extends CI_Model{
               INNER JOIN especialista_ciudad AS ec ON et.id_ciudad=ec.id
               WHERE et.id_ciudad IN  (SELECT DISTINCT id_ciudad FROM especialista_solicitud WHERE id_empleador='.$id.')
               AND ete.id_especialidad IN (SELECT DISTINCT id_especialidad FROM especialista_solicitud WHERE id_empleador='.$id.')
-              ORDER BY et.apellidos';
+              ORDER BY RAND() LIMIT 100';
         $query = $this->db->query($sql);
         return $query->result_array();
     }
