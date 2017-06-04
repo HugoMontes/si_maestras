@@ -124,89 +124,69 @@
                               </div>      
                             </div>
 
-                            <input type="hidden" id="tipo" name="tipo" value="<?php echo $noticia->tipo_contenido ?>" name="texto">
-                            <?php if($noticia->tipo_contenido=='pdf'){ ?>
-                            <div class="form-group">
-                              <label for="vista_previa">Documento PDF</label>
-                              <div class="margin-bottom">
-                                <?php $pdf = base_url('assets/pdf/'.$noticia->doc_pdf);?>
-                                <iframe src="<?php echo $pdf; ?>" style="width:600px; height:500px;" frameborder="0"></iframe>
+                            <label for="tipo">Recurso principal </label>
+                            <div class="radio">
+                              <label>
+                                <input type="radio" name="tipo" id="rbt-texto" value="texto" <?php echo $noticia->tipo_contenido=='texto'?'checked':''; ?>>
+                                Texto e imagenes
+                              </label>
+                            </div>
+                            <div class="radio">
+                              <label>
+                                  <input type="radio" name="tipo" id="rbt-pdf" value="pdf" <?php echo $noticia->tipo_contenido=='pdf'?'checked':''; ?>>
+                                  Documento PDF
+                              </label>
+                            </div>
+                            <div class="radio">
+                              <label>
+                                <input type="radio" name="tipo" id="rbt-video" value="video" <?php echo $noticia->tipo_contenido=='video'?'checked':''; ?>>
+                                Video YouTube
+                              </label>
+                            </div>
+                            <div class="radio">
+                              <label>
+                                <input type="radio" name="tipo" id="rbt-audio" value="audio" <?php echo $noticia->tipo_contenido=='audio'?'checked':''; ?>>
+                                Audio SoundCloud
+                              </label>
+                            </div>
+
+                            <div id="content-pdf" class="panel panel-default" <?php echo $noticia->tipo_contenido=='pdf'?'':'style="display: none;"'; ?>>
+                              <div class="panel-body">
+                                <label for="docPdf">Seleccionar documento PDF</label>
+                                <?php echo form_error('docPdf', '<span class="error-form">', '</span><br/><br/>'); ?>
+                                <input type="file" id="docPdf" name="docPdf" accept=".pdf"/>
+                                <p class="help-block">Seleccionar un documento pdf menor o igual a 1MB.</p>
+                                <?php if($noticia->tipo_contenido=='pdf'){ ?>
+                                  <div class="margin-bottom">
+                                    <?php $pdf = base_url('assets/pdf/'.$noticia->doc_pdf);?>
+                                    <iframe src="<?php echo $pdf; ?>" style="width:600px; height:500px;" frameborder="0"></iframe>
+                                  </div>
+                                <?php } ?>
                               </div>
                             </div>
-                            <div class="form-group">
-                              <label for="docPdf">Cambiar documento PDF</label>
-                              <?php echo form_error('docPdf', '<span class="error-form">', '</span><br/><br/>'); ?>
-                              <input type="file" id="docPdf" name="docPdf" accept=".pdf"/> 
-                            </div>
-                            <?php } ?>
-                            
-                            <?php if($noticia->tipo_contenido=='video'){ ?>
-                            <div class="form-group">
-                              <label for="urlvideo">Url externa del video</label>
-                              <?php echo form_error('urlvideo', '<span class="error-form">', '</span><br/><br/>'); ?>
-                              <input type="text" class="form-control" name="urlvideo" id="urlvideo" value="<?php echo set_value('urlvideo',$noticia->url_video);?>" placeholder="https://www.youtube.com/..."/>
-                              <p class="help-block">Ingresar la direccion del video <a href="https://www.youtube.com">youtube</a> que se desea reproducir.</p>
-                            </div>
-                            <?php } ?>
-                            
-                            <?php if($noticia->tipo_contenido=='audio'){ ?>
-                            <div class="form-group">
-                              <label for="urlaudio">Código de inserción del audio</label>
-                              <?php echo form_error('urlaudio', '<span class="error-form">', '</span><br/><br/>'); ?>
-                              <textarea class="form-control" name="urlaudio" id="urlaudio" rows="5" value="<?php echo set_value('urlaudio',$noticia->url_audio);?>" placeholder="<iframe... "></textarea>
-                              <p class="help-block">Ingresar el codigo envebido de audio <a href="https://soundcloud.com/">soundcloud</a>.</p>    
-                            </div>
-                            <?php } ?>
 
-                            <?php if($noticia->tipo_contenido=='texto'){ ?>
-                              <!-- Start: Nav tabs -->
-                              <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="active"><a href="#pdf" aria-controls="pdf" role="tab" data-toggle="tab">PDF</a></li>
-                                <li role="presentation"><a href="#video" aria-controls="video" role="tab" data-toggle="tab">Video</a></li>
-                                <li role="presentation"><a href="#audio" aria-controls="audio" role="tab" data-toggle="tab">Audio</a></li>
-                              </ul>
-                              <!-- End: Nav tabs -->
-
-                              <!-- Start: Tab panes -->
-                              <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane active" id="pdf">
-                                  <div class="panel panel-default">
-                                    <div class="panel-body">
-                                      <div class="form-group">
-                                        <label for="docPdf">Seleccionar documento PDF</label>
-                                        <?php echo form_error('docPdf', '<span class="error-form">', '</span><br/><br/>'); ?>
-                                        <input type="file" id="docPdf" name="docPdf" accept=".pdf"/> 
-                                      </div>
-                                    </div>
+                            <div id="content-video" class="panel panel-default" <?php echo $noticia->tipo_contenido=='video'?'':'style="display: none;"'; ?>>
+                              <div class="panel-body">
+                                <label for="urlvideo">Ingresar la url externa del video</label>
+                                <?php echo form_error('urlvideo', '<span class="error-form">', '</span><br/><br/>'); ?>
+                                <input type="text" class="form-control" name="urlvideo" id="urlvideo" value="<?php echo set_value('urlvideo',$noticia->url_video);?>" placeholder="https://www.youtube.com/..."/>
+                                <p class="help-block">Ingresar la direccion del video <a href="https://www.youtube.com">youtube</a> que se desea reproducir.</p>
+                                <?php if($noticia->tipo_contenido=='video'){ ?>
+                                  <div style="margin: 0 auto;">
+                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/<?php echo substr($noticia->url_video,strpos($noticia->url_video,'?v=')+3); ?>?rel=0" frameborder="0" allowfullscreen></iframe>
                                   </div>
-                                </div>
-                                <div role="tabpanel" class="tab-pane" id="video">
-                                  <div class="panel panel-default">
-                                    <div class="panel-body">
-                                      <div class="form-group">
-                                        <label for="urlvideo">Url externa del video</label>
-                                        <?php echo form_error('urlvideo', '<span class="error-form">', '</span><br/><br/>'); ?>
-                                        <input type="text" class="form-control" name="urlvideo" id="urlvideo" value="<?php echo set_value('urlvideo');?>" placeholder="https://www.youtube.com/..."/>
-                                        <p class="help-block">Ingresar la direccion del video <a href="https://www.youtube.com">youtube</a> que se desea reproducir.</p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div role="tabpanel" class="tab-pane" id="audio">
-                                  <div class="panel panel-default">
-                                    <div class="panel-body">
-                                      <div class="form-group">
-                                        <label for="urlaudio">Código de inserción del audio</label>
-                                        <?php echo form_error('urlaudio', '<span class="error-form">', '</span><br/><br/>'); ?>
-                                        <textarea class="form-control" name="urlaudio" id="urlaudio" rows="5" value="<?php echo set_value('urlaudio');?>" placeholder="<iframe... "></textarea>
-                                        <p class="help-block">Ingresar el codigo envebido de audio <a href="https://soundcloud.com/">soundcloud</a>.</p>    
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
+                                <?php } ?>
                               </div>
-                              <!-- End: Tab panes -->
-                            <?php } ?>
+                            </div>
+
+                            <div id="content-audio" class="panel panel-default" <?php echo $noticia->tipo_contenido=='audio'?'':'style="display: none;"'; ?>>
+                              <div class="panel-body">
+                                <label for="urlaudio">Código de inserción del audio</label>
+                                <?php echo form_error('urlaudio', '<span class="error-form">', '</span><br/><br/>'); ?>
+                                <textarea class="form-control" name="urlaudio" id="urlaudio" rows="5" value="<?php echo set_value('urlaudio',$noticia->url_audio);?>" placeholder="<iframe... "></textarea>
+                                <p class="help-block">Ingresar el codigo envebido de audio <a href="https://soundcloud.com/">soundcloud</a>.</p>    
+                              </div>
+                            </div>
                             
                             <div class="form-group">
                               <label for="url">Url externa </label>
@@ -305,5 +285,6 @@
     <script src="<?php echo base_url('assets/plugins/ckeditor/ckeditor.js')?>"></script>
     <script>CKEDITOR.replace('contenido' ,{filebrowserImageBrowseUrl : '<?php echo base_url('assets/filemanager/index.html');?>', customConfig: 'config_principal.js'});</script>
     <script>CKEDITOR.replace('resumen' ,{filebrowserImageBrowseUrl : '<?php echo base_url('assets/filemanager/index.html');?>', customConfig: 'config_principal.js'});</script>                   
+    <script src="<?php echo base_url('assets/js/valida-noticia-maestras.js')?>"></script> 
   </body>
 </html>

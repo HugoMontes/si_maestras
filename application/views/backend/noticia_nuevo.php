@@ -104,19 +104,63 @@
                               </div>      
                             </div>
 
-                            <label for="imagen">Tipo de contenido </label>
-                            <input type="hidden" id="tipo" name="tipo" value="texto">
-                            <!-- Start: Nav tabs -->
-                            <ul class="nav nav-tabs" role="tablist">
-                              <li role="presentation" class="active"><a href="#pdf" aria-controls="pdf" role="tab" data-toggle="tab">PDF</a></li>
-                              <li role="presentation"><a href="#video" aria-controls="video" role="tab" data-toggle="tab">Video</a></li>
-                              <li role="presentation"><a href="#audio" aria-controls="audio" role="tab" data-toggle="tab">Audio</a></li>
-                            </ul>
-                            <!-- End: Nav tabs -->
+                            <label for="tipo">Recurso principal </label>
+                            <div class="radio">
+                              <label>
+                                <input type="radio" name="tipo" id="rbt-texto" value="texto" checked>
+                                Texto e imagenes
+                              </label>
+                            </div>
+                            <div class="radio">
+                              <label>
+                                  <input type="radio" name="tipo" id="rbt-pdf" value="pdf">
+                                  Documento PDF
+                              </label>
+                            </div>
+                            <div class="radio">
+                              <label>
+                                <input type="radio" name="tipo" id="rbt-video" value="video">
+                                Video YouTube
+                              </label>
+                            </div>
+                            <div class="radio">
+                              <label>
+                                <input type="radio" name="tipo" id="rbt-audio" value="audio">
+                                Audio SoundCloud
+                              </label>
+                            </div>
+
+                            <div id="content-pdf" class="panel panel-default" style="display: none;">
+                              <div class="panel-body">
+                                <label for="docPdf">Seleccionar documento PDF</label>
+                                <?php echo form_error('docPdf', '<span class="error-form">', '</span><br/><br/>'); ?>
+                                <input type="file" id="docPdf" name="docPdf" accept=".pdf"/>
+                                <p class="help-block">Seleccionar un documento pdf menor o igual a 1MB.</p>
+                              </div>
+                            </div>
+
+                            <div id="content-video" class="panel panel-default" style="display: none;">
+                              <div class="panel-body">
+                                <label for="urlvideo">Ingresar la url externa del video</label>
+                                <?php echo form_error('urlvideo', '<span class="error-form">', '</span><br/><br/>'); ?>
+                                <input type="text" class="form-control" name="urlvideo" id="urlvideo" value="<?php echo set_value('urlvideo');?>" placeholder="https://www.youtube.com/..."/>
+                                <p class="help-block">Ingresar la direccion del video <a href="https://www.youtube.com">youtube</a> que se desea reproducir.</p>
+                              </div>
+                            </div>
+
+                            <div id="content-audio" class="panel panel-default" style="display: none;">
+                              <div class="panel-body">
+                                <label for="urlaudio">Código de inserción del audio</label>
+                                <?php echo form_error('urlaudio', '<span class="error-form">', '</span><br/><br/>'); ?>
+                                <textarea class="form-control" name="urlaudio" id="urlaudio" rows="5" value="<?php echo set_value('urlaudio');?>" placeholder="<iframe... "></textarea>
+                                <p class="help-block">Ingresar el codigo envebido de audio <a href="https://soundcloud.com/">soundcloud</a>.</p>    
+                              </div>
+                            </div>
+
 
                             <!-- Start: Tab panes -->
-                            <div class="tab-content">
-                              <div role="tabpanel" class="tab-pane active" id="pdf">
+                            <!--div class="tab-content">
+                              <div role="tabpanel" class="tab-pane" id="pdf">
                                 <div class="panel panel-default">
                                   <div class="panel-body">
                                     <div class="form-group">
@@ -151,7 +195,7 @@
                                   </div>
                                 </div>
                               </div>
-                            </div>
+                            </div-->
                             <!-- End: Tab panes -->
 
 

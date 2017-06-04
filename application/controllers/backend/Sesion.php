@@ -8,6 +8,7 @@
             $this->load->model('usuario_model');
             $this->load->model('perfil_model');
             $this->load->model('modulo_model'); 
+            $this->load->model('centro_model');
         }
         
         public function index()
@@ -69,9 +70,8 @@
                             }else{
                                $perfil = '';
                                $perfil_id = 0; 
-                            }
+                            }                            
                             
-                            $this->load->model('centro_model');
                             $array = array(
                                 'id' => $usuario_->id,
                                 'usuario' => $usuario,
@@ -80,7 +80,8 @@
                                 'apellidos' => $usuario_->apellidos,
                                 'creado' => $usuario_->creado,
                                 'perfil_id' => $perfil_id,
-                                'centro_formacion' => $usuario_->centro_formacion,                                
+                                'centro_formacion' => $usuario_->centro_formacion,
+                                'txt_centro_formacion' => strtoupper($this->centro_model->get($usuario_->centro_formacion)->descripcion),
                                 'perfil' => $perfil,
                                 'dir_imagenes'=>$perfil_id==1?'':$this->centro_model->get($usuario_->centro_formacion)->directorio_imagenes.'/',
                             );

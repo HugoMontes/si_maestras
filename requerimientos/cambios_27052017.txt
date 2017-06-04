@@ -1,0 +1,3 @@
+CAMBIOS BASE DE DATOS:
+	Editar tabla: especialista_solicitud
+		      Agregar campo ctr_formulario_satisfaccion

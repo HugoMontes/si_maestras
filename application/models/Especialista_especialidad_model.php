@@ -227,4 +227,8 @@ class Especialista_especialidad_model extends CI_Model{
     public function findByDescripcion($descripcion){
         return $this->db->get_where($this->table_name, array('descripcion' => $descripcion))->row();
     }
+
+    public function find($find = array()){
+        return $this->db->get_where($this->table_name, $find)->row();
+    }
 }

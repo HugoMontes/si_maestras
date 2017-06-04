@@ -93,10 +93,10 @@
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="titulo" name="titulo" value="<?php echo $buscar; ?>" placeholder="<?php echo $this->lang->line('score_buscar');?>"/>
                                     <span class="input-group-btn">
-                                        <a id="buscar-titulo" href="" class="btn btn-primary" onclick="buscar_titulo('<?php echo base_url('index.php/administrador/noticia');?>');"><i class="fa fa-search"></i>&nbsp; Buscar</a>
+                                        <a id="buscar-titulo" href="" class="btn btn-primary" onclick="buscar_titulo('<?php echo base_url('index.php/administrador/noticia/centro/'.$grupo->id);?>');"><i class="fa fa-search"></i>&nbsp; Buscar</a>
                                     </span>
                                     <span class="input-group-btn">
-                                        <a href="<?php echo base_url('index.php/administrador/noticia'); ?>" class="btn btn-default" style="margin-left: 10px;"> Limpiar</a>
+                                        <a href="<?php echo base_url('index.php/administrador/noticia/centro/'.$grupo->id); ?>" class="btn btn-default" style="margin-left: 10px;"> Limpiar</a>
                                     </span>
                                 </div>  
                               </div>

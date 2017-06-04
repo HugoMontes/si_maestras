@@ -1,5 +1,30 @@
 $(document).ready(function(){
-	$('#docPdf').change(function(){		
+
+	$('#rbt-texto').change(function(){
+		$('#content-pdf').hide();
+		$('#content-audio').hide();
+		$('#content-video').hide();
+	});
+
+	$('#rbt-pdf').change(function(){
+		$('#content-pdf').show();
+		$('#content-audio').hide();
+		$('#content-video').hide();
+	});
+
+	$('#rbt-audio').change(function(){
+		$('#content-pdf').hide();
+		$('#content-audio').show();
+		$('#content-video').hide();
+	});
+
+	$('#rbt-video').change(function(){
+		$('#content-pdf').hide();
+		$('#content-audio').hide();
+		$('#content-video').show();
+	});
+/*
+	$('#docPdf').change(function(){
 		if($(this).val()!=''){
 			$('#tipo').val('pdf');
 			$('#urlaudio').attr('disabled','true');
@@ -32,4 +57,5 @@ $(document).ready(function(){
 			$('#docPdf').removeAttr('disabled');
 		}
 	});
+*/
 });

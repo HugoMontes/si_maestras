@@ -212,8 +212,6 @@ $route['administrador/especialista/nuevo'] = 'backend/especialista/nuevo';
 $route['administrador/especialista/eliminar/(:any)'] = 'backend/especialista/eliminar/$1';
 $route['administrador/especialista/guardar'] = 'backend/especialista/guardar';
 $route['administrador/especialista/editar/(:num)'] = 'backend/especialista/existe/$1';
-$route['administrador/especialista/exportar/excel'] = 'backend/especialista/exportar_archivo';
-$route['administrador/especialista/importar/excel'] = 'backend/especialista/importar_archivo';
 
 // especialistas_centro_formacion
 $route['administrador/especialista/centro'] = 'backend/especialista_centro';
@@ -221,6 +219,8 @@ $route['administrador/especialista/centro/nuevo'] = 'backend/especialista_centro
 $route['administrador/especialista/centro/eliminar/(:any)'] = 'backend/especialista_centro/eliminar/$1';
 $route['administrador/especialista/centro/guardar'] = 'backend/especialista_centro/guardar';
 $route['administrador/especialista/centro/editar/(:num)'] = 'backend/especialista_centro/existe/$1';
+$route['administrador/especialista/exportar/excel'] = 'backend/especialista_centro/download_archivo';
+$route['administrador/especialista/importar/excel'] = 'backend/especialista_centro/upload_archivo';
 
 // especialidades
 $route['administrador/especialidad'] = 'backend/especialidad';
@@ -275,6 +275,9 @@ $route['formulario_solicitud_especialistas'] = 'frontend/especialista_solicitud'
 $route['finalizar_solicitud_especialistas'] = 'frontend/especialista_solicitud/guardar_solicitud';
 $route['solicitar/especialistas'] = 'frontend/especialista_solicitud/save_solicitud';
 $route['listar_especialistas/(:num)'] = 'frontend/especialista_solicitud/listar_especialistas/$1';
+$route['enviar/formulario/satisfaccion'] = 'frontend/especialista_solicitud/enviar_formulario_satisfaccion';
+$route['llenar/formulario/satisfaccion/(:num)'] = 'frontend/especialista_solicitud/formulario_satisfaccion/$1';
+
 // inscripciones formadores
 $route['formador_inscripcion_previo/autenticar'] = 'frontend/formador_inscripcion_previo/autenticar';
 $route['inscripciones-formadores-score-bolivia'] = 'frontend/formador_inscripcion';

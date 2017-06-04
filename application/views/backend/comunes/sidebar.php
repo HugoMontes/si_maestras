@@ -213,6 +213,9 @@
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
+      <div style="color: white; margin: 0px 12px;">
+        <p><?php echo $usuario_sesion->txt_centro_formacion; ?></p>
+      </div>
       <!-- search form -->
       <form action="<?php echo base_url('index.php/administrador/busqueda_rapida') ?>" method="get" class="sidebar-form">
         <div class="input-group">
@@ -316,7 +319,7 @@
         </li>
         <?php } ?>
 
-        
+        <?php if($usuario_sesion->perfil_id == SUPER){ ?>
         <li class="treeview <?php echo $class_menu_noticia_0;?>">
           <a href="#">
             <i class="fa fa-newspaper-o"></i>
@@ -326,17 +329,27 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <?php if($usuario_sesion->perfil_id == SUPER){ ?>
-                <li class="<?php echo $class_menu_noticia_1;?>"><a href="<?php echo base_url('index.php/administrador/noticia/1') ?>"><i class="fa fa-circle-o"></i> Generales</a></li>
-            <?php } ?>
-            <?php if($usuario_sesion->perfil_id == SUPER){ ?>
+            <li class="<?php echo $class_menu_noticia_1;?>"><a href="<?php echo base_url('index.php/administrador/noticia/1') ?>"><i class="fa fa-circle-o"></i> Generales</a></li>
             <li class="<?php echo $class_menu_noticia_2;?>"><a href="<?php echo base_url('index.php/administrador/noticia/2') ?>"><i class="fa fa-circle-o"></i> Capacitacion</a></li>
-            <?php } ?>
-            <?php if($usuario_sesion->perfil_id == CENTRO_FORMACION){ ?>
-            <li class="<?php echo $class_menu_noticia_2;?>"><a href="<?php echo base_url('index.php/administrador/noticia/centro/2') ?>"><i class="fa fa-circle-o"></i> Capacitacion</a></li>
-            <?php } ?>
           </ul>
         </li>
+        <?php } ?>
+
+        <?php if($usuario_sesion->perfil_id == CENTRO_FORMACION){ ?>
+        <li class="treeview <?php echo $class_menu_noticia_0;?>">
+          <a href="#">
+            <i class="fa fa-newspaper-o"></i>
+            <span>Noticias</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="<?php echo $class_menu_noticia_1;?>"><a href="<?php echo base_url('index.php/administrador/noticia/centro/1') ?>"><i class="fa fa-circle-o"></i> Generales</a></li>
+            <li class="<?php echo $class_menu_noticia_2;?>"><a href="<?php echo base_url('index.php/administrador/noticia/centro/2') ?>"><i class="fa fa-circle-o"></i> Capacitacion</a></li>
+          </ul>
+        </li>
+        <?php } ?>
 
         <?php if($usuario_sesion->perfil_id == SUPER){ ?>
         <li class="treeview <?php echo $class_menu_informacion_0;?>">

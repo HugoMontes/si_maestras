@@ -104,7 +104,7 @@ class Noticia_centro extends CI_Controller{
         
         $config['rows_per_page'] = FILAS;
         $config['page_limit'] = NUMERO_ITEMS_PAGINACION;
-        $config['base_url'] = base_url('index.php') . '/administrador/noticia/'; //always put trailing slash
+        $config['base_url'] = base_url('index.php') . '/administrador/noticia/centro/'.$idgrupo; //always put trailing slash
         $config['total_rows'] = $count;
         $config['cur_page'] = $cur_page;
         $config['stats_title'] = 'noticias';
