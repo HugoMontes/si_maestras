@@ -1,17 +1,14 @@
 <?php (defined('BASEPATH')) OR exit('No direct script access allowed');
 
-class Contacto_respuesta_model extends CI_Model{
+class Cuestionario_respuesta_model extends CI_Model{
 
-    protected $table_name = 'contacto_respuesta';
+	protected $table_name = 'cuestionario_respuesta';
     protected $primary_key = 'id';
 
     public function __construct() {
         parent::__construct();
-
         $this->load->database();
-
         $this->load->helper('inflector');
-
         if (!$this->table_name) {
             $this->table_name = strtolower(plural(get_class($this)));
         }
@@ -21,8 +18,7 @@ class Contacto_respuesta_model extends CI_Model{
         return $this->db->get_where($this->table_name, array($this->primary_key => $id))->row();
     }
     
-    public function get_values($fields = '', $where = array())
-    {
+    public function get_values($fields = '', $where = array()){
         $row = NULL;
         if(!empty($fields) && is_array($where) && count($where))
         {
@@ -35,7 +31,7 @@ class Contacto_respuesta_model extends CI_Model{
         return $row;   
     }
 
-    public function get_all($fields = '', $where = array(), $table = '', $limit = '', $order_by = '', $group_by = '') {
+    public function get_all($fields = '', $where = array(), $table = '', $limit = '',$order_by = '', $group_by = '') {
         $data = array();
         if ($fields != '') {
             $this->db->select($fields);
@@ -60,22 +56,16 @@ class Contacto_respuesta_model extends CI_Model{
         if ($group_by != '') {
             $this->db->group_by($group_by);
         }
+        
+        $query = $this->db->get($this->table_name);
 
-        $Q = $this->db->get($this->table_name);
-
-        if ($Q->num_rows() > 0) {
-            foreach ($Q->result_array() as $row) {
-                $data[] = $row;
-            }
+        if ($query->num_rows() > 0) {
+            return $query->result();
         }
-        $Q->free_result();
-
-        return $data;
     }
 
     public function insert($data) {
-        $data['creado'] = date('Y-m-d H:i:s');
-
+        //$data['creado'] = $data['modificado'] = date('Y-m-d H:i:s');
         $success = $this->db->insert($this->table_name, $data);
         if ($success) {
             return $this->db->insert_id();
@@ -129,19 +119,6 @@ class Contacto_respuesta_model extends CI_Model{
         return $Q->num_rows();
     }
     
-    public function get_count_custom($query = '')
-    {        
-        if(!empty($query))   
-        {
-            $Q = $this->db->query($query);
-        }    
-        else
-        {
-            $Q = $this->db->get($this->table_name);    
-        }    
-        return $Q->num_rows();
-    }
-    
     public function get_pagination($cur_page = 1, $rows_per_page = 25, $where = '', $order_by = '')
     {
         
@@ -179,9 +156,10 @@ class Contacto_respuesta_model extends CI_Model{
         }
         $Q->free_result();
 
-        return $data;       
+        return $data;
+              
     }
-    
+
     public function get_fast_search($where = '', $order_by = '')
     {
         $data = array();

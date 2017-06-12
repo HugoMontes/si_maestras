@@ -39,7 +39,7 @@
 			  </div>
 			</div>
 		  	<div class="form-group">
-			  <label for="txtEspecialidad" class="col-sm-5 control-label caboco-label">Rubro Requerido <span>*</span> <p class="label-descripcion">Rubro requerido dentro de un área determinada</p></label>
+			  <label for="txtEspecialidad" class="col-sm-5 control-label caboco-label">Rubro Requerido <span>*</span> <p class="label-descripcion">Rubro de la construcción requerido</p></label>
 			  <div class="col-sm-6">
 			  	<div class="input-group">
 			  	  <div class="input-group-addon"><span class="glyphicon glyphicon-briefcase"></span></div>

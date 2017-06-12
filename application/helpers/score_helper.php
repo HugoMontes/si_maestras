@@ -19,7 +19,7 @@ if ( ! function_exists('enviar_email'))
 {
     function enviar_email($mensaje = '', $asunto = '', $email_destino)
     {              
-        $email_remitente='info@scorebolivia.org';
+        $email_remitente='info@maestrasconstructoras.org';
         
         $config = Array(
         'mailtype'  => 'html', 
@@ -29,7 +29,7 @@ if ( ! function_exists('enviar_email'))
         
         $CI =& get_instance();
         $CI->load->library('email',$config); 	
-		$CI->email->from($email_remitente, 'SCORE Bolivia');
+		$CI->email->from($email_remitente, 'Maestras Constructoras');
 		$CI->email->to($email_destino);
 		
 		$CI->email->subject($asunto);

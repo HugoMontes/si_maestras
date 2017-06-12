@@ -53,9 +53,23 @@
                 </div>      
               </div>
               <!-- end : descripcion -->
+
+              <!-- begin : codigo -->
+              <div class="form-group">
+                <label for="codigo">Código del centro de formación: <span class="required">*</span></label>
+                <?php echo form_error('codigo', '<span class="error-form">', '</span>'); ?>
+                <div class="row">
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" id="codigo" name="codigo" value="<?php echo set_value('codigo');?>" placeholder="Ingrese un código para el centro" maxlength="2"/>
+                    <span id="help-codigo" class="help-block" style="display: none;">Este campo es obligatorio.</span>
+                    <span class="help-block">El código del centro de formación esta compuesta por dos letras las cuales deben ser únicas para cada centro. Posteriormente este codigo es utilizado para codificar las especialidades.</span>
+                  </div>
+                </div>      
+              </div>
+              <!-- end : codigo -->
               
               <!-- begin : especialidades -->
-              <div class="panel panel-primary">
+              <!--div class="panel panel-primary">
                 <div class="panel-heading">RUBROS DE FORMACIÓN</div>
                 <div class="panel-body">
                   <?php echo form_error('especialidad', '<span class="error-form">', '</span>'); ?>
@@ -104,7 +118,7 @@
                     </div>
                   </div> 
                 </div>
-              </div>
+              </div-->
               <!-- end : especialidades -->
               
               <!-- begin : estado -->
@@ -135,6 +149,9 @@
                 </div> 
               </div> 
               <!-- end : estado -->
+
+              <p>Despues de crear el centro de formación puede adicionar los rubros.</p>
+          
             </div>
             <!-- /.box-body -->
             <input type="hidden" name="guardar" id="guardar" value="<?php echo NUEVO; ?>" />  

@@ -100,9 +100,9 @@ $lang['score_convocatoria_empresa_editar_ayuda'] = '<p>Realice los cambios que r
 $lang['score_convocatoria_empresa_error_publicado'] = 'Fallo publicando 1 convocatoria de empresas porque al menos una de las demás convocatorias de empresas esta publicada. <br/> Solo se puede tener una convocatoria de empresas publicada, el resto de convocatorias de empresas debe estar necesariamente despublicada. Esto con el fin de que en la convocatoria publicada se guarden los datos de las postulaciones o inscripciones de empresas';
 
 // inscripciones - postulaciones empresas
-$lang['score_inscripcion_empresa_notificacion'] = 'El Sitio Web de SCORE Bolivia recibió una inscripción de empresa';
+$lang['score_inscripcion_empresa_notificacion'] = 'El Sitio Web de Maestras Constructoras recibió una inscripción de empresa';
 // inscripciones - postulaciones formadores
-$lang['score_activacion_formador_notificacion'] = 'SCORE Bolivia - activación de cuenta';
+$lang['score_activacion_formador_notificacion'] = 'Maestras Constructoras - activación de cuenta';
 // inicio
 $lang['score_intranet_inicio'] = 'Intranet';
 $lang['score_intranet_recurso'] = 'Recursos';
@@ -186,7 +186,7 @@ $lang['score_biblioteca_editar_ayuda'] = '<p>Realice los cambios que requiera y 
 # backend
 ############################################################################################################
 //comunes
-$lang['score_notificacion_usuario_nuevo'] = 'Un nuevo usuario fue agregado a la plataforma SCORE Bolivia';
+$lang['score_notificacion_usuario_nuevo'] = 'Un nuevo usuario fue agregado a la plataforma Maestras Constructoras';
 $lang['score_campo_obligatorio'] = 'Todos los campos marcados con * son obligatorios';
 $lang['score_ver_pagina_tooltip'] = 'Ver página';
 $lang['score_convocatoria_tooltip'] = 'Convocatoria';
@@ -211,7 +211,7 @@ $lang['score_cerrar'] = 'Cerrar';
 $lang['score_autor'] = 'Autor';
 $lang['score_creado_por'] = 'Creado por';
 $lang['score_modificado_por'] = 'Modificado por';
-$lang['score_notificacion_nuevo_usuario'] = 'SI-SCORE Bolivia agregó a un nuevo usuario';
+$lang['score_notificacion_nuevo_usuario'] = 'Maestras Constructoras agregó a un nuevo usuario';
 // slide
 $lang['score_slide_nuevo_titulo'] = 'Añadir nuevo slide';
 $lang['score_slide_editar_titulo'] = 'Editar slide';
@@ -226,7 +226,7 @@ $lang['score_slide_eliminado'] = 'Un slide ha sido eliminado correctamente';
 $lang['score_slide_url_video'] = 'Si el slide va acompañado de un video, ingrese la url del video aquí (youtube ó vimeo).';
 $lang['score_slide_img_condiciones'] = '(Tamaño máximo 128 kb, dimensión recomendada: ancho = 1600px, alto = 700px)';
 // contacto
-$lang['score_contacto_notificacion'] = 'El Sitio Web de SCORE Bolivia recibió un nuevo contacto';
+$lang['score_contacto_notificacion'] = 'El Sitio Web de Maestras Constructoras recibió un nuevo contacto';
 $lang['score_contacto_respuesta_enviada'] = 'El correo electrónico de respuesta fue enviado satisfactoriamente';
 $lang['score_contacto_responder_titulo'] = 'Responder contacto';
 $lang['score_contacto_editar_titulo'] = 'Editar contacto';
@@ -291,7 +291,7 @@ $lang['score_usuario_eliminar_confirmacion'] = '¿Seguro que quiere eliminar est
 $lang['score_usuario_eliminado'] = 'Un usuario ha sido eliminado correctamente';
 $lang['score_usuario_img_condiciones'] = '(Tamaño máximo 128 kb)';
 $lang['score_usuario_notificacion'] = 'Envía al usuario un correo electrónico con información sobre su cuenta (Nombre de usuario y contraseña).';
-$lang['score_usuario_asunto_email'] = '[SCORE Bolivia] Información de tu usuario y contraseña';
+$lang['score_usuario_asunto_email'] = '[Maestras Constructoras] Información de tu usuario y contraseña';
 $lang['score_usuario_error_email'] = 'No se pudo enviar el correo electrónico al usuario con la información sobre su cuenta';
 $lang['score_usuario_iniciar_sesion'] = 'Iniciar sesión';
 $lang['score_usuario_error_deshabilitar'] = 'No puede dashabilitarse a si mismo';
@@ -402,7 +402,7 @@ $lang['maestras_centros'] = 'Centros de formación';
 // biblioteca
 $lang['score_sitio_biblioteca'] = 'Biblioteca';
 // inscripcion formador
-$lang['score_sitio_inscripcion_formador'] = 'Inscripción de formadores SCORE Bolivia';
+$lang['score_sitio_inscripcion_formador'] = 'Inscripción de formadores Maestras Constructoras';
 $lang['score_sitio_inscripcion_formador_error_password'] = 'La contraseña que ha introducido no coincide. Por favor, introduzca la contraseña que desee en el campo de contraseña y confírmela en el campo de confirmación de contraseña.';
 $lang['score_sitio_inscripcion_formador_tmp_guardada'] = '<p><strong>¡Gracias por ingresar tu información!</strong></p>
 <p>Continúa tu inscripción revisando tu  e-mail ahora.</p>
@@ -413,17 +413,17 @@ $lang['score_sitio_inscripcion_formador_error_activacion'] = 'El enlace de activ
 // inscripcion empresa
 $lang['score_sitio_inscripcion_empresa_guardada'] = 'Su inscripción se ha enviado con éxito. Muchas gracias.';
 $lang['score_sitio_inscripcion_empresa_error_recaptcha'] = '¡Marque el recaptcha por favor!';
-$lang['score_sitio_inscripcion_empresa'] = 'Inscripción de empresas SCORE Bolivia';
+$lang['score_sitio_inscripcion_empresa'] = 'Inscripción de empresas Maestras Constructoras';
 // contacto
 $lang['score_sitio_contacto_guardado'] = 'Su mensaje se ha enviado con éxito. Muchas gracias.';
 $lang['score_sitio_contacto_error_recaptcha'] = '¡Marque el recaptcha por favor!';
 $lang['score_sitio_contacto'] = 'Contacto Maestras Constructoras';
 // paginas predisenadas
 $lang['score_sitio_inicio'] = 'MAESTRAS CONSTRUCTURAS';
-$lang['score_sitio_publicaciones'] = 'Publicaciones SCORE Bolivia';
-$lang['score_sitio_formadores'] = 'Formadores SCORE Bolivia';
+$lang['score_sitio_publicaciones'] = 'Publicaciones Maestras Constructoras';
+$lang['score_sitio_formadores'] = 'Formadores Maestras Constructoras';
 $lang['score_sitio_error_404'] = 'Página no encontrada';
-$lang['score_sitio_testimonios'] = 'Testimonios SCORE Bolivia';
+$lang['score_sitio_testimonios'] = 'Testimonios Maestras Constructoras';
 $lang['score_sitio_testimonios_empresas'] = 'Testimonios de empresas que implementaron SCORE';
 $lang['score_sitio_testimonios_personal'] = 'Comentarios de empresas que implementaron SCORE ';
 

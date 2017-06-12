@@ -34,7 +34,7 @@ define('TESTIMONIOS','testimonios');
 define('PUBLICACIONES','publicaciones');
 define('CONTACTOS','contactos');
 define('SLIDES','slides');
-define('ESPECIALISTAS','especialistas');
+define('ESPECIALISTAS','Maestras Constructoras');
 define('ESPECIALIDADES','especialidades');
 define('CENTROS_FORMACION','centros_formacion');
 // generos

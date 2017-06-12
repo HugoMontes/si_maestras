@@ -2,7 +2,23 @@
 *	EVENTOS DE CONTROLES
 ********************************************************/
 $(document).on('click','#btn-add-rubro',function(){
-  $('#foco-rubro table tbody tr').clone().appendTo('#tbl-especialidades tbody');
+  	// $('#foco-rubro table tbody tr').clone().appendTo('#tbl-especialidades tbody');
+  	// alert("guardando...."+url);
+  	var url = $('#url-ajax-save-rubro').val();
+  	var id_centro = $('#txt-id-centro').val();
+  	var especialidad = $('#especialidad').val();
+  	var id_area = $('#area').val();
+  	if(validaDatosRubro(especialidad, id_area)){
+	  	$.ajax({
+		    url: url,
+		    data: {'especialidad' : especialidad, 'id_centro' : id_centro, 'id_area' : id_area },
+		    type: "POST",
+		    dataType: "html",
+		    success: function(data) {
+		      	console.log(data);
+		   	},
+		});
+	}
 });
 
 var row_rubro;
@@ -33,8 +49,6 @@ $(document).on('click','.btn-remove-dialog',function(){
 				}	
 			},
 		});
-	}else{
-		row_rubro.remove();
 	}
 });
 
@@ -82,3 +96,15 @@ $(document).on('click','#btn-guardar',function(event){
 /*******************************************************
 *	FUNCIONES
 ********************************************************/
+function validaDatosRubro(especialidad, id_area){
+	var sw=true;
+	if(especialidad==''){
+		alert('Ingrese un valor en especialidad');
+		sw=false;
+	}
+	if(id_area==0){
+		alert('Seleccione un valor para rubro');
+		sw=false;
+	}
+	return sw;
+}

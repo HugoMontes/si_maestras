@@ -7,7 +7,8 @@ class Especialista_solicitud extends CI_Controller{
         $this->load->model('especialista_ciudad_model');
         $this->load->model('especialista_especialidad_model'); 
         $this->load->model('especialista_empleador_model');
-        $this->load->model('especialista_solicitud_model'); 
+        $this->load->model('especialista_solicitud_model');
+        $this->load->model('centro_model'); 
         $this->load->model('menu_model');
         $this->load->model('modulo_model');   
         $this->load->model('pagina_predisenada_model');
@@ -143,7 +144,7 @@ class Especialista_solicitud extends CI_Controller{
     private function enviarEmail($email,$id){
         $logo=$this->modulo_model->get_values('contenido',array('modulo'=>'mod_logotipo','estado'=>PUBLICADO)); 
         $to = $email;
-        $subject = 'Solicitud especialistas';
+        $subject = 'Solicitud Maestras Constructoras';
         $message = '
         <html>
         <head>
@@ -171,11 +172,11 @@ class Especialista_solicitud extends CI_Controller{
                                 <tr>
                                     <td style="padding: 10px;">
                                         <div style="font-size: 14px;">
-                                            <p>Recientemente a realizado una solicitud de especialistas mediante el formulario de <a href="http://maestrasconstructoras.org/">Maestras Constructoras</a>.</p>
-                                            <p>Ahora usted puede acceder al listado del especialistas mediante el siguiente botón:</p>
+                                            <p>Recientemente ha realizado una solicitud de maestras constructoras mediante el formulario de la Plataforma Web <a href="http://maestrasconstructoras.org/">www.maestrasconstructoras.org</a>.</p>
+                                            <p>Ahora usted puede acceder al listado del maestras constructoras en el rubro requerido mediante el siguiente botón:</p>
                                             <p><center>
                                                 <a href="'.base_url('index.php/listar_especialistas/'.$id).'" style="display: inline-block; padding: 6px 12px; margin-bottom: 0; font-size: 14px; font-weight: 400; line-height: 1.42857143; text-align: center; white-space: nowrap; vertical-align: middle; -ms-touch-action: manipulation; touch-action: manipulation; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; background-image: none; border: 1px solid transparent; border-radius: 4px; color: #fff; background-color: #337ab7; text-decoration:none;">
-                                                    Ver listado de especialistas
+                                                    Ver listado de maestras constructoras
                                                 </a></center>
                                              </p>
                                             <p>Si usted no hizo la solicitud, ignorar este correo electrónico.</p>
@@ -257,61 +258,20 @@ class Especialista_solicitud extends CI_Controller{
                 }
             }
         }
+        //$this->envia_mail_satisfaccion();
+        //echo 'mail enviado';
     }
 
     public function envia_mail_satisfaccion($solicitud){ 
         $logo=$this->modulo_model->get_values('contenido',array('modulo'=>'mod_logotipo','estado'=>PUBLICADO)); 
+        //$to = 'hugomontes.formaempresas@gmail.com';
         $to = $solicitud->correo;
-        $subject = 'Maestras Constructoras - Formulario de satisfaccion';
-        $message = '
-        <html>
-        <head>
-            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-            <title></title>
-        </head>
-        <body>
-            <table width="100%" style="font-family: Verdana;">
-                <tr>
-                    <td>
-                        <table id="contenido" style="min-width:332px; max-width:600px; border:1px solid #F0F0F0; border:1px solid #C0C0C0; border-bottom-left-radius:3px; border-bottom-right-radius:3px;">
-                            <tbody>
-                                <tr>
-                                    <td style="padding: 10px;">
-                                        <div class="container-image" style="background: #fff;">
-                                            <img src="'.base_url('assets/img/logo/'.$logo->contenido).'" alt="">
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="background: #f8d38a; font-size: 24px; padding: 20px;">
-                                        <p>Encuesta de satisfacción:</p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 10px;">
-                                        <div style="font-size: 14px;">
-                                            <p><center>En fecha '.date('d/m/Y',strtotime($solicitud->creado)).' usted ha solicitado los servicios del sitio web: maestrasconstructoras.org. A fin de mejorar, agradeceriamos conocer su opinion acerca del servicio recibido. Para ello agradeceriamos responda una pequeña encuesta haciendo clic en el siguiente enlace:</center></p>
-                                            <p>
-                                                <center>
-                                                    <a href="'.base_url('index.php/llenar/formulario/satisfaccion/'.$solicitud->id).'" style="display: inline-block; padding: 6px 12px; margin-bottom: 0; font-size: 14px; font-weight: 400; line-height: 1.42857143; text-align: center; white-space: nowrap; vertical-align: middle; -ms-touch-action: manipulation; touch-action: manipulation; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; background-image: none; border: 1px solid transparent; border-radius: 4px; color: #fff; background-color: #337ab7; text-decoration:none;">
-                                                        Ir a encuesta
-                                                    </a>
-                                                </center>
-                                             </p>
-                                            <p><center>El llenado del formulario de satisfaccion permite mejorar nuestros servios.</center></p>
-                                            <p><center>Gracias por su apoyo. Si usted no contacto con ninguna maestra constructora porfavor ignore este mensaje.</center></p>
-                                        </div>
-                                        <p style="font-size: 12px; color: #9e9e9e">Esta dirección de correo electrónico no admite respuestas. Para obtener más información ingresar a la pagina <a href="http://maestrasconstructoras.org/">Maestras Constructoras</a>.</p>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-            </table>
-        </body>
-        </html>';
-
+        $subject = 'Maestras Constructoras - Encuesta de satisfaccion';
+        $data=array(
+            'logo'=>$logo,
+            'solicitud'=>$solicitud,
+        );        
+        $message = $this->load->view('frontend/comunes/mail_satisfaccion', $data, true);
         $from = "Maestras Constructoras";
         //$Bcc = "example@example.com";
 
@@ -331,20 +291,96 @@ class Especialista_solicitud extends CI_Controller{
         }
         return false;
     }
-
+    // http://localhost/si_maestras/index.php/llenar/formulario/satisfaccion/52
     public function formulario_satisfaccion($id){
-        $this->load->helper('caboco_helper');
-        $pagina_especialistas = $this->pagina_predisenada_model->get_values('metadescripcion, metapalabras_clave, id, hits,estado', array('alias'=>'contacto-maestras-constructoras'));
-        $this->pagina_predisenada_model->update(array('hits'=>$pagina_especialistas->hits + 1),$pagina_especialistas->id);  
-        $data=array();
-        $data['titulo'] = $this->lang->line('caboco_sitio_titulo_solicitud_especialista');
-        $data['metadescripcion'] = $pagina_especialistas->metadescripcion;
-        $data['metapalabras_clave'] = $pagina_especialistas->metapalabras_clave;
-        $data['menus'] = $this->nested_set->getMenuBootstrap(); 
-        $data['mod_pie'] = $this->modulo_model->get_values('contenido',array('modulo'=>'mod_pie','estado'=>PUBLICADO)); 
-        $data['mod_logo'] = $this->modulo_model->get_values('contenido',array('modulo'=>'mod_logotipo','estado'=>PUBLICADO));  
-        $this->load->view('frontend/especialista_formulario_satisfaccion',$data);        
+        $solicitud=$this->especialista_solicitud_model->get($id);
+        if(isset($solicitud)){
+            if($solicitud->encuesta==null){
+                $this->load->model('cuestionario_opciones_model');
+                $this->load->helper('caboco_helper');
+                $pagina_especialistas = $this->pagina_predisenada_model->get_values('metadescripcion, metapalabras_clave, id, hits,estado', array('alias'=>'contacto-maestras-constructoras'));
+                $this->pagina_predisenada_model->update(array('hits'=>$pagina_especialistas->hits + 1),$pagina_especialistas->id);  
+                $data=array();
+                $data['titulo'] = $this->lang->line('caboco_sitio_titulo_solicitud_especialista');
+                $data['metadescripcion'] = $pagina_especialistas->metadescripcion;
+                $data['metapalabras_clave'] = $pagina_especialistas->metapalabras_clave;
+                $data['menus'] = $this->nested_set->getMenuBootstrap(); 
+                $data['mod_pie'] = $this->modulo_model->get_values('contenido',array('modulo'=>'mod_pie','estado'=>PUBLICADO)); 
+                $data['mod_logo'] = $this->modulo_model->get_values('contenido',array('modulo'=>'mod_logotipo','estado'=>PUBLICADO));  
+                $data['iduser'] = $id;  
+                $data['centros'] = $this->centro_model->get_all('', array('estado'=>1), '', '', 'descripcion', ''); 
+                $data['opciones_p4'] = $this->cuestionario_opciones_model->get_all('', array('id_pregunta'=>4, 'estado'=>1), '', '', 'id', ''); 
+                $data['opciones_p5'] = $this->cuestionario_opciones_model->get_all('', array('id_pregunta'=>5, 'estado'=>1), '', '', 'id', ''); 
+                $data['opciones_p6'] = $this->cuestionario_opciones_model->get_all('', array('id_pregunta'=>6, 'estado'=>1), '', '', 'id', ''); 
+                $this->load->view('frontend/especialista_formulario_satisfaccion',$data);
+            }else{
+                $this->load->helper('caboco_helper');
+                $pagina_especialistas = $this->pagina_predisenada_model->get_values('metadescripcion, metapalabras_clave, id, hits,estado', array('alias'=>'contacto-maestras-constructoras'));
+                $this->pagina_predisenada_model->update(array('hits'=>$pagina_especialistas->hits + 1),$pagina_especialistas->id);  
+                $data=array();
+                $data['titulo'] = $this->lang->line('caboco_sitio_titulo_solicitud_especialista');
+                $data['metadescripcion'] = $pagina_especialistas->metadescripcion;
+                $data['metapalabras_clave'] = $pagina_especialistas->metapalabras_clave;
+                $data['menus'] = $this->nested_set->getMenuBootstrap(); 
+                $data['mod_pie'] = $this->modulo_model->get_values('contenido',array('modulo'=>'mod_pie','estado'=>PUBLICADO)); 
+                $data['mod_logo'] = $this->modulo_model->get_values('contenido',array('modulo'=>'mod_logotipo','estado'=>PUBLICADO));
+                $this->load->view('frontend/especialista_formulario_respuesta',$data);
+            }
+        }else{
+            redirect('/inicio/index');
+        }   
     }
+
+    public function guardar_cuestionario(){
+        $this->load->model('cuestionario_respuesta_model');
+        $id_usuario = $this->input->post('iduser');
+        $solicitud=$this->especialista_solicitud_model->get($id_usuario);
+        if(isset($solicitud)){
+            if($solicitud->encuesta==null){
+                // Recuperar datos
+                $r1 = $this->input->post('p1');
+                $r2 = $this->input->post('p2');
+                $r3 = $this->input->post('p3');
+                $r4 = $this->input->post('p4');
+                $r5 = $this->input->post('p5');
+                $r6 = $this->input->post('p6');
+                // Guardar respuestas
+                $data=array('id_usuario'=>$id_usuario, 'id_pregunta'=>1, 'res_b'=>$r1);
+                $this->cuestionario_respuesta_model->insert($data);
+                $data=array('id_usuario'=>$id_usuario, 'id_pregunta'=>2, 'res_b'=>$r2);
+                $this->cuestionario_respuesta_model->insert($data);
+                $data=array('id_usuario'=>$id_usuario, 'id_pregunta'=>3, 'id_opciones'=>$r3);
+                $this->cuestionario_respuesta_model->insert($data);
+                foreach ($r4 as $respuesta) {
+                    $data=array('id_usuario'=>$id_usuario, 'id_pregunta'=>4, 'id_opciones'=>$respuesta);
+                    $this->cuestionario_respuesta_model->insert($data);    
+                }
+                $data=array('id_usuario'=>$id_usuario, 'id_pregunta'=>5, 'id_opciones'=>$r5);
+                $this->cuestionario_respuesta_model->insert($data);
+                foreach ($r6 as $respuesta) {
+                    $data=array('id_usuario'=>$id_usuario, 'id_pregunta'=>6, 'id_opciones'=>$respuesta);
+                    $this->cuestionario_respuesta_model->insert($data);    
+                }
+                $data = array('encuesta'=>date('Y-m-d H:i:s'));
+                $this->especialista_solicitud_model->update($data, $id_usuario);
+            }
+            // Redireccionar
+            $this->load->helper('caboco_helper');
+            $pagina_especialistas = $this->pagina_predisenada_model->get_values('metadescripcion, metapalabras_clave, id, hits,estado', array('alias'=>'contacto-maestras-constructoras'));
+            $this->pagina_predisenada_model->update(array('hits'=>$pagina_especialistas->hits + 1),$pagina_especialistas->id);  
+            $data=array();
+            $data['titulo'] = $this->lang->line('caboco_sitio_titulo_solicitud_especialista');
+            $data['metadescripcion'] = $pagina_especialistas->metadescripcion;
+            $data['metapalabras_clave'] = $pagina_especialistas->metapalabras_clave;
+            $data['menus'] = $this->nested_set->getMenuBootstrap(); 
+            $data['mod_pie'] = $this->modulo_model->get_values('contenido',array('modulo'=>'mod_pie','estado'=>PUBLICADO)); 
+            $data['mod_logo'] = $this->modulo_model->get_values('contenido',array('modulo'=>'mod_logotipo','estado'=>PUBLICADO));
+            $this->load->view('frontend/especialista_formulario_respuesta',$data);
+        }else{
+            redirect('/inicio/index');
+        }
+    }
+
     /*
     public function genera_codigo(){
         $rand_part = str_shuffle("abcdefghijklmnopqrstuvwxyz0123456789".uniqid());

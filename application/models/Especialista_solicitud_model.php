@@ -14,6 +14,10 @@ class Especialista_solicitud_model extends CI_Model{
         }
     }
 
+    public function get($id) {
+        return $this->db->get_where($this->table_name, array($this->primary_key => $id))->row();
+    }
+
     public function get_all($fields = '', $where = array(), $table = '', $limit = '', $order_by = '', $group_by = '') {
         $data = array();
         if ($fields != '') {

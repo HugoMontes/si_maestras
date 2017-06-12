@@ -96,7 +96,7 @@ class Centro_formacion extends CI_Controller{
            $data['error'] = $this->session->flashdata('error');
         }
         $data['titulo'] = $this->lang->line('score_formador_nuevo_titulo');
-        $data=$this->inicio_valores_formulario($data);
+        //$data=$this->inicio_valores_formulario($data);
         $this->load->view('backend/centro_formacion_nuevo',$data);
     }
     
@@ -126,7 +126,7 @@ class Centro_formacion extends CI_Controller{
         }
         $data['titulo'] = $this->lang->line('maestras_centros_editar_titulo');
         $data['centro']=$this->centro_model->get($centro_id);
-        $data['especialidades']=$this->especialista_especialidad_model->get_all('',array('id_centro'=>$centro_id),'','','','');
+        $data['especialidades']=$this->especialista_especialidad_model->get_all('',array('id_centro'=>$centro_id),'','','id','');
         $data=$this->inicio_valores_formulario($data);
         $this->load->view('backend/centro_formacion_editar',$data);
     }
@@ -159,6 +159,8 @@ class Centro_formacion extends CI_Controller{
             $guardar = $this->input->post("guardar");
             if($guardar == EDICION){
                 $centro_id = $this->input->post('centro_id'); 
+            }elseif($guardar == NUEVO){
+                $this->form_validation->set_rules('codigo', 'Código', 'trim|required');    
             }
             //required=campo obligatorio||xss_clean=evitamos inyecciones de codigo
             $this->form_validation->set_rules('descripcion', 'Centro de formación', 'trim|required');
@@ -176,8 +178,9 @@ class Centro_formacion extends CI_Controller{
                 // obtenemos los datos
                 $usuario_sesion = get_user_session();                   
                 $descripcion = $this->input->post('descripcion');
+                $codigo = $this->input->post('codigo');
                 $nombre_carpeta=str_replace(" ", "_", $descripcion);
-                $especialidades = $this->input->post('especialidades');
+                //$especialidades = $this->input->post('especialidades');
                 $areas = $this->input->post('areas');
                 $estado = $this->input->post('estado');
                 $guardar = $this->input->post("guardar");
@@ -187,6 +190,7 @@ class Centro_formacion extends CI_Controller{
                     $data = array (
                         'descripcion' => $descripcion,
                         'estado' => $estado,
+                        'codigo' => strtoupper($codigo),
                         'directorio_imagenes' => $nombre_carpeta,
                         'creado_por'=>$usuario_sesion->id,
                     );                             
@@ -195,8 +199,9 @@ class Centro_formacion extends CI_Controller{
                     }
                     if($estado == DESPUBLICADO){    
                         $data['despublicado'] = date('Y-m-d H:i:s');
-                    }
+                    }                    
                     $centro_id = $this->centro_model->insert($data);
+                    /*
                     for($i=0;$i<count($especialidades);$i++) {
                         if($especialidades[$i]!=""){
                             $data = array (
@@ -209,6 +214,7 @@ class Centro_formacion extends CI_Controller{
                             $this->centro_model->insert_especialidad($data);
                         }
                     }
+                    */
                     $this->crear_directorio($nombre_carpeta);     
                     $this->session->set_flashdata('mensaje', $this->lang->line('caboco_especialidad_guardado'));
                     redirect('administrador/centro/editar/'.$centro_id);
@@ -369,5 +375,35 @@ class Centro_formacion extends CI_Controller{
         }
         $data['areas'] = $areas_array;
         return $data;
+    }
+
+    public function guardar_rubro(){
+        $this->load->helper('caboco');
+        // recuperar datos
+        $usuario_sesion = get_user_session();
+        $descripcion = $this->input->post('especialidad');
+        $id_centro = $this->input->post('id_centro');
+        $id_area = $this->input->post('id_area');
+        // guardar especialidad
+        $data = array (
+            'id_centro' => $id_centro,
+            'id_area' => $id_area,
+            'descripcion' => $descripcion,
+            'creado_por' => $usuario_sesion->id,
+            'estado' => 1,
+            );
+        $this->centro_model->insert_especialidad($data);
+        $data=array(
+            'id_centro'=>$id_centro,
+            'descripcion'=>$descripcion,
+            'id_area'=>$id_area,
+        );
+        // listar especialidades
+        $data['especialidades']=$this->especialista_especialidad_model->get_all('',array('id_centro'=>$id_centro),'','','id','');
+        //echo  $this->load->view('backend/ajax/listar_especialidades',$data);
+        print_r($data);
+        //header('Content-type: application/json; charset=utf-8');
+        //echo json_encode($data);
+        //exit();   
     }
 }

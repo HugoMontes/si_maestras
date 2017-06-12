@@ -205,6 +205,7 @@ $route['administrador/centro/guardar'] = 'backend/centro_formacion/guardar';
 $route['administrador/centro/editar/(:num)'] = 'backend/centro_formacion/existe/$1';
 $route['administrador/centro/valida/eliminar/especialidad'] = 'backend/centro_formacion/valida_eliminar_especialidad';
 $route['administrador/centro/delete/especialidad'] = 'backend/centro_formacion/delete_especialidad';
+$route['administrador/centro/guardar/rubro'] = 'backend/centro_formacion/guardar_rubro';
 
 // especialistas_administrador
 $route['administrador/especialista'] = 'backend/especialista';
@@ -277,7 +278,7 @@ $route['solicitar/especialistas'] = 'frontend/especialista_solicitud/save_solici
 $route['listar_especialistas/(:num)'] = 'frontend/especialista_solicitud/listar_especialistas/$1';
 $route['enviar/formulario/satisfaccion'] = 'frontend/especialista_solicitud/enviar_formulario_satisfaccion';
 $route['llenar/formulario/satisfaccion/(:num)'] = 'frontend/especialista_solicitud/formulario_satisfaccion/$1';
-
+$route['formulario/satisfaccion/guardar'] = 'frontend/especialista_solicitud/guardar_cuestionario';
 // inscripciones formadores
 $route['formador_inscripcion_previo/autenticar'] = 'frontend/formador_inscripcion_previo/autenticar';
 $route['inscripciones-formadores-score-bolivia'] = 'frontend/formador_inscripcion';
