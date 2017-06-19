@@ -221,5 +221,11 @@ class Especialista_trabajador_model extends CI_Model{
         $Q->free_result();
 
         return $data;       
-    }       
+    }
+
+    public function is_register_trabajador_centro($id_trabajador, $id_centro){
+        $sql='SELECT * FROM especialista_trabajador_especialidad ete, especialista_especialidad ee WHERE ete.id_trabajador='.$id_trabajador.' AND ete.id_especialidad=ee.id AND ee.id_centro='.$id_centro;
+        $query = $this->db->query($sql);
+        return $query->num_rows();
+    }  
 }

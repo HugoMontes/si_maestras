@@ -1,0 +1,32 @@
+NUEVA MAESTRA CONSTRUCTORA FORMULARIO
+
+CASO 1: Si esta registrada en el mismo centro de formacion, despliega los datos y muestra boton de edicion, bloqueando acceso desde nombre al final.
+
+CASO 2: Si esta registrada en otro centro de formacion muestra mensaje "La maestra constructora ya ha sido registrada en otro centro de formación, por favor verifique los datos personales corresponden a la misma persona (nombre, apellido, telefono,....)." que que el usuario ya se encuetra registrado, llenando automaticamente todos sus datos.
+
+Bloque de certificacion al final del formulario.
+
+====================== ENCUESTA DE SATISFACCION
+MODIFICAR PREGUNTA 2 
+"Por favor marque el(los) centros de formación donde fueron formadas las maestras"
+
+ * INFOCAL
+ * ...
+ * NO CUENTO CON ESA INFORMACIÓN
+
+Preguntas sin numeros
+
+-  3
+si el usuario digita si aparece un mensaje dicendo: "Agradeceremos su colaboración respondiendo cuatro sencillas preguntas"
+POR SI
+- Se despliega 1, 2, 5 y 6
+
+si el usuario digita no aparece un mensaje dicendo:
+POR NO
+- Se despliega 4
+  "Porfavor indiquenos cual fue la razon por la que no contrato los servicios:"
+
+BOTON ENVIAR ENCUESTA DE COLOR AMARRILLO CON LETRAS AZULES
+
+CABOCO RECIBE TODAS LAS RESPUESTAS MOSTRAR INFORME:
+NOMBRE_USUARIO | CORREO | CENTRO DE FORMACION | RESPUESTA

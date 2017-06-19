@@ -200,5 +200,5 @@ class Especialista_trabajador_especialidad_model extends CI_Model{
         $Q->free_result();
 
         return $data;       
-    }       
+    }
 }

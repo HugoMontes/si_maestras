@@ -42,6 +42,7 @@ $(document).ready(function(){
     cambiaImagenFondo();
 });
 function cambiaImagenFondo(){
+    console.log('cambiando..............');
     if(i<imagenes.length-1){
         $('.solicitud-maestras-main').css('background','url('+imagenes.eq(i).text()+')');
         i++;

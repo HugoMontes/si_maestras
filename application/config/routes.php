@@ -216,6 +216,7 @@ $route['administrador/especialista/editar/(:num)'] = 'backend/especialista/exist
 
 // especialistas_centro_formacion
 $route['administrador/especialista/centro'] = 'backend/especialista_centro';
+$route['administrador/especialista/(:any)'] = 'backend/especialista_centro/ajax_especialista/$1';
 $route['administrador/especialista/centro/nuevo'] = 'backend/especialista_centro/nuevo';
 $route['administrador/especialista/centro/eliminar/(:any)'] = 'backend/especialista_centro/eliminar/$1';
 $route['administrador/especialista/centro/guardar'] = 'backend/especialista_centro/guardar';

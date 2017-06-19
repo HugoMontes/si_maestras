@@ -369,6 +369,7 @@ class Especialista_centro extends CI_Controller{
         // Seleccion departamentos     
         $deptos=$this->especialista_depto_model->get_all('',array(),'','','','');
         $departamentos = array();
+        $departamentos[0]='Expedido en...';
         foreach ($deptos as $depto) {
             $departamentos[$depto->id]=$depto->descripcion;    
         }
@@ -577,6 +578,23 @@ class Especialista_centro extends CI_Controller{
         }
         redirect('administrador/especialista/centro');
     }
+
+
+    public function ajax_especialista($ci=null){
+        $usuario_sesion = get_user_session();
+        $especialista=$this->especialista_trabajador_model->get_by_ci($ci);
+        $num_especialidades=0;
+        if($especialista!=null){
+            $num_especialidades=$this->especialista_trabajador_model->is_register_trabajador_centro($especialista->id, $usuario_sesion->centro_formacion);
+        }
+        $data=array(
+            'especialista'=>$especialista,
+            'num_esp' => $num_especialidades,
+        );
+        header('Content-type: application/json; charset=utf-8');
+        echo json_encode($data);
+        exit();
+    } 
 
     private function valida_tabla($data){
         $nro_cols=count(current($data));

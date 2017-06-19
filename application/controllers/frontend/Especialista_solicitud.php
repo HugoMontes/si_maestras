@@ -345,21 +345,26 @@ class Especialista_solicitud extends CI_Controller{
                 $r5 = $this->input->post('p5');
                 $r6 = $this->input->post('p6');
                 // Guardar respuestas
-                $data=array('id_usuario'=>$id_usuario, 'id_pregunta'=>1, 'res_b'=>$r1);
+                $data=array('id_usuario'=>$id_usuario, 'id_pregunta'=>3, 'id_opciones'=>$r1);
                 $this->cuestionario_respuesta_model->insert($data);
-                $data=array('id_usuario'=>$id_usuario, 'id_pregunta'=>2, 'res_b'=>$r2);
-                $this->cuestionario_respuesta_model->insert($data);
-                $data=array('id_usuario'=>$id_usuario, 'id_pregunta'=>3, 'id_opciones'=>$r3);
-                $this->cuestionario_respuesta_model->insert($data);
-                foreach ($r4 as $respuesta) {
-                    $data=array('id_usuario'=>$id_usuario, 'id_pregunta'=>4, 'id_opciones'=>$respuesta);
-                    $this->cuestionario_respuesta_model->insert($data);    
-                }
-                $data=array('id_usuario'=>$id_usuario, 'id_pregunta'=>5, 'id_opciones'=>$r5);
-                $this->cuestionario_respuesta_model->insert($data);
-                foreach ($r6 as $respuesta) {
-                    $data=array('id_usuario'=>$id_usuario, 'id_pregunta'=>6, 'id_opciones'=>$respuesta);
-                    $this->cuestionario_respuesta_model->insert($data);    
+                if($r1==1){
+                    $data=array('id_usuario'=>$id_usuario, 'id_pregunta'=>1, 'res_b'=>$r2);
+                    $this->cuestionario_respuesta_model->insert($data);
+                    foreach ($r3 as $respuesta) {
+                        $data=array('id_usuario'=>$id_usuario, 'id_pregunta'=>2, 'res_b'=>$respuesta);
+                        $this->cuestionario_respuesta_model->insert($data);    
+                    }
+                    $data=array('id_usuario'=>$id_usuario, 'id_pregunta'=>5, 'id_opciones'=>$r4);
+                    $this->cuestionario_respuesta_model->insert($data);
+                    foreach ($r5 as $respuesta) {
+                        $data=array('id_usuario'=>$id_usuario, 'id_pregunta'=>6, 'id_opciones'=>$respuesta);
+                        $this->cuestionario_respuesta_model->insert($data);    
+                    }
+                }else{
+                    foreach ($r6 as $respuesta) {
+                        $data=array('id_usuario'=>$id_usuario, 'id_pregunta'=>4, 'id_opciones'=>$respuesta);
+                        $this->cuestionario_respuesta_model->insert($data);    
+                    }
                 }
                 $data = array('encuesta'=>date('Y-m-d H:i:s'));
                 $this->especialista_solicitud_model->update($data, $id_usuario);
