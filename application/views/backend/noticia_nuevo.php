@@ -28,7 +28,11 @@
               <h1>
                 Añadir nueva: <?php echo $titulo; ?>
                 <small></small>
-              </h1>
+                <?php
+                  $navegacion = $this->navegacion_model->get_values('navegacion',array('id'=>$id_navegacion));
+                ?>
+                <a href="<?php echo base_url($navegacion->navegacion);?>" class="btn btn-default btn-sm title-action">Volver al listado</a>
+              </h1>   
             </section>
             
             <!-- Main content -->

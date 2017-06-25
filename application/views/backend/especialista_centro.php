@@ -78,10 +78,10 @@
                                         <div class="input-group">
                                             <input type="text" class="form-control" id="apellidos" name="apellidos" value="<?php // echo $buscar; ?>" placeholder="<?php echo $this->lang->line('score_buscar');?>"/>
                                             <span class="input-group-btn">
-                                                <a id="buscar-apellidos" href="" class="btn btn-primary" onclick="buscar_apellidos('<?php echo base_url('index.php/administrador/especialista');?>');"><i class="fa fa-search"></i>&nbsp; Buscar</a>
+                                                <a id="buscar-apellidos" href="" class="btn btn-primary" onclick="buscar_apellidos('<?php echo base_url('index.php/administrador/especialista/centro');?>');"><i class="fa fa-search"></i>&nbsp; Buscar</a>
                                             </span>
                                             <span class="input-group-btn">
-                                                <a href="<?php echo base_url('index.php/administrador/especialista'); ?>" class="btn btn-default" style="margin-left: 10px;"> Limpiar</a>
+                                                <a href="<?php echo base_url('index.php/administrador/especialista/centro'); ?>" class="btn btn-default" style="margin-left: 10px;"> Limpiar</a>
                                             </span>
                                         </div>  
                                     </div>

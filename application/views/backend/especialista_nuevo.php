@@ -88,7 +88,7 @@
                     $data = array(
                       'name'  => 'ciudad',
                       'id'    => 'ciudad',
-                      'class' => 'form-control selectpicker',
+                      'class' => 'form-control',
                       'data-style' => 'btn-primary'
                       );                            
                     echo form_dropdown($data, $ciudades, set_value('ciudad'));                              
@@ -96,7 +96,7 @@
                   </div>
                 </div>      
               </div>
-              <div class="form-group">
+              <div id="frmgrp-fechanac" class="form-group">
                 <label for="fechanac">Fecha de nacimiento <span class="required">*</span></label>
                 <?php echo form_error('fechanac', '<span class="error-form">', '</span>'); ?>
                 <div class="row">
@@ -134,7 +134,44 @@
                    	?>
                   </div>
                 </div>      
-              </div>  
+              </div>
+
+              <div class="form-group">
+                <label for="direccion">Dirección <span class="required">*</span></label>
+                <?php echo form_error('direccion', '<span class="error-form">', '</span>'); ?>
+                <div class="row">
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" id="direccion" name="direccion" value="<?php echo set_value('direccion');?>" placeholder="Ingrese una direccion"/>
+                  </div>
+                </div>      
+              </div>
+              <div class="form-group">
+                <label for="telefono1">Telefono de Contacto</label>
+                <?php echo form_error('telefono1', '<span class="error-form">', '</span>'); ?>
+                <div class="row">
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" id="telefono1" name="telefono1" value="<?php echo set_value('telefono1');?>" placeholder="Ingrese numero de telefono fijo o celular"/>
+                  </div>
+                </div>      
+              </div>
+              <div class="form-group">
+                <label for="telefono2">Telefono de Referencia</label>
+                <?php echo form_error('telefono2', '<span class="error-form">', '</span>'); ?>
+                <div class="row">
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" id="telefono2" name="telefono2" value="<?php echo set_value('telefono2');?>" placeholder="Ingrese numero de telefono fijo o celular"/>
+                  </div>
+                </div>      
+              </div>
+              <div class="form-group">
+                <label for="correo">Correo electronico</label>
+                <?php echo form_error('correo', '<span class="error-form">', '</span>'); ?>
+                <div class="row">
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" id="correo" name="correo" value="<?php echo set_value('correo');?>" placeholder="Ingrese un email"/>
+                  </div>
+                </div>      
+              </div>
 
               <div class="panel panel-primary">
                 <div class="panel-heading">CERTIFICACIONES</div>
@@ -185,42 +222,6 @@
                 </div>
               </div>
 
-			        <div class="form-group">
-                <label for="direccion">Dirección <span class="required">*</span></label>
-                <?php echo form_error('direccion', '<span class="error-form">', '</span>'); ?>
-                <div class="row">
-                  <div class="col-md-6">
-                    <input type="text" class="form-control" id="direccion" name="direccion" value="<?php echo set_value('direccion');?>" placeholder="Ingrese una direccion"/>
-                  </div>
-                </div>      
-              </div>
-              <div class="form-group">
-                <label for="telefono1">Telefono de Contacto</label>
-                <?php echo form_error('telefono1', '<span class="error-form">', '</span>'); ?>
-                <div class="row">
-                  <div class="col-md-6">
-                    <input type="text" class="form-control" id="telefono1" name="telefono1" value="<?php echo set_value('telefono1');?>" placeholder="Ingrese numero de telefono fijo o celular"/>
-                  </div>
-                </div>      
-              </div>
-              <div class="form-group">
-                <label for="telefono2">Telefono de Referencia</label>
-                <?php echo form_error('telefono2', '<span class="error-form">', '</span>'); ?>
-                <div class="row">
-                  <div class="col-md-6">
-                    <input type="text" class="form-control" id="telefono2" name="telefono2" value="<?php echo set_value('telefono2');?>" placeholder="Ingrese numero de telefono fijo o celular"/>
-                  </div>
-                </div>      
-              </div>
-              <div class="form-group">
-                <label for="correo">Correo electronico</label>
-                <?php echo form_error('correo', '<span class="error-form">', '</span>'); ?>
-                <div class="row">
-                  <div class="col-md-6">
-                    <input type="text" class="form-control" id="correo" name="correo" value="<?php echo set_value('correo');?>" placeholder="Ingrese un email"/>
-                  </div>
-                </div>      
-              </div>
               <div class="form-group">
                 <label for="estado">Estado</label>
                 <?php echo form_error('estado', '<span class="error-form">', '</span>'); ?>  
@@ -255,7 +256,7 @@
               	$navegacion = $this->navegacion_model->get_values('navegacion',array('vista'=>ESPECIALISTAS)); 
               ?>
               <a href="<?php echo base_url($navegacion->navegacion); ?>" class="btn btn-default">Cancelar</a>
-              <button type="submit" class="btn btn-primary">Guardar</button>
+              <button id="btn-guardar" type="submit" class="btn btn-primary">Guardar</button>
             </div>
           </form>
           <!-- form end -->                                   

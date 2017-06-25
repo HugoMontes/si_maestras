@@ -34,6 +34,10 @@
                   }
                 ?>
                 <a href="<?php echo base_url('index.php/administrador/'.$categoria.'/nuevo/'.$id_grupo);?>" class="btn btn-default btn-sm title-action"><?php echo $this->lang->line('score_nueva'); ?></a>
+                <?php
+                  $navegacion = $this->navegacion_model->get_values('navegacion',array('id'=>$id_navegacion));
+                ?>
+                <a href="<?php echo base_url($navegacion->navegacion);?>" class="btn btn-default btn-sm title-action">Volver al listado</a>
                 <small></small>
               </h1>
             </section>

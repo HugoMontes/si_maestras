@@ -135,6 +135,43 @@
             </div>      
           </div>
 
+          <div class="form-group">
+            <label for="direccion">Dirección <span class="required">*</span></label>
+            <?php echo form_error('direccion', '<span class="error-form">', '</span><br/><br/>'); ?>
+            <div class="row">
+              <div class="col-md-6">
+                <input type="text" class="form-control" id="direccion" name="direccion" value="<?php echo set_value('direccion',$especialista->direccion);?>" placeholder="Ingrese una direccion"/>
+              </div>
+            </div>      
+          </div>
+          <div class="form-group">
+            <label for="telefono1">Telefono de Contacto</label>
+            <?php echo form_error('telefono1', '<span class="error-form">', '</span><br/><br/>'); ?>
+            <div class="row">
+              <div class="col-md-6">
+                <input type="text" class="form-control" id="telefono1" name="telefono1" value="<?php echo set_value('telefono1',$especialista->telefono_contacto);?>" placeholder="Ingrese numero de telefono o celular"/>
+              </div>
+            </div>      
+          </div>
+          <div class="form-group">
+            <label for="telefono2">Telefono de Referencia</label>
+            <?php echo form_error('telefono2', '<span class="error-form">', '</span><br/><br/>'); ?>
+            <div class="row">
+              <div class="col-md-6">
+                <input type="text" class="form-control" id="telefono2" name="telefono2" value="<?php echo set_value('telefono2',$especialista->telefono_referencia);?>" placeholder="Ingrese numero de telefono o celular"/>
+              </div>
+            </div>      
+          </div>
+          <div class="form-group">
+            <label for="correo">Correo electronico</label>
+            <?php echo form_error('correo', '<span class="error-form">', '</span><br/><br/>'); ?>
+            <div class="row">
+              <div class="col-md-6">
+                <input type="text" class="form-control" id="correo" name="correo" value="<?php echo set_value('correo',$especialista->correo);?>" placeholder="Ingrese un email"/>
+              </div>
+            </div>      
+          </div>
+
           <div class="panel panel-primary">
             <div class="panel-heading">CERTIFICACIONES</div>
             <div class="panel-body">
@@ -190,42 +227,6 @@
             </div>
           </div>
 
-          <div class="form-group">
-            <label for="direccion">Dirección <span class="required">*</span></label>
-            <?php echo form_error('direccion', '<span class="error-form">', '</span><br/><br/>'); ?>
-            <div class="row">
-              <div class="col-md-6">
-                <input type="text" class="form-control" id="direccion" name="direccion" value="<?php echo set_value('direccion',$especialista->direccion);?>" placeholder="Ingrese una direccion"/>
-              </div>
-            </div>      
-          </div>
-          <div class="form-group">
-            <label for="telefono1">Telefono de Contacto</label>
-            <?php echo form_error('telefono1', '<span class="error-form">', '</span><br/><br/>'); ?>
-            <div class="row">
-              <div class="col-md-6">
-                <input type="text" class="form-control" id="telefono1" name="telefono1" value="<?php echo set_value('telefono1',$especialista->telefono_contacto);?>" placeholder="Ingrese numero de telefono o celular"/>
-              </div>
-            </div>      
-          </div>
-          <div class="form-group">
-            <label for="telefono2">Telefono de Referencia</label>
-            <?php echo form_error('telefono2', '<span class="error-form">', '</span><br/><br/>'); ?>
-            <div class="row">
-              <div class="col-md-6">
-                <input type="text" class="form-control" id="telefono2" name="telefono2" value="<?php echo set_value('telefono2',$especialista->telefono_referencia);?>" placeholder="Ingrese numero de telefono o celular"/>
-              </div>
-            </div>      
-          </div>
-          <div class="form-group">
-            <label for="correo">Correo electronico</label>
-            <?php echo form_error('correo', '<span class="error-form">', '</span><br/><br/>'); ?>
-            <div class="row">
-              <div class="col-md-6">
-                <input type="text" class="form-control" id="correo" name="correo" value="<?php echo set_value('correo',$especialista->correo);?>" placeholder="Ingrese un email"/>
-              </div>
-            </div>      
-          </div>
           <div class="form-group">
             <label for="estado">Estado</label>
             <?php echo form_error('estado', '<span class="error-form">', '</span><br/><br/>'); ?>  

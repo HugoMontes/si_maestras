@@ -1,4 +1,8 @@
 var url_editar;
+
+/********************************
+*********** BEGIN : EVENTOS *****
+*********************************/
 $( function() {
   $( ".fecha-certificacion" ).datepicker({ dateFormat: 'yy-mm-dd' });
   url_editar=$('#btn-editar').attr('href');
@@ -66,6 +70,45 @@ $(document).on('click','.especialidades',function(){
   }
 });
 
+$('#btn-guardar').click(function(event){
+  event.preventDefault();
+  var numItems=$('input:checkbox:checked').length;
+  var sw=true;
+  $('#frmgrp-fechanac').removeClass('has-error')
+  if(numItems==0){
+    sw=false;
+    alert("Seleccione por lo menos una certificación.");
+  }
+  if($('#depto').val()=='0'){
+    sw=false;
+    alert("Seleccione lugar de expedicion de la cédula."); 
+  }
+  if(validaFechaNac()){
+    sw=false;
+    $('#frmgrp-fechanac').addClass('has-error');
+    alert('La fecha de nacimiento es un dato obligatorio.');
+  }
+  if(sw==true){
+    $( "#frm-maestra").submit();
+  }
+});
+/********************************
+*********** END : EVENTOS *******
+*********************************/
+
+/********************************
+*********** BEGIN : FUNCIONES ***
+*********************************/
+function validaFechaNac(){  
+  var dia=$('#dia').val();
+  var mes=$('#mes').val();
+  var anio=$('#anio').val();
+  if(dia==0 || mes==0 || anio==0){
+    return true;
+  }
+  return false;
+}
+
 function formatDate(date) {
   var d = new Date(date),
   month = '' + (d.getMonth() + 1),
@@ -75,20 +118,6 @@ function formatDate(date) {
   if (day.length < 2) day = '0' + day;
   return [year, month, day].join('-');
 }
-
-$('#btn-guardar').click(function(event){
-  event.preventDefault();
-  var numItems=$('input:checkbox:checked').length;
-  var sw=true;
-  if(numItems==0){
-    sw=false;
-    alert("Seleccione por lo menos una certificación.");
-  }
-  if($('#depto').val()=='0'){
-    sw=false;
-    alert("Seleccione lugar de expedicion de la cédula."); 
-  }
-  if(sw==true){
-    $( "#frm-maestra").submit();
-  }
-});
+/********************************
+*********** END : FUNCIONES *****
+*********************************/

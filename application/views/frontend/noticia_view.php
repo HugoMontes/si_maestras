@@ -41,7 +41,10 @@
       </div>
       <br/>
       <div style="border-top: 1px dashed #444444; border-bottom: 1px dashed #444444;">
-          <p><span class="glyphicon glyphicon-calendar"></span> <?php echo $noticia->creado; ?> | <?php echo $noticia->fuente; ?></p>
+        <p><span class="glyphicon glyphicon-calendar"></span> <?php echo $noticia->creado; ?> | <?php echo $noticia->fuente; ?></p>
+        <?php if($noticia->url!=''){ ?>
+        <p><span class="glyphicon glyphicon-link"></span><a href="<?php echo $noticia->url; ?>" style="color: #666;"> <?php echo $noticia->url; ?></a></p>  
+        <?php } ?>
       </div>
       <br/>
       <?php if($noticia->tipo_contenido=='texto'){ 

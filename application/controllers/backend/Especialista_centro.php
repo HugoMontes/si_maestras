@@ -28,7 +28,7 @@ class Especialista_centro extends CI_Controller{
         $navegacion = $this->navegacion_model->get_values('id',array('vista'=>ESPECIALISTAS)); 
         $this->navegacion_model->update(array('navegacion'=>$url),$navegacion->id); 
         
-        /*
+        
         ###################################################
         # Busqueda
         ###################################################
@@ -43,7 +43,7 @@ class Especialista_centro extends CI_Controller{
         }else{
             $data['buscar']='';
         }
-
+        
         ###################################################
         # Ordenamiento
         ###################################################
@@ -54,13 +54,15 @@ class Especialista_centro extends CI_Controller{
             $config['add_pars']['col'] = $col;
             $config['add_pars']['dir'] = $dir;
         }else{
-            $order = " `especialista_trabajador.creado` DESC ";
+            $order = " `creado` DESC ";
         }
-
+        /*
         ###################################################
         # Consulta principal
         ###################################################
         if (!isset($where)) {
+            $where = '';
+        }else{
             $where = '';
         }
         //$count = $this->especialista_trabajador_model->get_count($where, $order);
