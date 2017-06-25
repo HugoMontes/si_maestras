@@ -35,6 +35,7 @@ define('PUBLICACIONES','publicaciones');
 define('CONTACTOS','contactos');
 define('SLIDES','slides');
 define('ESPECIALISTAS','especialistas');
+define('ENCUESTA','encuesta');
 define('ESPECIALIDADES','especialidades');
 define('CENTROS_FORMACION','centros_formacion');
 // generos

@@ -52,6 +52,8 @@
     $class_menu_publicacion_0 = '';
     $class_menu_publicacion_1 = '';
     $class_menu_publicacion_2 = '';
+    // menu encuesta
+    $class_menu_encuesta_0 = '';
     // menu usuario
     $class_menu_usuario_0 = '';
     $class_menu_usuario_1 = '';
@@ -164,6 +166,8 @@
         else{
             $class_menu_publicacion_1 = 'active';
         }        
+    }elseif(strpos($url, 'encuesta') !== false AND strpos($url, 'search_key=') === false){
+        $class_menu_encuesta_0 = 'active';     
     }elseif(strpos($url, 'usuario') !== false AND strpos($url, 'search_key=') === false){
         $class_menu_usuario_0 = 'active';
         if(strpos($url, 'editar/'.$usuario_sesion->id) !== false){
@@ -464,6 +468,14 @@
         </li>
         <?php } ?>
         
+
+
+        <li class="treeview <?php echo $class_menu_encuesta_0;?>">
+          <a href="<?php echo base_url('index.php/administrador/encuesta');?>">
+            <i class="glyphicon glyphicon-check"></i> <span>Resultados encuesta</span>
+          </a>
+        </li>
+
         <!--
         <?php if($usuario_sesion->perfil_id == SUPER){ ?>
         <li class="treeview <?php echo $class_menu_publicacion_0;?>">

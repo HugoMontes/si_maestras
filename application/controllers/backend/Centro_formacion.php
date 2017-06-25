@@ -60,7 +60,6 @@ class Centro_formacion extends CI_Controller{
             $where = '';
         }
         $count = $this->centro_model->get_count($where, $order);
-
         ###################################################
         # Pagination
         ###################################################
@@ -81,12 +80,10 @@ class Centro_formacion extends CI_Controller{
 
         $this->page->initialize($config);
 
-        //$data['centros'] = $this->centro_model->get_pagination($cur_page, $config['rows_per_page'], $where, $order);
+        $data['centros'] = $this->centro_model->get_pagination($cur_page, $config['rows_per_page'], $where, $order);
         ########################################################################################  
         $data['titulo'] = $this->lang->line('maestras_centros');
-        $data['centros'] = $this->centro_model->get_all('',array(),'','','descripcion asc','');
         $this->load->view('backend/centro_formacion',$data);
-        
     }
 
     public function nuevo(){
@@ -216,7 +213,7 @@ class Centro_formacion extends CI_Controller{
                     }
                     */
                     $this->crear_directorio($nombre_carpeta);     
-                    $this->session->set_flashdata('mensaje', $this->lang->line('caboco_especialidad_guardado'));
+                    $this->session->set_flashdata('mensaje', 'El centro de formación fue guardado exitosamente');
                     redirect('administrador/centro/editar/'.$centro_id);
                 }
                 
@@ -238,6 +235,7 @@ class Centro_formacion extends CI_Controller{
                         // ACTUALIZAR CENTRO
                         $this->centro_model->update($data, $centro_id);                        
                         // ACTUALIZAR ESPECIALIDADES/RUBROS LOS QUE TIENEN ID
+                        /*
                         for($i=0;$i<count($id_especialidades);$i++) {
                             $data = array (
                                 'id_area' => $areas[$i],
@@ -245,7 +243,9 @@ class Centro_formacion extends CI_Controller{
                             );
                             $this->centro_model->update_especialidad($data,$id_especialidades[$i]);
                         }
+                        */
                         // GUARDAR NUEVAS ESPECIALIDADES RUBROS
+                        /*
                         for($j=$i;$j<count($especialidades);$j++) {
                             if($especialidades[$j]!=""){
                                 $data = array (
@@ -258,6 +258,7 @@ class Centro_formacion extends CI_Controller{
                                 $this->centro_model->insert_especialidad($data);
                             }
                         }
+                        */
                         $this->session->set_flashdata('mensaje', $this->lang->line('maestras_centros_guardado'));
                         redirect('administrador/centro/editar/'.$centro_id);
                         
@@ -318,12 +319,12 @@ class Centro_formacion extends CI_Controller{
             $formador = $this->centro_model->get($formador_id);
             if($formador->estado == 0)
             {                    
-                $data['mensaje'] = $this->lang->line('score_formador_despublicado');
+                $data['mensaje'] = '1 centro de formación ha sido despublicado';
                 echo $this->load->view('backend/ajax/mensaje',$data,TRUE);  
             }
             else
             {
-                $data['mensaje'] = $this->lang->line('score_formador_publicado');
+                $data['mensaje'] = '1 centro de formación ha sido publicado';
                 echo $this->load->view('backend/ajax/mensaje',$data,TRUE); 
             }
         }
@@ -384,26 +385,40 @@ class Centro_formacion extends CI_Controller{
         $descripcion = $this->input->post('especialidad');
         $id_centro = $this->input->post('id_centro');
         $id_area = $this->input->post('id_area');
+        $codigo=$this->centro_model->get($id_centro)->codigo;
+        $codigo.=$this->especialista_area_model->get($id_area)->codigo;
         // guardar especialidad
         $data = array (
             'id_centro' => $id_centro,
             'id_area' => $id_area,
+            'codigo' => $codigo,
             'descripcion' => $descripcion,
             'creado_por' => $usuario_sesion->id,
             'estado' => 1,
             );
-        $this->centro_model->insert_especialidad($data);
+        $id_especialidad=$this->especialista_especialidad_model->insert($data);
+        $data = array(
+            'codigo' => $codigo.$id_especialidad,
+            );
+        $this->especialista_especialidad_model->update($data,$id_especialidad);
+        /*
         $data=array(
             'id_centro'=>$id_centro,
             'descripcion'=>$descripcion,
             'id_area'=>$id_area,
         );
+        */
         // listar especialidades
-        $data['especialidades']=$this->especialista_especialidad_model->get_all('',array('id_centro'=>$id_centro),'','','id','');
-        //echo  $this->load->view('backend/ajax/listar_especialidades',$data);
-        print_r($data);
-        //header('Content-type: application/json; charset=utf-8');
-        //echo json_encode($data);
-        //exit();   
+        //$data['especialidades']=$this->especialista_especialidad_model->get_all('',array('id_centro'=>$id_centro),'','','id','');
+        //print_r($data);
+        $especialidad=$this->especialista_especialidad_model->get($id_especialidad);
+        $centro=$this->especialista_area_model->get($id_area)->descripcion;
+        $data=array(
+            'especialidad'=>$especialidad,
+            'centro'=>$centro,            
+            );
+        header('Content-type: application/json; charset=utf-8');
+        echo json_encode($data);
+        exit();   
     }
 }

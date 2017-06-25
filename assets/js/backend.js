@@ -165,6 +165,12 @@ function buscar_nombre(url)
     $('#buscar-nombre').attr('href', url + '/?search_in=nombre&search_key=' + buscar);      
 }
 
+function buscar_centros(url)
+{
+    var buscar = document.getElementById('centro').value; //?search_in=email&search_key=@gmail.com
+    $('#buscar-centro').attr('href', url + '/?search_in=descripcion&search_key=' + buscar);
+}
+
 function buscar_contenido(url)
 {
     var buscar = document.getElementById('contenido').value; //?search_in=email&search_key=@gmail.com

@@ -40,7 +40,6 @@
           <!-- form start -->
           <form id="form-centro" role="form" method="post" action="<?php echo base_url('index.php/administrador/centro/guardar');?>">
             <div class="box-body">
-              
               <!-- begin : descripcion -->
               <div class="form-group">
                 <label for="descripcion">Centro de formación: <span class="required">*</span></label>
@@ -52,14 +51,14 @@
                   </div>
                 </div>      
               </div>
-              <!-- end : descripcion -->
-              
+              <!-- end : descripcion -->         
               
 
               <!-- begin : especialidades -->
               <div class="panel panel-primary">
                 <div class="panel-heading">NUEVO RUBRO DE FORMACIÓN</div>
                 <div class="panel-body">
+                  <div class="alert alert-success alert-add-rubro" style="display: none;" role="alert">...</div>
                   <?php echo form_error('especialidad', '<span class="error-form">', '</span>'); ?>  
                   <!-- begin : Mensaje error eliminar rubro -->
                   <div id="msg-error-eliminar-rubro" class="row" style="display: none;">
@@ -136,37 +135,42 @@
               <!-- begin : Rubros de formacion -->
               <div class="row">
                 <div class="col-md-12">
-                  <table id="tbl-especialidades" class="table table-bordered" style="margin: 0px;">
-                    <thead>
-                      <tr>
-                        <th>Certificación</th>
-                        <th style="width: 270px;">Rubro</th>
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php if(count($especialidades)!=0){ ?>
-                        <?php
-                          foreach ($especialidades as $especialidad) { 
-                            $especialidad = (object) $especialidad;
-                        ?>
-                            <tr>
-                              <td>
-                                <?php echo $especialidad->descripcion; ?>
-                              </td>
-                              <td>
-                                <?php echo get_area($especialidad->id_area); ?>
-                              </td>
-                              <td style="width: 50px;">
-                                <button type="button" class="btn btn-danger btn-remove-dialog" title="Eliminar certificación"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                              </td>
-                            </tr>
-                        <?php } ?> 
-                      <?php }else{ ?>
-                         <td colspan="3">No existen certificaciones</td>   
-                      <?php } ?>
-                      </tbody>
-                  </table>
+                  <div id="browse_table">
+                    <table id="tbl-especialidades" class="table table-hover table-bordered dt-responsive nowrap" style="margin: 0px;">
+                      <thead>
+                        <tr>
+                          <th>Certificación</th>
+                          <th style="width: 135px;">Codigo</th>
+                          <th style="width: 270px;">Rubro</th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php if(count($especialidades)!=0){ ?>
+                          <?php
+                            foreach ($especialidades as $especialidad) { 
+                              $especialidad = (object) $especialidad;
+                          ?>
+                          <tr>
+                            <td class="row-descripcion"><?php echo $especialidad->descripcion; ?></td>
+                            <td>
+                              <?php echo $especialidad->codigo; ?>
+                            </td>
+                            <td>
+                              <?php echo get_area($especialidad->id_area); ?>
+                            </td>
+                            <td style="width: 50px;">
+                              <input type="hidden" class="id-rubro" value="<?php echo $especialidad->id; ?>"></input>
+                              <button type="button" class="btn btn-danger btn-remove-dialog" title="Eliminar certificación"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                            </td>
+                          </tr>
+                          <?php } ?> 
+                        <?php }else{ ?>
+                           <td colspan="3">No existen certificaciones</td>   
+                        <?php } ?>
+                        </tbody>
+                    </table>
+                    </div>
                 </div>
               </div> 
               <!-- begin : Rubros de formacion -->
@@ -228,11 +232,11 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h3 class="modal-title" id="myModalLabel">Mensaje</h3>
+        <h3 class="modal-title" id="myModalLabel">Eliminar</h3>
       </div>
       <div class="modal-body">
         <p>¿Seguro que quiere eliminar este rubro?</p>
-        <p><div id="modal_confirm_eliminar_nombre"></div></p>
+        <p><div id="mdl-elim-txt-rubro"></div></p>
       </div>
       <div class="modal-footer">
         <button type="button" id="btn-remove-confirm" class="btn btn-primary" data-dismiss="modal">Aceptar</a>

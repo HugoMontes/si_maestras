@@ -14,6 +14,20 @@ class Especialista_empleador_model extends CI_Model{
         }
     }
 
+    public function exists($key, $value){
+        $this->db->where($key, $value);
+        $query = $this->db->get($this->table_name);
+        if ($query->num_rows() > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function get($id) {
+        return $this->db->get_where($this->table_name, array($this->primary_key => $id))->row();
+    }
+
     public function get_all($fields = '', $where = array(), $table = '', $limit = '', $order_by = '', $group_by = '') {
         $data = array();
         if ($fields != '') {

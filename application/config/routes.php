@@ -119,6 +119,8 @@ $route['administrador/publicacion/publicar'] = 'backend/publicacion/publicar';
 $route['administrador/publicacion/editar/(:num)'] = 'backend/publicacion/existe/$1';
 $route['administrador/publicacion/guardar'] = 'backend/publicacion/guardar';
 $route['administrador/publicacion/nuevo'] = 'backend/publicacion/nuevo';
+// encuesta
+$route['administrador/encuesta'] = 'backend/encuesta';
 // contacto
 $route['administrador/contacto'] = 'backend/contacto';
 $route['administrador/contacto/eliminar/(:any)'] = 'backend/contacto/eliminar/$1';
@@ -202,10 +204,13 @@ $route['administrador/centro'] = 'backend/centro_formacion';
 $route['administrador/centro/nuevo'] = 'backend/centro_formacion/nuevo';
 $route['administrador/centro/eliminar/(:any)'] = 'backend/centro_formacion/eliminar/$1';
 $route['administrador/centro/guardar'] = 'backend/centro_formacion/guardar';
+$route['administrador/centro/publicar'] = 'backend/centro_formacion/publicar';
+$route['administrador/formador/publicar'] = 'backend/centro_formacion/publicar';
 $route['administrador/centro/editar/(:num)'] = 'backend/centro_formacion/existe/$1';
 $route['administrador/centro/valida/eliminar/especialidad'] = 'backend/centro_formacion/valida_eliminar_especialidad';
 $route['administrador/centro/delete/especialidad'] = 'backend/centro_formacion/delete_especialidad';
 $route['administrador/centro/guardar/rubro'] = 'backend/centro_formacion/guardar_rubro';
+$route['administrador/centro/publicar_mensaje'] = 'backend/centro_formacion/publicar_mensaje';
 
 // especialistas_administrador
 $route['administrador/especialista'] = 'backend/especialista';

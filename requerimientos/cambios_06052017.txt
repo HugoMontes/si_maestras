@@ -4,3 +4,26 @@ CAMBIOS BASE DE DATOS:
 	Editar tabla: noticia
 		      Agregar campo id_centro y dejar todo en cero
 	Reemplazar tabla: pagina_predisenadas
+
+======================================================
+CASO SOLO PARA CENTROS DE FORMACION
+
+1. Recuperar los id de la tabla cuestionario_respuesta de los registros cuyo id_pregunta=2 y res_b=id_centro
+
+2. Con ese listado de ids para cada uno recuperar todos los registros cuyo id_usuario=ids[i] (Ejemplo: id_usuario=52)
+
+3. Para mostrar el valor de la pregunta P1 consultar y recuperar de la base de datos id_usuario=52 and id_pregunta=3, si del registro recuperado id_opciones=1, entonces es SI
+
+4. Para mostrar el valor de la pregunta P2 consultar y recuperar de la base de datos id_usuario=52 and id_pregunta=1, mostrar el valor que se encuetra en res_b
+
+5. Para mostrar el valor de la pregunta P3 consultar y recuperar de la base de datos id_usuario=52 and id_pregunta=2, EN ESTE CASO PUEDE DEVOLVER VACIO O MAS DE UN REGISTRO.Con un for realizar una consulta para cada registro, mediante res_b buscar el id del centro para recuperar su nombre.
+
+6. Para mostrar el valor de la pregunta P4 consultar y recuperar de la base de datos id_usuario=52 and id_pregunta=5, mostrar el resultado de id_opciones (EXCELENTE)
+
+7. Para mostrar el valor de la pregunta P5 consultar y recuperar de la base de datos id_usuario=52 and id_pregunta=6, EN ESTE CASO PUEDE DEVOLVER VACIO O MAS DE UN REGISTRO.Con un for realizar una consulta para cada registro, mediante id_opciones buscar el id de la pregunta en opciones y recuperar su valor enunciado.
+	
+
+=====================================================
+2017/06/21
+- EDITAR TABLA cuestionario_pregunta
+- AGREGAR NUEVO REGISTRO: navegacion
