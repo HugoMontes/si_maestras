@@ -57,7 +57,7 @@
             <div class="noticia-content-title noticia-border">
               <div class="meta-left">
                 <h6 class="noticia-titulo">
-                  <a href="<?php echo base_url()."index.php/noticias_detalle/".$noticia->id;?>"><?php echo $noticia->titulo; ?></a>
+                  <a href="<?php echo base_url()."index.php/noticias_detalle/".$noticia->id;?>"><?php echo get_palabras($noticia->titulo, 22); ?></a>
                   <br/>
                   <span class="fecha"><i class="fa fa-calendar" aria-hidden="true"></i> <?php echo date("d-m-Y", strtotime($noticia->creado)); ?></span>
                 </h6>

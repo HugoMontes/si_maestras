@@ -70,7 +70,8 @@ class Noticia extends CI_Controller{
 	       	if($pagina->estado == PUBLICADO){
 	           $this->pagina_predisenada_model->update(array('hits'=>$pagina->hits + 1),$pagina->id);       
 	           $data['titulo'] = $grupo->descripcion;
-	           $data['metadescripcion'] = $pagina->metadescripcion;
+	           //$data['metadescripcion'] = $pagina->metadescripcion;
+	           $data['metadescripcion'] = $noticia->titulo;
 	           $data['metapalabras_clave'] = $pagina->metapalabras_clave;
 	           $data['menus'] = $this->nested_set->getMenuBootstrap(); 
 	    	   $data['noticia'] = $noticia;
