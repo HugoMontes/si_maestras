@@ -43,12 +43,14 @@
             <?php
               if(!empty($noticia->imagen)){
                 if(!is_youtube($noticia->imagen)){
-                  $img = base_url('assets/img/noticias/'.$noticia->imagen);
+                  if(isset($noticia->thumb)){
+                    $img = base_url('assets/img/noticias/thumb/'.$noticia->thumb);
+                  }
                 }else{
                   $img = $noticia->imagen;
                 }
               }else{
-                $img = base_url('assets/img/noticias/default.png');
+                $img = base_url('assets/img/noticias/thumb/default.png');
               }
             ?>
             <div class="noticia-imagen">
@@ -177,13 +179,15 @@
             <?php
               if(!empty($noticia->imagen)){
                 if(!is_youtube($noticia->imagen)){
-                  $img = base_url('assets/img/noticias/'.$noticia->imagen);
+                  if(isset($noticia->thumb)){
+                    $img = base_url('assets/img/noticias/thumb/'.$noticia->thumb);
+                  }
                 }else{
                   $img = $noticia->imagen;
                 }
               }
               else{
-                $img = base_url('assets/img/noticias/default.png');
+                $img = base_url('assets/img/noticias/thumb/default.png');
               }
             ?>
             <div class="noticia-imagen">

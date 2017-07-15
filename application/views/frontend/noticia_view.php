@@ -125,8 +125,9 @@
 
         <div class="col-md-offset-3 col-md-6 col-md-offset-3">
           <h1><?php echo $noticia->titulo; ?></h1>
+          <!--a href="http://www.facebook.com/sharer.php?s=100&p[url]=<?php echo base_url(); ?>?s=100&p[title]=<?php echo $noticia->titulo; ?>&p[images][0]=<?php echo base_url('assets/img/noticias/'.$noticia->imagen);?>&p[summary]=<?php echo $noticia->titulo; ?>">hola</a-->
           <br/>
-          <div class="fb-like" data-href="http://www.maestrasconstructoras.org/" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+          <div class="fb-like" data-href="http://www.maestrasconstructoras.org/" data-layout="standard" data-action="like" data-show-faces="true"></div>
           <br/>
           <br/>
           <div class="noticia-resumen">
