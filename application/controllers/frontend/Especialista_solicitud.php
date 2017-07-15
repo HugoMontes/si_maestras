@@ -214,22 +214,21 @@ class Especialista_solicitud extends CI_Controller{
 
     public function listar_especialistas($id){
         $this->load->helper('caboco_helper');
-        $especialistas=$this->especialista_solicitud_model->get_especialistas_by_id_solicitud($id);
-  
-
-        
+        //$especialistas=$this->especialista_solicitud_model->get_especialistas_by_id_solicitud($id);
+        $solicitud=$this->especialista_solicitud_model->get_solicitud_by_id($id);
+        $especialistas=$this->especialista_solicitud_model->get_trabajadores_by_id_area($solicitud->id_especialidad); 
+        //print_r($especialistas);
         $i=0;
         foreach ($especialistas as $e) {
             $especialidades=$this->especialista_solicitud_model->get_especialidad_by_id_trabajador($e['id_trabajador']);
             $especialistas[$i]['especialidades']=$especialidades;
             $i++;
-            /*
-            echo $e['id_trabajador'].'<br>';
+            //echo $e['id_trabajador'].'<br>';
             //print_r($especialidades);
             //echo count($especialidades);
-            echo '<br>=============================<br>';
-            */            
+            //echo '<br>=============================<br>';             
         }
+        
         
         $pagina_especialistas = $this->pagina_predisenada_model->get_values('metadescripcion, metapalabras_clave, id, hits,estado', array('alias'=>'contacto-maestras-constructoras'));
         $this->pagina_predisenada_model->update(array('hits'=>$pagina_especialistas->hits + 1),$pagina_especialistas->id);  
@@ -241,7 +240,6 @@ class Especialista_solicitud extends CI_Controller{
         $data['mod_pie'] = $this->modulo_model->get_values('contenido',array('modulo'=>'mod_pie','estado'=>PUBLICADO)); 
         $data['mod_logo'] = $this->modulo_model->get_values('contenido',array('modulo'=>'mod_logotipo','estado'=>PUBLICADO));  
         $data['especialistas'] = $especialistas;
-        // $data['selecesp'] = $this->especialista_solicitud_model->get_id_especialidades_by_id_empleador($id);
         $this->load->view('frontend/especialista_respuesta_consulta',$data);        
     }
 

@@ -130,6 +130,7 @@ class Especialista_solicitud_model extends CI_Model{
     }
     */
     public function get_especialistas_by_id_solicitud($id){
+        /*
         $sql='SELECT et.id AS id_trabajador, ec.descripcion AS ciudad, et.apellidos, et.nombres, et.telefono_contacto, et.telefono_referencia, et.correo, et.direccion
                 FROM especialista_trabajador AS et 
                 JOIN especialista_trabajador_especialidad AS ete ON ete.id_trabajador=et.id
@@ -138,9 +139,31 @@ class Especialista_solicitud_model extends CI_Model{
                 JOIN especialista_ciudad AS ec ON ec.id=es.id_ciudad
                 JOIN especialista_area AS ea ON ea.id=es.id_especialidad
                 WHERE es.id='.$id.' ORDER BY RAND() LIMIT 100';
+        */
+        $sql='SELECT * FROM especialista_solicitud WHERE id='.$id;
         $query = $this->db->query($sql);
         return $query->result_array();
     }
+
+    public function get_solicitud_by_id($id){
+        $this->db->from('especialista_solicitud');
+        $this->db->where('id',$id);  
+        $query = $this->db->get();
+        if($query->num_rows()>0){
+            return $query->row();            
+        }
+        return null;
+    }
+
+    public function get_trabajadores_by_id_area($id){
+        $sql='SELECT et.id AS id_trabajador, et.apellidos, et.nombres, et.telefono_contacto, et.telefono_referencia, et.correo, et.direccion
+                FROM especialista_trabajador AS et 
+                JOIN especialista_trabajador_especialidad AS ete ON ete.id_trabajador=et.id
+                JOIN especialista_especialidad AS ee ON ee.id=ete.id_especialidad
+                WHERE ee.id_area='.$id.' ORDER BY RAND() LIMIT 100';
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }    
 
     public function get_especialidad_by_id_trabajador($id){
         $sql='SELECT ee.id AS id_especialidad, ee.descripcion AS especialidad, cf.descripcion AS centro 
